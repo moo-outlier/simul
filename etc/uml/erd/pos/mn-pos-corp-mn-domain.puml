@@ -1,0 +1,88 @@
+@startuml 
+
+ left to right direction
+entity "MN_POS_CORP" as mnPosCorp {
+	포스 설치 업체
+	--
+	POS_CORP_PID : BIGINT	 <<PK>>
+	--
+}
+
+entity "MN_POS_CORP_INSTL_STATS" as mnPosCorpInstlStats {
+	포스 업체 설치 통계
+	--
+	CORP_INSTL_STATS_PID : BIGINT	 <<PK>>
+	--
+}
+
+entity "MN_POS_CORP_INSTL_DAILY_STATS" as mnPosCorpInstlDailyStats {
+	포스 업체 설치 일일 통계
+	--
+	CORP_INSTL_DAILY_PID : BIGINT	 <<PK>>
+	--
+}
+
+entity "MN_POS_CORP_INSTL" as mnPosCorpInstl {
+  포스 업체 설치
+  --
+	CORP_INSTL_PID : BIGINT	 <<PK>>
+	--
+	POS_PID : BIGINT
+	POS_CORP_PID : BIGINT
+}
+
+entity "MN_POS_CORP_INSTL_H" as mnPosCorpInstlH {
+  포스 업체 설치 이력
+  --
+	CORP_INSTL_H_PID : BIGINT	 <<PK>>
+	--
+	POS_PID : BIGINT
+	POS_CORP_PID : BIGINT
+}
+
+entity "MN_POS_CORP_TRNSF" as mnPosCorpTrnsf {
+  포스 업체 이관
+  --
+	CORP_TRNSF_PID : BIGINT	 <<PK>>
+	--
+	POS_CORP_PID : BIGINT
+	CORP_INSTL_H_PID : BIGINT
+}
+
+
+ entity "MN_POS_CORP_STAFF" as mnPosCorpStaff {
+   외부 - 사원
+   --
+  	CORP_STAFF_PID : BIGINT	 <<PK>>
+  	--
+  }
+
+'========================================외부 도메인================================================
+entity "MN_STM_M" as mnStmM {
+  외부 - 매장관리 마스터
+  --
+  STORE_PID : INT <<pk>>
+  --
+}
+
+entity "MN_POS" as mnPos {
+  외부 - 포스
+  --
+ 	POS_PID : BIGINT	 <<PK>>
+ 	--
+ }
+
+
+'========================================ERD DIAGRAM===============================================
+
+mnStmM ||..o{ mnPos
+mnPosCorp ||..o{ mnStmM
+
+mnPosCorp ||..o{ mnPosCorpInstlStats
+mnPosCorpInstlStats ||..o{ mnPosCorpInstlDailyStats
+mnPosCorp ||..o{ mnPosCorpInstl
+mnPosCorpInstl ||..o{ mnPosCorpInstlH
+
+mnPosCorpTrnsf ||..|| mnPosCorp
+mnPosCorp ||..o{ mnPosCorpStaff
+@enduml

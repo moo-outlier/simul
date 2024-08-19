@@ -1,0 +1,39 @@
+@startuml
+
+left to right direction
+
+entity "MN_STM_VAN_CHG_H" as mnPartnerCard {
+  STM_VAN_CHG_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  STORE_NM : varchar(50)
+  CORNER_NM : varchar(50)
+  STT_CODE : varchar(7)
+  USE_CODE : varchar(7)
+  BEFORE_DEF_VAN_NM : varchar(50)
+  BEFORE_DEF_VAN_CODE : varchar(7)
+  BEFORE_DEF_VAN_CONTRACT_NO : varchar(50)
+  BEFORE_DEF_VAN_SERIAL_NO : varchar(50)
+  BEFORE_CASH_VAN_NM : varchar(50)
+  BEFORE_CASH_VAN_CODE : varchar(7)
+  BEFORE_CASH_VAN_CONTRACT_NO : varchar(50)
+  BEFORE_CASH_VAN_SERIAL_NO : varchar(50)
+  BEFORE_OK_CONTRACT_NO : varchar(50)
+  BEFORE_OK_SERIAL_NO : varchar(50)
+  AFTER_DEF_VAN_NM : varchar(50)
+  AFTER_DEF_VAN_CODE : varchar(7)
+  AFTER_DEF_VAN_CONTRACT_NO : varchar(50)
+  AFTER_DEF_VAN_SERIAL_NO : varchar(50)
+  AFTER_CASH_VAN_NM : varchar(50)
+  AFTER_CASH_VAN_CODE : varchar(7)
+  AFTER_CASH_VAN_CONTRACT_NO : varchar(50)
+  AFTER_CASH_VAN_SERIAL_NO : varchar(50)
+  AFTER_OK_CONTRACT_NO : varchar(50)
+  AFTER_OK_SERIAL_NO : varchar(50)
+  CREATOR : varchar(100)
+  CREATED_AT : timestamp
+  UPDATER : varchar(100)
+  UPDATED_AT : timestamp
+}
+
+@enduml

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbm.failure.dao.SelectFailureDAO">
+
+  <sql id="paging">
+    LIMIT #{recordSize} OFFSET #{startNo}
+  </sql>
+
+  <sql id="whereGetFailure">
+    <where>
+      1=1
+      <if test='pvUnqcode != null and !pvUnqcode.equals("")'>
+--    편성고유코드
+      AND PV_UNQCODE = #{pvUnqcode}
+      </if>
+      <if test='deviceCode != null and !deviceCode.equals("")'>
+--    장치코드
+      AND DEVICE_CODE = #{deviceCode}
+      </if>
+      <if test='failureCode != null and !failureCode.equals("")'>
+--    고장코드
+      AND FAILURE_CODE = #{failureCode}
+      </if>
+      <if test='stationNm != null and !stationNm.equals("")'>
+--    역 이름
+      AND STATION_NM LIKE CONCAT('%', #{stationNm}, '%')
+      </if>
+      <if test='startDe != null and !startDe.equals("") and endDe != null and !endDe.equals("")'>
+--    검지일시
+      AND OCCUR_AT BETWEEN #{startDe} AND #{endDe}
+      </if>
+    </where>
+  </sql>
+
+  <select id="getFailureCount" resultType="Integer">
+--  getFailureCount
+--  고장 이력 총 갯수 조회
+    SELECT
+      COUNT(*)
+    FROM MN_FAILURE_H
+    <include refid="whereGetFailure"/>
+  </select>
+
+  <select id="getFailureList" resultType="cmmcloud.data.CamelLinkedHashMap">
+--  getFailureList
+--  고장 이력 목록 리스트
+    SELECT
+      FAILURE_H_PID,
+      DATE_FORMAT(OCCUR_AT, '%Y-%m-%d %H:%i:%s') AS OCCUR_AT,
+      DATE_FORMAT(ERASE_AT, '%Y-%m-%d %H:%i:%s') AS ERASE_AT,
+      PV_UNQNO,
+      PV_UNQCODE,
+      CAR_SE_CODE,
+      DEVICE_CODE,
+      DEVICE_NM,
+      DEVICE_UNQNO,
+      FAILURE_CODE,
+      FAILURE_NM,
+      FAILURE_MSG,
+      FAILURE_FLAG,
+      STATION_NM,
+      FAILURE_DSTNC,
+      CNTNC_SPD
+    FROM MN_FAILURE_H
+    <include refid="whereGetFailure"/>
+    ORDER BY OCCUR_AT DESC
+    <include refid="paging"/>
+  </select>
+
+  <select id="getFailureCode" resultType="cmmcloud.data.CamelLinkedHashMap">
+--  getFailureCode
+--  고장 코드 상세 조회
+    SELECT
+      PV_UNQNO,
+      PV_UNQCODE,
+      CAR_SE_CODE,
+      FAILURE_GRP_CODE,
+      FAILURE_CODE,
+      FAILURE_NM,
+      FAILURE_MSG,
+      ACTION1_MSG,
+      ACTION2_MSG,
+      DEVICE_CODE,
+      DEVICE_NM,
+      DEVICE_UNQNO,
+      STATION_NM,
+      CNTNC_SPD,
+      DATE_FORMAT(OCCUR_AT, '%Y-%m-%d %H:%i:%s') AS OCCUR_AT,
+      DATE_FORMAT(ERASE_AT, '%Y-%m-%d %H:%i:%s') AS ERASE_AT
+    FROM
+      MN_FAILURE_H
+    WHERE
+      FAILURE_H_PID = #{failureUnqcode}
+  </select>
+
+  <select id="getPvUnqcodeCategory" resultType="String">
+-- getPvUnqcodeCategory
+-- 편성고유코드 카테고리 조회
+    SELECT
+      DISTINCT PV_UNQCODE
+    FROM
+      MN_FAILURE_H
+    ORDER BY PV_UNQCODE ASC
+  </select>
+
+  <select id="getDeviceCodeCategory" resultType="String">
+-- getDeviceCodeCategory
+-- 장치코드 카테고리 조회
+    SELECT
+      DISTINCT DEVICE_CODE
+    FROM
+      MN_FAILURE_H
+    ORDER BY DEVICE_CODE ASC
+  </select>
+
+  <select id="getFailureCodeCategory" resultType="String">
+-- getFailureCodeCategory
+-- 고장코드 카테고리 조회
+    SELECT
+      DISTINCT FAILURE_CODE
+    FROM
+      MN_FAILURE_H
+    ORDER BY FAILURE_CODE ASC
+  </select>
+
+</mapper>

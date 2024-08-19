@@ -1,0 +1,20 @@
+@startuml
+
+left to right direction
+
+actor "관리자" as admin
+
+package "등급설정"{
+  usecase "등급조회" AS UG10
+  usecase "등급 일괄 저장" AS UG11
+  usecase "등급 일괄 삭제" AS UG12
+  usecase "등급별 장비 가격 일괄 조회" AS UG13
+  usecase "등급별 장비 가격 일괄 수정" AS UG14
+}
+
+admin --> UG10
+admin --> UG11
+admin --> UG12
+admin --> UG13
+admin --> UG14
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+
+left to right direction
+
+entity "MN_GIFT_CARD" as mnGiftCard {
+  GIFT_CARD_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  CTG_CODE : varchar(7)
+  GIFT_CARD_CODE : varchar(7)
+  GIFT_CARD_NM : varchar(50)
+  PRICE : int
+  USE_AT : varchar(1)
+  CREATOR : varchar(50)
+  CREATED_AT : timestamp
+  UPDATER : varchar(50)
+  UPDATED_AT : timestamp
+}
+
+@enduml

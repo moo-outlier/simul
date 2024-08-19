@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbm.device.dao.DeviceDAO">
+
+  <insert id="addDevice" parameterType="HashMap">
+    /* addDevice */
+    /* 장치 코드 단일 추가 */
+    INSERT INTO
+      MN_DEVICE
+    SET
+      DEVICE_CODE = #{deviceCode},
+      DEVICE_NM = #{deviceNm},
+      DEVICE_NOTE = #{deviceNote},
+      <if test='makerNm != null and !makerNm.equals("")'>
+        MAKER_NM = #{makerNm},
+      </if>
+      CREATOR = #{creator},
+      UPDATER = #{updater}
+  </insert>
+
+  <insert id="addDevices" parameterType="LinkedHashMap">
+    <!-- getDevices -->
+    <!-- 장치 코드 다중 추가 -->
+    INSERT INTO MN_DEVICE
+    (
+        DEVICE_CODE,
+        DEVICE_NM,
+        DEVICE_NOTE,
+        MAKER_NM,
+        CREATOR,
+        UPDATER
+    )
+    VALUES
+    <foreach collection="devices" item="device" separator=",">
+      (#{device.deviceCode},
+      #{device.deviceNm},
+      #{device.deviceNote},
+      <choose>
+        <when test='device.makerNm != null and !device.makerNm.equals("")'>
+          #{device.makerNm},
+        </when>
+        <otherwise>
+          '',
+        </otherwise>
+      </choose>
+      #{creator},
+      #{updater})
+    </foreach>
+  </insert>
+
+  <update id="updateDevice" parameterType="HashMap">
+    /* updateDevice */
+    /* 장치 코드 수정 */
+    UPDATE
+      MN_DEVICE
+    SET
+      DEVICE_NM = #{deviceNm},
+      DEVICE_NOTE = #{deviceNote},
+      <if test='makerNm != null and !makerNm.equals("")'>
+        MAKER_NM = #{makerNm},
+      </if>
+      UPDATER = #{updater}
+    WHERE
+      DEVICE_CODE = #{deviceCode}
+  </update>
+  
+  <delete id="deleteDevice" parameterType="HashMap">
+    /* deleteDevice */
+    /* 장치 코드 삭제 */
+    DELETE FROM
+      MN_DEVICE
+    WHERE
+      DEVICE_CODE = #{deviceCode}
+  </delete>
+
+  <insert id="addDeviceDetail" parameterType="HashMap">
+    /* addDeviceDetail */
+    /* 장치 코드 상세 정보 단일 추가 */
+    INSERT INTO
+      MN_DEVICE_DETAIL
+    SET
+      DEVICE_CODE = #{deviceCode},
+      DEVICE_NM = #{deviceNm},
+      BYTE_AT = #{byteAt},
+      BYTE_ID = #{byteId},
+      BIT_ID = #{bitId},
+      DATA_LNGTH = #{dataLgnth},
+      DATA_TYPE = #{dataType},
+      CREATOR = #{creator},
+      UPDATER = #{updater}
+  </insert>
+
+  <insert id="addDevicesDetail" parameterType="LinkedHashMap">
+    /* addDevicesDetail */
+    /* 장치 코드 상세 정보 다중 추가 */
+    INSERT INTO
+      MN_DEVICE_DETAIL (DEVICE_CODE,
+                        DEVICE_NM,
+                        BYTE_AT,
+                        BYTE_ID,
+                        BIT_ID,
+                        DATA_LNGTH,
+                        DATA_TYPE,
+                        CREATOR,
+                        UPDATER)
+    VALUES
+      <foreach collection="devices" item="device" separator=",">
+        (#{device.deviceCode},
+         #{device.deviceNm},
+         #{device.byteAt},
+         #{device.byteId},
+         #{device.bitId},
+         #{device.dataLngth},
+         #{device.dataType},
+         #{device.creator},
+         #{device.updater})
+      </foreach>
+  </insert>
+
+  <update id="updateDeviceDetail" parameterType="HashMap">
+    /* updateDeviceDetail */
+    /* 장치 코드 상세 정보 수정 */
+    UPDATE
+      MN_DEVICE_DETAIL
+    SET
+      DEVICE_NM = #{deviceNm},
+      BYTE_AT = #{byteAt},
+      BYTE_ID = #{byteId},
+      BIT_ID = #{bitId},
+      DATA_LNGTH = #{dataLgnth},
+      DATA_TYPE = #{dataType},
+      UPDATER = #{updater}
+    WHERE
+      DEVICE_CODE = #{deviceCode}
+  </update>
+
+  <delete id="deleteDeviceDetail" parameterType="HashMap">
+    /* deleteDeviceDetail */
+    /* 장치 코드 상세 정보 삭제 */
+    DELETE FROM
+      MN_DEVICE_DETAIL
+    WHERE
+      DEVICE_CODE = #{deviceCode}
+  </delete>
+
+</mapper>

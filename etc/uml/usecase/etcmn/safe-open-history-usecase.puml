@@ -1,0 +1,13 @@
+@startuml Safe Open History Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package 돈통오픈이력{
+  usecase "돈통오픈이력 목록" AS UC11
+}
+
+user --> UC11
+
+@enduml

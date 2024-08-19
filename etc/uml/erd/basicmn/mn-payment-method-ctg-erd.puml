@@ -1,0 +1,19 @@
+@startuml
+
+left to right direction
+
+entity "MN_PAYMENT_METHOD_CTG" as mnPaymentMethodCtg {
+  KIT_MEMO_PID : int <<pk>>
+  --
+  STORE_UNQCODE :varchar(14)
+  PAYMENT_METHOD_SE_CODE :varchar(1)
+  CTG_CODE :varchar(7)
+  CTG_NM :varchar(50)
+  USE_AT :varchar(1)
+  CREATOR :varchar(50)
+  CREATED_AT :timestamp
+  UPDATER :varchar(50)
+  UPDATED_AT :timestamp
+}
+
+@enduml

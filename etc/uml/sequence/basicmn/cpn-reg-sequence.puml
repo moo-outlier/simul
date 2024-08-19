@@ -1,0 +1,206 @@
+@startuml Partner Card Reg Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 쿠폰 분류 목록 API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode)
+activate service
+service -> dao: HashMap\n(paymentMethodCode)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+deactivate db
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 쿠폰 분류 등록 API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode, ctgCode,\n ctgNm, useAt)
+activate service
+service -> dao: HashMap\n(paymentMethodCode, ctgCode,\n ctgNm, useAt)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode, ctgCode,\n ctgNm, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 쿠폰 분류 수정 API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode, ctgCode)
+activate service
+service -> dao: HashMap\n(paymentMethodCode, ctgCode)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode, ctgCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API4
+user -> controller : 쿠폰 분류 삭제 API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode, ctgCode)
+activate service
+service -> dao: HashMap\n(paymentMethodCode, ctgCode)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode, ctgCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API5
+user -> controller : 쿠폰 목록 API
+activate controller
+controller -> service : HashMap\n(ctgCode)
+activate service
+service -> dao: HashMap\n(ctgCode)
+activate dao
+dao -> db: HashMap\n(ctgCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API6
+user -> controller : 쿠폰 등록 API
+activate controller
+controller -> service : HashMap\n(ctgCode, autoNumbering, cpnCode,\n cpnCardNm, price, useAt)
+activate service
+service -> dao: HashMap\n(ctgCode, autoNumbering, cpnCode,\n cpnCardNm, price, useAt)
+activate dao
+dao -> db: HashMap\n(ctgCode, autoNumbering, cpnCode,\n cpnCardNm, price, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API7
+user -> controller : 쿠폰 수정 API
+activate controller
+controller -> service : HashMap\n(cpnCode, cpnCardNm, price, useAt)
+activate service
+service -> dao: HashMap\n(cpnCode, cpnCardNm, price, useAt)
+activate dao
+dao -> db: HashMap\n(cpnCode, cpnCardNm, price, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API8
+user -> controller : 쿠폰 삭제 API
+activate controller
+controller -> service : HashMap\n(cpnCode)
+activate service
+service -> dao: HashMap\n(cpnCode)
+activate dao
+dao -> db: HashMap\n(cpnCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API9
+user -> controller : 쿠폰 상품 목록 API
+activate controller
+controller -> service : HashMap\n(ctgCode, cpnCode)
+activate service
+service -> dao: HashMap\n(ctgCode, cpnCode)
+activate dao
+dao -> db: HashMap\n(ctgCode, cpnCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API10
+user -> controller : 쿠폰에 상품 추가 API
+activate controller
+controller -> service : HashMap\n(ctgCode, cpnCode, storeGcode)
+activate service
+service -> dao: HashMap\n(ctgCode, cpnCode, storeGcode)
+activate dao
+dao -> db: HashMap\n(ctgCode, cpnCode, storeGcode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+'API11
+user -> controller : 쿠폰에 상품 삭제 API
+activate controller
+controller -> service : HashMap\n(ctgCode, cpnCode, storeGcode)
+activate service
+service -> dao: HashMap\n(ctgCode, cpnCode, storeGcode)
+activate dao
+dao -> db: HashMap\n(ctgCode, cpnCode, storeGcode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+@enduml

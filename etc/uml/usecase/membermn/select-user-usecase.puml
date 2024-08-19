@@ -1,0 +1,28 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점" as store
+
+package 회원정보조회{
+  usecase 회원정보_조회 AS US10
+  usecase 회원정보_상세조회 AS US11
+  usecase SMS발송 AS US12
+  usecase 포인트이관 AS US13
+  usecase 포인트조정 AS US14
+  usecase 엑셀다운로드 AS US15
+  usecase 즐겨찾기추가 AS US16
+  usecase 표시항목추가 AS US17
+}
+
+store --> US10
+store --> US11
+store --> US12
+store --> US13
+store --> US14
+store --> US15
+store --> US16
+store --> US17
+
+
+@enduml

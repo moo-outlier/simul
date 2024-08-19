@@ -1,0 +1,560 @@
+@startuml Sample Sequence
+
+actor "관리자" as user
+participant "PosMnController" as controller
+participant "PosMnService" as service
+participant "PosMnDAO" as dao
+database "DB" as db
+
+
+' API1
+user -> controller : 포스_프로그램_버전_등록
+activate controller
+controller -> service : Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate service
+service -> dao: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate dao
+dao -> db: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+service -> dao: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm, creator, updater)
+activate dao
+dao -> db: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm, creator, updater)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 포스_프로그램_버전_수정
+activate controller
+controller -> service : Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate service
+service -> dao: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate dao
+dao -> db: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate db
+dao <-- db: Hashmap\n(hasPosProgVerPid, hasPosProgRecvHPid, hasPosProgTargetPid)
+deactivate db
+service <-- dao: Hashmap\n(hasPosProgVerPid, hasPosProgRecvHPid, hasPosProgTargetPid)
+deactivate dao
+
+service -> dao: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate dao
+dao -> db: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+service -> dao: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate dao
+dao -> db: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, \n updateSeCode, posProgVerFileNm)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 포스_프로그램_버전_삭제
+activate controller
+controller -> service : Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, updateSeCode, posProgVerFileNm)
+activate service
+service -> dao: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, updateSeCode, posProgVerFileNm)
+activate dao
+dao -> db: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, updateSeCode, posProgVerFileNm)
+activate db
+dao <-- db: Hashmap\n(hasPosProgVerPid, hasPosProgRecvHPid, hasPosProgTargetPid)
+deactivate db
+service <-- dao: Hashmap\n(hasPosProgVerPid, hasPosProgRecvHPid, hasPosProgTargetPid)
+deactivate dao
+
+service -> dao: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, updateSeCode, posProgVerFileNm)
+activate dao
+dao -> db: Hashmap\n(posProgVerNo, posProgVerNm, progSeCode, updateSeCode, posProgVerFileNm)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API4
+user -> controller : 포스_프로그램_버전_검색
+activate controller
+controller -> service : Hashmap\n(selectSeCode, posProgVerNo, posProgVerNm)
+activate service
+service -> dao: Hashmap\n(selectSeCode, posProgVerNo, posProgVerNm)
+activate dao
+dao -> db: Hashmap\n(selectSeCode, posProgVerNo, posProgVerNm)
+activate db
+dao <-- db: List<Hashmap>\n (posProgVerNo, posProgVerNm, progSeCode, \n posProgVerFileNm, cregister, receive)
+deactivate db
+service <-- dao: List<Hashmap>\n (posProgVerNo, posProgVerNm, progSeCode, \n posProgVerFileNm, cregister, receive)
+deactivate dao
+
+controller <-- service: ResObj(List<Hashmap>)
+deactivate service
+user <-- controller: ResObj(List<Hashmap>)
+deactivate controller
+
+' API5
+user -> controller : 포스_프로그램_버전_수신_조회
+activate controller
+controller -> service : Hashmap\n(selectSeCode,posProgVerNo)
+activate service
+service -> dao: Hashmap\n(selectSeCode,posProgVerNo)
+activate dao
+dao -> db: Hashmap\n(selectSeCode, posProgVerNo)
+activate db
+dao <-- db: List<Hashmap>\n (storeUnqcode, storeNm, posNo, swCrtfNo, \n hwCrtfNo, posProgRcvDt,  posIp)
+deactivate db
+service <-- dao: List<Hashmap>\n (storeUnqcode, storeNm, posNo, swCrtfNo, \n hwCrtfNo, posProgRcvDt,  posIp)
+deactivate dao
+
+controller <-- service: ResObj(List<Hashmap>)
+deactivate service
+user <-- controller: ResObj(List<Hashmap>)
+deactivate controller
+
+' API6
+user -> controller : 포스_프로그램_적용매장_등록
+activate controller
+controller -> service : Hashmap\n(storeUnqcode,posProgVerNo, posNo)
+activate service
+service -> dao: Hashmap\n(storeUnqcode,posProgVerNo, posNo)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode,posProgVerNo, posNo)
+activate db
+dao <-- db: Hashmap\n (hasPosPid, hasPosProgVerPid, hasPosProgTargetPid)
+deactivate db
+service <-- dao: Hashmap\n (hasPosPid, hasPosProgVerPid, hasPosProgTargetPid)
+deactivate dao
+
+service -> dao: Hashmap\n(storeUnqcode,posProgVerNo, posNo, creator, updater, posHNote)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode,posProgVerNo, posNo, creator, updater, posHNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj()
+deactivate service
+user <-- controller: ResObj()
+deactivate controller
+
+' API7
+user -> controller : 포스_프로그램_적용매장_삭제
+activate controller
+controller -> service : Hashmap\n(storeNm, posNo, posProgVerNo, posProgVerNm,\n progSeCode, posProgRcvSeCode, updateSeCode,\n posProgVerFileNm, posProgRegDt, swCrtfNo, hwCrtfNo, posIp)
+activate service
+service -> dao: Hashmap\n(storeNm, posNo, posProgVerNo, posProgVerNm,\n progSeCode, posProgRcvSeCode, updateSeCode,\n posProgVerFileNm, posProgRegDt, swCrtfNo, hwCrtfNo, posIp)
+activate dao
+dao -> db: Hashmap\n(storeNm, posNo, posProgVerNo, posProgVerNm,\n progSeCode, posProgRcvSeCode, updateSeCode,\n posProgVerFileNm, posProgRegDt, swCrtfNo, hwCrtfNo, posIp)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+service -> dao: Hashmap\n(storeNm, posNo, posProgVerNo, posProgVerNm,\n progSeCode, posProgRcvSeCode, updateSeCode,\n posProgVerFileNm, posProgRegDt, swCrtfNo, hwCrtfNo, posIp)
+activate dao
+dao -> db: Hashmap\n(storeNm, posNo, posProgVerNo, posProgVerNm,\n progSeCode, posProgRcvSeCode, updateSeCode,\n posProgVerFileNm, posProgRegDt, swCrtfNo, hwCrtfNo, posIp)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj()
+deactivate service
+user <-- controller: ResObj()
+deactivate controller
+
+' API8
+user -> controller : 포스_프로그램_적용매장_검색
+activate controller
+controller -> service : Hashmap\n(storeUnqcode, posProgVerNo)
+activate service
+service -> dao: Hashmap\n(storeUnqcode, posProgVerNo)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, posProgVerNo)
+activate db
+dao <-- db: (List<Hashmap>)\n(storeUnqcode, storeNm, posNo, swCrtfNo, hwCrtfNo,\n posSeCode, posFormSeCode, paymentSeCode, \n lastPosProgVerNo, lastLoginDt, lastLoginIp)
+deactivate db
+service <-- dao: (List<Hashmap>)\n(storeUnqcode, storeNm, posNo, swCrtfNo, hwCrtfNo,\n posSeCode, posFormSeCode, paymentSeCode, \n lastPosProgVerNo, lastLoginDt, lastLoginIp)
+deactivate dao
+
+controller <-- service: ResObj(List<Hashmap>)
+deactivate service
+user <-- controller: ResObj(List<Hashmap>)
+deactivate controller
+
+' API9
+user -> controller : 포스_프로그램_적용매장_수신이력_조회
+activate controller
+controller -> service : Hashmap\n(storeUnqcode, selectSeCode, posNo)
+activate service
+service -> dao: Hashmap\n(storeUnqcode, selectSeCode, posNo)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, selectSeCode, posNo)
+activate db
+dao <-- db: (List<Hashmap>)\n(posProgVerNo, posProgVerNm, progSeCode,\n posProgRcvSeCode, updateSeCode, posProgVerFileNm, \nosProgRcvDt)
+deactivate db
+service <-- dao: (List<Hashmap>)\n(posProgVerNo, posProgVerNm, progSeCode,\n posProgRcvSeCode, updateSeCode, posProgVerFileNm, \nosProgRcvDt)
+deactivate dao
+
+controller <-- service: ResObj(List<Hashmap>)
+deactivate service
+user <-- controller: ResObj(List<Hashmap>)
+deactivate controller
+
+' API10
+user -> controller : 포스_프로그램_적용매장_수신확인
+activate controller
+controller -> service : Hashmap\n(storeUnqcode, selectSeCode, posNo)
+activate service
+service -> dao: Hashmap\n(storeUnqcode, selectSeCode, posNo)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, selectSeCode, posNo)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+service -> dao: Hashmap\n(storeUnqcode, selectSeCode, posNo, creator, updater)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, selectSeCode, posNo, creator, updater)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+service -> dao: Hashmap\n(storeUnqcode, selectSeCode, posNo, creator, updater)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, selectSeCode, posNo, creator, updater)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+service -> dao: Hashmap\n(storeUnqcode, selectSeCode, posNo, creator, updater)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, selectSeCode, posNo, creator, updater)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+controller <-- service: ResObj()
+deactivate service
+user <-- controller: ResObj()
+deactivate controller
+
+
+' API11
+user -> controller : 포스 로그인 로그 등록
+activate controller
+controller -> service : Hashmap\n(posPid, fchqCode, fchqNm, storeUnqcode, \n storeNm, posNo, swCrtfNo, hwCrtfNo, \n loginDe, athntKeyVal, loginIp, loginDt, \n posProgVerNo, loginSttCode, hddCpctyVal, \n updtVerNm, osVerNm, sttCode, useCode)
+activate service
+service -> dao: Hashmap\n (storeUnqcode, posNo, posProgVerNo)
+activate dao
+dao -> db: Hashmap\n (storeUnqcode, posNo, posProgVerNo)
+activate db
+dao <-- db: Hashmap\n (isPosNo, posPid, isPosProgVerNo, isPosStoreUnqcode)
+deactivate db
+service <-- dao: Hashmap\n (isPosNo, posPid, isPosProgVerNo, isPosStoreUnqcode)
+deactivate dao
+
+service -> dao: Hashmap\n(posPid, fchqCode, fchqNm, storeUnqcode, \n storeNm, posNo, swCrtfNo, hwCrtfNo, \n loginDe, athntKeyVal, loginIp, loginDt, \n posProgVerNo, loginSttCode, hddCpctyVal, \n updtVerNm, osVerNm, sttCode, useCode)
+activate dao
+dao -> db: Hashmap\n(posPid, fchqCode, fchqNm, storeUnqcode, \n storeNm, posNo, swCrtfNo, hwCrtfNo, \n loginDe, athntKeyVal, loginIp, loginDt, \n posProgVerNo, loginSttCode, hddCpctyVal, \n updtVerNm, osVerNm, sttCode, useCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API12
+user -> controller : 포스 로그인 로그 조회
+activate controller
+controller -> service : Hashmap\n(startDe, endDe, fchqCode, fchqNm, \n storeUnqcode, storeNm,sttCode, useCode)
+activate service
+service -> dao: Hashmap\n (startDe, endDe, fchqCode, fchqNm, \n storeUnqcode, storeNm,sttCode, useCode)
+activate dao
+dao -> db: Hashmap\n (startDe, endDe, fchqCode, fchqNm, \n storeUnqcode, storeNm,sttCode, useCode)
+activate db
+dao <-- db: Hashmap\n (fchqCode, fchqNm, storeUnqcode, storeNm, \n posNo, swCrtfNo, hwCrtfNo, loginDe, \n athntKeyVal, loginIp, loginDt, posProgVerNo, \n loginSttCode, hddCpctyVal, updtVerNm)
+deactivate db
+service <-- dao: Hashmap\n (fchqCode, fchqNm, storeUnqcode, storeNm, \n posNo, swCrtfNo, hwCrtfNo, loginDe, \n athntKeyVal, loginIp, loginDt, posProgVerNo, \n loginSttCode, hddCpctyVal, updtVerNm)
+deactivate dao
+
+controller <-- service: ResObj(Hashmap)
+deactivate service
+user <-- controller: ResObj(Hashmap)
+deactivate controller
+
+' API13
+user -> controller : 맥어드레스 등록
+activate controller
+controller -> service : Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm,\n posNo, macAddrVal, useSeCode, \n demoEndDe, macAddrNote)
+activate service
+service -> dao: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm,\n posNo, macAddrVal, useSeCode, \n demoEndDe, macAddrNote)
+activate dao
+dao -> db: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm,\n posNo, macAddrVal, useSeCode, \n demoEndDe, macAddrNote)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+service -> dao: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm,\n posNo, macAddrVal, useSeCode, \n demoEndDe, macAddrNote, creator, updater)
+activate dao
+dao -> db: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm,\n posNo, macAddrVal, useSeCode, \n demoEndDe, macAddrNote, creator, updater)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API14
+user -> controller : 맥어드레스 검색
+activate controller
+controller -> service : Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm,macAddrVal)
+activate service
+service -> dao: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm,macAddrVal)
+activate dao
+dao -> db: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm,macAddrVal)
+activate db
+dao <-- db: List<Hashmap>\n (fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal, updater)
+deactivate db
+service <-- dao: List<Hashmap>\n (fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal, updater)
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API15
+user -> controller : 맥어드레스 수정
+activate controller
+controller -> service : Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal, updater)
+activate service
+service -> dao: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal, updater)
+activate dao
+dao -> db: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal, updater)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+service -> dao: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal, updater)
+activate dao
+dao -> db: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal, updater)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj()
+deactivate service
+user <-- controller: ResObj()
+deactivate controller
+
+' API16
+user -> controller : 맥어드레스 삭제
+activate controller
+controller -> service : Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal)
+activate service
+service -> dao: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal)
+activate dao
+dao -> db: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+service -> dao: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal)
+activate dao
+dao -> db: Hashmap\n(fchqCode, fchqNm, storeUnqcode, storeNm, posNo, useSeCode,\n demoEndDe,macAddrNote, macAddrVal)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj()
+deactivate service
+user <-- controller: ResObj()
+deactivate controller
+
+' API17
+user -> controller : 맥어드레스 매장포스 검색
+activate controller
+controller -> service : Hashmap\n(fchqCode, fchqNm, storeNm, storeUnqcode)
+activate service
+service -> dao: Hashmap\n(fchqCode, fchqNm, storeNm, storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(fchqCode, fchqNm, storeNm, storeUnqcode)
+activate db
+dao <-- db:  List<Hashmap>\n (fchqCode, fchqNm, storeNm, storeUnqcode, posNo)
+deactivate db
+service <-- dao: List<Hashmap>\n (fchqCode, fchqNm, storeNm, storeUnqcode, posNo)
+deactivate dao
+
+controller <-- service: ResObj(List)
+deactivate service
+user <-- controller: ResObj(List)
+deactivate controller
+
+' API18
+user -> controller : 포스출력물종류 목록 API
+activate controller
+controller -> service : void
+activate service
+service -> dao: void
+activate dao
+dao -> db: void
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+deactivate db
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API19
+user -> controller : 포스출력물템플릿 목록 API
+activate controller
+controller -> service : HashMap\n(posOutputKndCode)
+activate service
+service -> dao: HashMap\n(posOutputKndCode)
+activate dao
+dao -> db: HashMap\n(posOutputKndCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API20
+user -> controller : 포스출력물템플릿 상세 조회 API
+activate controller
+controller -> service : HashMap\n(posOutputKndCode, posOutputTmplatCode)
+activate service
+service -> dao: HashMap\n(posOutputKndCode, posOutputTmplatCode)
+activate dao
+dao -> db: HashMap\n(posOutputKndCode, posOutputTmplatCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: HashMap
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API21
+user -> controller : 포스출력물 템플릿 수정 API
+activate controller
+controller -> service : HashMap\n(posOutputKndCode, posOutputTmplatCode,\n posOutputTmplat)
+activate service
+service -> dao: HashMap\n(posOutputKndCode, posOutputTmplatCode,\n posOutputTmplat)
+activate dao
+dao -> db: HashMap\n(posOutputKndCode, posOutputTmplatCode,\n posOutputTmplat)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API22
+user -> controller : 포스출력물코드 목록 API
+activate controller
+controller -> service : HashMap\n(posOutputKndCode)
+activate service
+service -> dao: HashMap\n(posOutputKndCode)
+activate dao
+dao -> db: HashMap\n(posOutputKndCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API23
+user -> controller : 포스출력물로그 목록
+activate controller
+controller -> service : HashMap\n(startDe, endDe, posOutputKndCode)
+activate service
+service -> dao: HashMap\n(startDe, endDe, posOutputKndCode)
+activate dao
+dao -> db: HashMap\n(startDe, endDe, posOutputKndCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+@enduml

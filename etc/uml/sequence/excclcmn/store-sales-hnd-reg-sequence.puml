@@ -1,0 +1,99 @@
+@startuml Safe Open Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 영수증 목록 조회 API
+user -> controller : 영수증 목록 조회 API
+activate controller
+controller -> service : HashMap(\nsalesDe, storeUnqcode)
+activate service
+service -> dao: HashMap(\nsalesDe, storeUnqcode)
+activate dao
+dao -> db: HashMap(\nsalesDe, storeUnqcode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 영수증 내역 조회 API
+user -> controller : 영수증 내역 조회 API
+activate controller
+controller -> service : HashMap(\nsalesDe, storeUnqcode, recptNo, posNo)
+activate service
+service -> dao: HashMap(\nsalesDe, storeUnqcode, recptNo, posNo)
+activate dao
+dao -> db: HashMap(\nsalesDe, storeUnqcode, recptNo, posNo)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 매출 수기등록 API
+user -> controller : 매출 수기등록 API
+activate controller
+controller -> service : HashMap(\nsalesDe, storeUnqcode, posNo, cshPayment, \ncardPayment, salesSeCode, goodsList)
+activate service
+service -> dao: HashMap(\nsalesDe, storeUnqcode, posNo, cshPayment, \ncardPayment, salesSeCode, goodsList)
+activate dao
+dao -> db: HashMap(\nsalesDe, storeUnqcode, posNo, cshPayment, \ncardPayment, salesSeCode, goodsList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 수기등록매출 수정 API
+user -> controller : 수기등록매출 수정 API
+activate controller
+controller -> service : HashMap(\nsalesDe, storeUnqcode, posNo, recptNo, \ncshPayment, cardPayment, salesSeCode, goodsList)
+activate service
+service -> dao: HashMap(\nsalesDe, storeUnqcode, posNo, recptNo, \ncshPayment, cardPayment, salesSeCode, goodsList)
+activate dao
+dao -> db: HashMap(\nsalesDe, storeUnqcode, posNo, recptNo, \ncshPayment, cardPayment, salesSeCode, goodsList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 수기등록매출 삭제 API
+user -> controller : 수기등록매출 삭제 API
+activate controller
+controller -> service : HashMap(\nsalesDe, storeUnqcode, posNo, recptNo)
+activate service
+service -> dao: HashMap(\nsalesDe, storeUnqcode, posNo, recptNo)
+activate dao
+dao -> db: HashMap(\nsalesDe, storeUnqcode, posNo, recptNo)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

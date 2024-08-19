@@ -1,0 +1,44 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+
+user -> controller : 일자별 회원 구매내역 조회
+activate controller
+controller -> service : Hashmap \n ( startDe, endDe, deSecode, \n newMbr, mbrCode, mbrNm, \n mbrGrdCode, anvrSecode, anvrStartDe, \n anvrEndDe, noSecode, no, useAt, \n dmRcvdAt, gender, mttlAt, mbrEmail, \n emailRcvdAt, smsRcvdAt )
+activate service
+service -> dao: Hashmap \n ( startDe, endDe, deSecode, \n newMbr, mbrCode, mbrNm, \n mbrGrdCode, anvrSecode, anvrStartDe, \n anvrEndDe, noSecode, no, useAt, \n dmRcvdAt, gender, mttlAt, mbrEmail, \n emailRcvdAt, smsRcvdAt )
+activate dao
+dao -> db: Hashmap \n ( startDe, endDe, deSecode, \n newMbr, mbrCode, mbrNm, \n mbrGrdCode, anvrSecode, anvrStartDe, \n anvrEndDe, noSecode, no, useAt, \n dmRcvdAt, gender, mttlAt, mbrEmail, \n emailRcvdAt, smsRcvdAt )
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+user -> controller : 회원별 구매내역 상세조회
+activate controller
+controller -> service : Hashmap \n (startDe, endDe, mbrCode)
+activate service
+service -> dao: Hashmap \n (startDe, endDe, mbrCode)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe, mbrCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

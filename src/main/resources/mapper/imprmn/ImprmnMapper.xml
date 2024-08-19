@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbm.imprmn.dao.ImprmnDAO">
+
+  <insert id="addHistory" parameterType="HashMap">
+    /* addHistory */
+    /* 이력 추가 */
+    INSERT INTO
+      MN_IMPRMN_H (PV_UNQCODE,
+                   DEVICE_CODE,
+                   DEVICE_UNQNO,
+                   DETAIL_DEVICE_NM,
+                   IMPRMN_NOTE)
+    VALUES
+    <foreach collection="history" item="item" separator=",">
+      (#{item.pvUnqcode},
+       #{item.deviceCode},
+       #{item.deviceUnqno},
+       #{item.detailDeviceNm},
+       #{item.imprmnNote})
+    </foreach>
+  </insert>
+
+  <insert id="addManual" parameterType="HashMap">
+    /* addManual */
+    /* 매뉴얼 추가 */
+    INSERT INTO
+      MN_IMPRMN_MANUAL (DEVICE_CODE,
+                        DEVICE_NM,
+                        DETAIL_DEVICE_NM,
+                        FILE_URL)
+    VALUES
+    <foreach collection="manuals" item="manual" separator=",">
+      (#{manual.deviceCode},
+       #{manual.deviceNm},
+       #{manual.detailDeviceNm},
+       #{manual.fileUrl})
+    </foreach>
+    </insert>
+
+</mapper>

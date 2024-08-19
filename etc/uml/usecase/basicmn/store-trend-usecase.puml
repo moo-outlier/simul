@@ -1,0 +1,33 @@
+@startuml Coupon Card Reg Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package 매장추이API{
+  usecase "매장추이 목록" AS UC11
+  usecase "사용매장수" AS UC12
+  usecase "영수건수" AS UC13
+  usecase "카드승인" AS UC14
+}
+
+package 관리업체추이API{
+  usecase "관리업체추이 목록" AS UC21
+  usecase "월별 설치건수" AS UC22
+  usecase "관리업체별 설치건수" AS UC23
+  usecase "최근 관리업체별 설치건수" AS UC24
+  usecase "관리업체 매장사용 현황" AS UC25
+}
+
+' 사용자
+UC11 <-- user
+UC12 <-- user
+UC13 <-- user
+UC14 <-- user
+user --> UC21
+user --> UC22
+user --> UC23
+user --> UC24
+user --> UC25
+
+@enduml

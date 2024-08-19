@@ -1,0 +1,63 @@
+@startuml Safe Open Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 계정관리 조회 API
+user -> controller : 계정관리 조회 API
+activate controller
+controller -> service : HashMap(rcppaySeCode)
+activate service
+service -> dao: HashMap(rcppaySeCode)
+activate dao
+dao -> db: HashMap(rcppaySeCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 계정관리 저장 API
+user -> controller : 계정관리 저장 API
+activate controller
+controller -> service : HashMap(\nvaultcashAcntList, rcppaySeCode)
+activate service
+service -> dao: HashMap(\nvaultcashAcntList, rcppaySeCode)
+activate dao
+dao -> db: HashMap(\nvaultcashAcntList, rcppaySeCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 계정관리 삭제 API
+user -> controller : 계정관리 삭제 API
+activate controller
+controller -> service : HashMap(\nvaultcashAcntList, rcppaySeCode)
+activate service
+service -> dao: HashMap(\nvaultcashAcntList, rcppaySeCode)
+activate dao
+dao -> db: HashMap(\nvaultcashAcntList, rcppaySeCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

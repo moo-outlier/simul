@@ -1,0 +1,21 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점" as store
+
+package 판매터치키등록{
+  usecase 터치키그룹_조회 AS UJ10
+  usecase 터치키_저장 AS UJ11
+  usecase 터치키_삭제 AS UJ12
+  usecase 터치키_조회 AS UJ13
+}
+
+' 사용자
+store --> UJ10
+store --> UJ11
+store --> UJ12
+store --> UJ13
+
+
+@enduml

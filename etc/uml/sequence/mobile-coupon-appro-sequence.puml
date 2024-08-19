@@ -1,0 +1,122 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "CouponApproController" as controller
+participant "CouponApproService" as service
+participant "CouponApproDAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 모바일쿠폰승인현황 등록 API
+activate controller
+controller -> service : Hashmap \n (storeUnqcode, storeNm, salesDe, posNo, recptNo, \n cpnSeCode, cpnBarcodeVal, approNo, logNo, \n approPrice, approDe, approDt, cpnPrice)
+activate service
+service -> dao: Hashmap \n (Hashmap \n (storeUnqcode, storeNm, salesDe, posNo, recptNo, \n cpnSeCode, cpnBarcodeVal, approNo, logNo, \n approPrice, approDe, approDt, cpnPrice)
+activate dao
+dao -> db: Hashmap \n (Hashmap \n (storeUnqcode, storeNm, salesDe, posNo, recptNo, \n cpnSeCode, cpnBarcodeVal, approNo, logNo, \n approPrice, approDe, approDt, cpnPrice)
+activate db
+dao <-- db: int:
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao:
+activate dao
+dao -> db:
+dao <-- db: Hashmap \n (mblcpnApproPid, storeUnqcode, storeNm, salesDe, \nposNo, recptNo, cpnSeCode, cpnBarcodeVal, approNo, \nlogNo, approPrice, approDe, approDt, cpnPrice, \n rmnngPrice, creator, createdAt)
+deactivate db
+service <-- dao: Hashmap \n (mblcpnApproPid, storeUnqcode, storeNm, salesDe, \nposNo, recptNo, cpnSeCode, cpnBarcodeVal, approNo, \nlogNo, approPrice, approDe, approDt, cpnPrice, \n rmnngPrice, creator, createdAt)
+deactivate dao
+service -> dao: String cpnUseEncVal, mblcpnApproPid
+activate dao
+dao -> db: String cpnUseEncVal, mblcpnApproPid
+activate db
+dao <-- db: int:
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 모바일쿠폰승인현황 조회 API
+activate controller
+controller -> service : Hashmap\n(searchStartDe, searchEndDe, storeUnqcode)
+activate service
+service -> dao: Hashmap\n(searchStartDe, searchEndDe, storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(searchStartDe, searchEndDe, storeUnqcode)
+activate db
+dao <-- db: Hashmap\n (mblcpnApproPid, storeUnqcode, storeNm, salesDe, \n posNo, recptNo, cpnSeCode, cpnBarcodeVal, approNo, \n logNo, approPrice, approDe, approDt, cpnPrice, \n rmnngPrice, creator, createdAt )
+deactivate db
+service <-- dao: Hashmap\n (mblcpnApproPid, storeUnqcode, storeNm, salesDe, \n posNo, recptNo, cpnSeCode, cpnBarcodeVal, approNo, \n logNo, approPrice, approDe, approDt, cpnPrice, \n rmnngPrice, creator, createdAt )
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+
+
+
+
+
+
+
+
+' API3
+user -> controller : 모바일상품 쿠폰승인현황 등록 API
+activate controller
+controller -> service : Hashmap \n (storeUnqcode, storeNm, salesDe, posNo, recptNo, cpnSeCode, \n cpnBarcodeVal, approNo, logNo, approPrice, approDe, \n approDt, goodsCode, goodsNm, salesCnt, goodsPrice\n storeUnqcode)
+activate service
+service -> dao: Hashmap \n (storeUnqcode, storeNm, salesDe, posNo, recptNo, cpnSeCode, \n cpnBarcodeVal, approNo, logNo, approPrice, approDe, \n approDt, goodsCode, goodsNm, salesCnt, goodsPrice\n storeUnqcode)
+activate dao
+dao -> db: Hashmap \n (storeUnqcode, storeNm, salesDe, posNo, recptNo, cpnSeCode, \n cpnBarcodeVal, approNo, logNo, approPrice, approDe, \n approDt, goodsCode, goodsNm, salesCnt, goodsPrice\n storeUnqcode)
+activate db
+dao <-- db: int:
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao:
+activate dao
+dao -> db:
+dao <-- db: Hashmap \n (mblcpnApproGPid, storeUnqcode, storeNm, salesDe, posNo, \n recptNo, cpnSeCode, cpnBarcodeVal, approNo, logNo, \n approPrice, approDe, approDt, goodsCode, goodsNm, \n salesCnt, goodsPrice, actlSalesPrice creator, createdAt)
+deactivate db
+service <-- dao: Hashmap \n (mblcpnApproGPid, storeUnqcode, storeNm, salesDe, posNo, \n recptNo, cpnSeCode, cpnBarcodeVal, approNo, logNo, \n approPrice, approDe, approDt, goodsCode, goodsNm, \n salesCnt, goodsPrice, actlSalesPrice creator, createdAt)
+deactivate dao
+service -> dao: String cpnUseEncVal, mblcpnApproGPid
+activate dao
+dao -> db: String cpnUseEncVal, mblcpnApproGPid
+activate db
+dao <-- db: int:
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+' API4
+user -> controller : 모바일상품 쿠폰승인현황 조회 API
+activate controller
+controller -> service : Hashmap\n(searchStartDe, searchEndDe, storeUnqcode)
+activate service
+service -> dao: Hashmap\n(searchStartDe, searchEndDe, storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(searchStartDe, searchEndDe, storeUnqcode)
+activate db
+dao <-- db: Hashmap\n ( storeUnqcode, storeNm, salesDe, posNo, \n recptNo, cpnSeCode, cpnBarcodeVal, approNo, logNo, \n approPrice, approDe, approDt, goodsCode, goodsNm, \n salesCnt, goodsPrice, actlSalesPrice)
+deactivate db
+service <-- dao: Hashmap\n ( storeUnqcode, storeNm, salesDe, posNo, \n recptNo, cpnSeCode, cpnBarcodeVal, approNo, logNo, \n approPrice, approDe, approDt, goodsCode, goodsNm, \n salesCnt, goodsPrice, actlSalesPrice)
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+@enduml

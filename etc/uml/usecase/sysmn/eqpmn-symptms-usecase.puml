@@ -1,0 +1,22 @@
+@startuml
+
+left to right direction
+
+actor "관리자" as admin
+
+package "증상부위관리"{
+  usecase "증상부위 대분류 조회" AS UG10
+  usecase "증상부위 대분류 일괄 저장" AS UG11
+  usecase "증상부위 대분류 일괄 삭제" AS UG12
+  usecase "증상부위 소분류 조회" AS UG13
+  usecase "증상부위 소분류 일괄 저장" AS UG14
+  usecase "증상부위 소분류 일괄 삭제" AS UG15
+}
+
+admin --> UG10
+admin --> UG11
+admin --> UG12
+admin --> UG13
+admin --> UG14
+admin --> UG15
+@enduml

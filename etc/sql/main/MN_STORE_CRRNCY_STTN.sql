@@ -1,0 +1,18 @@
+CREATE TABLE `MN_STORE_CRRNCY_STTN` (
+    `STORE_CRRNCY_STTN_PID` int NOT NULL AUTO_INCREMENT COMMENT '매장_금전_현황_일련번호',
+    `FCHQ_CODE` varchar(7) NOT NULL  COMMENT '본사_코드',
+    `STORE_UNQCODE` varchar(14)   COMMENT '매장_고유코드',
+    `STORE_NM` varchar(50) NOT NULL  COMMENT '매장_명',
+    `SALES_DE` int NOT NULL  COMMENT '영업_일자',
+    `POS_NO` varchar(20) NOT NULL  COMMENT '포스_번호',
+    `RCPPAY_SE_CODE` varchar(1) NOT NULL  COMMENT '입출금_구분_코드',
+    `VAULTCASH_ACNT_CODE` varchar(7) NOT NULL  COMMENT '시재_계정_코드',
+    `VAULTCASH_ACNT_NM` varchar(50) NOT NULL  COMMENT '시재_계정_명',
+    `PRICE` int(11) NOT NULL  COMMENT '금액',
+    `CRRNCY_STTN_NOTE` varchar(400)   COMMENT '금전_현황_비고',
+    `CREATOR` varchar(100) NOT NULL  COMMENT '작성자',
+    `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '작성일시',
+    `UPDATER` varchar(100) NOT NULL  COMMENT '수정자',
+    `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시'
+    , PRIMARY KEY (`STORE_CRRNCY_STTN_PID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

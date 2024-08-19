@@ -1,0 +1,81 @@
+@startuml Kitchen Memo Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 주방전체목록API
+user -> controller : 주방전체목록API
+activate controller
+controller -> service : storeCode
+activate service
+service -> dao: storeCode
+activate dao
+dao -> db: storeCode
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 주방메모저장API
+user -> controller : 주방메모저장API
+activate controller
+controller -> service : Hashmap\n(storeCode, memoCode, memo)
+activate service
+service -> dao:  Hashmap\n(storeCode, memoCode, memo)
+activate dao
+dao -> db:  Hashmap\n(storeCode, memoCode, memo)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 주방메모수정API
+user -> controller : 주방메모수정API
+activate controller
+controller -> service :  Hashmap\n(storeCode, memoCode,\n memo, useAt)
+activate service
+service -> dao: Hashmap\n(storeCode, memoCode,\n memo, useAt)
+activate dao
+dao -> db: Hashmap\n(storeCode, memoCode,\n memo, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 주방메모삭제API
+user -> controller : 주방메모삭제API
+activate controller
+controller -> service :  Hashmap\n(storeCode, memoCode,\n memo, useAt)
+activate service
+service -> dao: Hashmap\n(storeCode, memoCode,\n memo, useAt)
+activate dao
+dao -> db: Hashmap\n(storeCode, memoCode,\n memo, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

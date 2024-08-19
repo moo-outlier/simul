@@ -1,0 +1,118 @@
+@startuml
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 증상부위 대분류 조회
+user -> controller : 증상부위 대분류 조회
+activate controller
+controller -> service : (void)
+activate service
+service -> dao: (void)
+activate dao
+dao -> db: (void)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 증상부위 대분류 일괄 저장
+user -> controller : 증상부위 대분류 일괄 저장
+activate controller
+controller -> service : HashMap\n(eqpmnSymptmsList)
+activate service
+service -> dao: HashMap\n(eqpmnSymptmsList)
+activate dao
+dao -> db: HashMap\n(eqpmnSymptmsList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 증상부위 대분류 일괄 삭제
+user -> controller : 증상부위 대분류 일괄 삭제
+activate controller
+controller -> service : HashMap\n(eqpmnSymptmsList)
+activate service
+service -> dao: HashMap\n(eqpmnSymptmsList)
+activate dao
+dao -> db: HashMap\n(eqpmnSymptmsList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 증상부위 소분류 조회
+user -> controller : 증상부위 소분류 조회
+activate controller
+controller -> service : HashMap\n(eqpmnSymptmsCode)
+activate service
+service -> dao: HashMap\n(eqpmnSymptmsCode)
+activate dao
+dao -> db: HashMap\n(eqpmnSymptmsCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 증상부위 소분류 일괄 저장
+user -> controller : 증상부위 소분류 일괄 저장
+activate controller
+controller -> service : HashMap\n(eqpmnSymptmsCode, eqpmnSymptmsList)
+activate service
+service -> dao: HashMap\n(eqpmnSymptmsCode, eqpmnSymptmsList)
+activate dao
+dao -> db: HashMap\n(eqpmnSymptmsCode, eqpmnSymptmsList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 증상부위 소분류 일괄 삭제
+user -> controller : 증상부위 소분류 일괄 삭제
+activate controller
+controller -> service : HashMap\n(eqpmnSymptmsCode, eqpmnSymptmsList)
+activate service
+service -> dao: HashMap\n(eqpmnSymptmsCode, eqpmnSymptmsList)
+activate dao
+dao -> db: HashMap\n(eqpmnSymptmsCode, eqpmnSymptmsList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+
+@enduml

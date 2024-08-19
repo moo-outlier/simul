@@ -1,0 +1,18 @@
+@startuml
+
+left to right direction
+
+entity "MN_KITCHEN_MEMO" as mnKitchenMemo {
+  KIT_MEMO_PID : int <<pk>>
+  --
+  STORE_CODE : VARCHAR(7)
+  MEMO_CODE : VARCHAR(2)
+  MEMO : VARCHAR(30)
+  USE_AT : VARCHAR(1)
+  CREATOR : VARCHAR(100)
+  UPDATOR : VARCHAR(100)
+  CREATED_AT : TIMESTAMP
+  UPDATED_AT : TIMESTAMP
+}
+
+@enduml

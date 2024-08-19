@@ -1,0 +1,14 @@
+CREATE TABLE `ENV_GRP_I` (
+    `ENV_GRP_I_PID` int NOT NULL AUTO_INCREMENT COMMENT '환경_그룹_아이템_일련번호',
+    `TYPE_CODE` varchar(7) NOT NULL  COMMENT '유형_코드',
+    `USE_CODE` varchar(7) NOT NULL  COMMENT '용도_코드',
+    `TAB_CODE` varchar(7) NOT NULL  COMMENT '탭_코드',
+    `GRP_CODE` varchar(7) NOT NULL  COMMENT '그룹_코드',
+    `ENV_CODE` varchar(7) NOT NULL  COMMENT '환경_코드',
+    `DEFAULT_ENV_PREFER_CODE` varchar(7) NOT NULL  COMMENT '기본_환경_설정_코드',
+    `CREATOR` varchar(100) NOT NULL  COMMENT '작성자',
+    `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '작성일시',
+    `UPDATER` varchar(100) NOT NULL  COMMENT '수정자',
+    `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시'
+    , PRIMARY KEY (`ENV_GRP_I_PID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

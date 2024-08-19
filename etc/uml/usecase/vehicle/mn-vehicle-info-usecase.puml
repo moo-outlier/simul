@@ -1,0 +1,22 @@
+@startuml CBM Vehicle Info Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package 편성코드관리_API{
+  usecase "편성 목록" AS vehicle11
+  usecase "편성 상세조회" AS vehicle12
+  usecase "편성 추가" AS vehicle13
+  usecase "편성 수정" AS vehicle14
+  usecase "편성 삭제" AS vehicle15
+}
+
+' 사용자
+user --> vehicle11
+user --> vehicle12
+user --> vehicle13
+user --> vehicle14
+user --> vehicle15
+
+@enduml

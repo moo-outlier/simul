@@ -1,0 +1,18 @@
+@startuml
+
+left to right direction
+
+actor "관리자" as admin
+
+package "업체관리"{
+  usecase "업체목록 조회" AS UG10
+  usecase "업체상세 조회" AS UG11
+  usecase "업체 수정" AS UG12
+  usecase "관리업체 갱신" AS UG13
+}
+
+admin --> UG10
+admin --> UG11
+admin --> UG12
+admin --> UG13
+@enduml

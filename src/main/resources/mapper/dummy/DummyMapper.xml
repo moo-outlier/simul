@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbm.dummy.dao.DummyDAO">
+
+  <insert id="addThresholdDummy">
+    INSERT INTO
+    MN_THRHLD_RESULT
+    (PV_UNQCODE,
+     DEVICE_UNQNO,
+     DEVICE_CODE,
+     CAR_SE_CODE,
+     DEVICE_NM,
+     THRHLD_SE_CODE,
+     OCRNC_AT,
+     CREATOR,
+     UPDATER
+    )
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.pvUnqcode},
+      #{item.deviceUnqno},
+      #{item.deviceCode},
+      #{item.carSeCode},
+      #{item.deviceNm},
+      #{item.thrhldSeCode},
+      #{item.ocrncAt},
+      'system',
+      'system'
+      )
+    </foreach>
+  </insert>
+
+  <insert id="addFailureHDummy">
+    INSERT INTO
+    MN_FAILURE_H
+    (PV_UNQNO,
+    PV_UNQCODE,
+    FAILURE_GRP_CODE,
+    FAILURE_CODE,
+    FAILURE_NM,
+    FAILURE_FLAG,
+    FAILURE_MSG,
+    ACTION1_MSG,
+    ACTION2_MSG,
+    DEVICE_UNQNO,
+    DEVICE_CODE,
+    DEVICE_NM,
+    CAR_SE_CODE,
+    STATION_NO,
+    STATION_NM,
+    OCCUR_DE,
+    OCCUR_AT,
+    ERASE_AT,
+    FAILURE_DSTNC,
+    CREATOR,
+    UPDATER
+    )
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.pvUnqno},
+      #{item.pvUnqcode},
+      #{item.failureGrpCode},
+      #{item.failureCode},
+      #{item.failureNm},
+      #{item.failureFlag},
+      #{item.failureMsg},
+      #{item.action1Msg},
+      #{item.action2Msg},
+      #{item.deviceUnqno},
+      #{item.deviceCode},
+      #{item.deviceNm},
+      #{item.carSeCode},
+      #{item.stationNo},
+      #{item.stationNm},
+      #{item.occurDe},
+      #{item.occurAt},
+      #{item.eraseAt},
+      #{item.failureDstnc},
+      'system',
+      'system'
+      )
+    </foreach>
+  </insert>
+
+  <update id="updateLiveVehicles">
+    CREATE
+    TEMPORARY TABLE
+    TMP_MN_LIVE_VEHICLE_STATUS
+    LIKE MN_LIVE_VEHICLE_STATUS;
+
+    INSERT INTO TMP_MN_LIVE_VEHICLE_STATUS
+    (PV_UNQCODE,
+    LOCATION,
+    LOCATION_SE_CODE,
+    STATUS_SE_CODE,
+    FAILURE_STATUS_CNT,
+    STOP_CNT,
+    UPDATER)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (
+      #{item.pvUnqcode},
+      #{item.location},
+      #{item.locationSeCode},
+      #{item.statusSeCode},
+      #{item.failureStatusCnt},
+      #{item.stopCnt},
+      'system'
+      )
+    </foreach>
+    ;
+
+    UPDATE MN_LIVE_VEHICLE_STATUS ori
+    INNER JOIN TMP_MN_LIVE_VEHICLE_STATUS tmp
+    ON ori.PV_UNQCODE = tmp.PV_UNQCODE
+    SET ori.LOCATION           = tmp.LOCATION,
+    ori.LOCATION_SE_CODE   = tmp.LOCATION_SE_CODE,
+    ori.STATUS_SE_CODE     = tmp.STATUS_SE_CODE,
+    ori.FAILURE_STATUS_CNT = tmp.FAILURE_STATUS_CNT,
+    ori.STOP_CNT           = tmp.STOP_CNT,
+    ori.UPDATER            = tmp.UPDATER;
+
+    DROP TEMPORARY TABLE TMP_MN_LIVE_VEHICLE_STATUS;
+  </update>
+
+</mapper>

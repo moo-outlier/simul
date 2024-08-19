@@ -1,0 +1,60 @@
+@startuml 환경변수설정API Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package 환경변수설정API{
+  usecase "탭별 환경코드 구조 조회" AS UC11
+  usecase "전체 환경코드 구조 조회" AS UC12
+  usecase "탭별 환경코드 기본값 조회 - FC본사" AS UC13
+  usecase "탭별 환경코드 기본값 조회 - 매장" AS UC14
+  usecase "탭별 환경코드 조회 - FC본사" AS UC15
+  usecase "탭별 환경코드 조회 - 매장" AS UC16
+  usecase "탭별 환경코드 수정 - FC본사" AS UC17
+  usecase "탭별 환경코드 수정 - 매장" AS UC18
+  usecase "본사목록 조회" AS UC19
+  usecase "매장목록 조회" AS UC20
+  usecase "포스목록 조회" AS UC21
+  usecase "포스명 일괄수정" AS UC22
+  usecase "포스 복사" AS UC23
+  usecase "포스 삭제" AS UC24
+  usecase "테이블그룹 조회" AS UC25
+  usecase "테이블그룹 일괄수정" AS UC26
+  usecase "환경코드목록 조회" AS UC27
+  usecase "환경변수목록 조회" AS UC28
+  usecase "환경변수 일괄조회 - FC본사" AS UC29
+  usecase "환경변수 일괄조회 - 매장" AS UC30
+  usecase "환경변수 일괄조회 - 포스" AS UC31
+  usecase "환경변수 일괄수정 - FC본사" AS UC32
+  usecase "환경변수 일괄수정 - 매장" AS UC33
+  usecase "환경변수 일괄수정 - 포스" AS UC34
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+user --> UC22
+user --> UC23
+user --> UC24
+user --> UC25
+user --> UC26
+user --> UC27
+user --> UC28
+user --> UC29
+user --> UC30
+user --> UC31
+user --> UC32
+user --> UC33
+user --> UC34
+
+@enduml

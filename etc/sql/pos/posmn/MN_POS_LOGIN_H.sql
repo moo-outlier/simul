@@ -1,0 +1,30 @@
+CREATE TABLE `MN_POS_LOGIN_H`
+(
+    `POS_LOGIN_H_PID` bigint       NOT NULL AUTO_INCREMENT COMMENT '포스_로그인_이력_순번',
+    `POS_PID`         bigint       NOT NULL COMMENT '포스_순번',
+    `STORE_UNQCODE`   varchar(14)  NOT NULL COMMENT '매장_고유코드',
+    `FCHQ_CODE`       varchar(7)   NOT NULL COMMENT '본사_코드',
+    `LOGIN_DE`        int          NOT NULL COMMENT '로그인_일자',
+    `FCHQ_NM`         varchar(50)  NOT NULL COMMENT '본사_명',
+    `STORE_NM`        varchar(50)  NOT NULL COMMENT '매장_명',
+    `POS_NO`          varchar(20)  NOT NULL COMMENT '포스_번호',
+    `SW_CRTF_NO`      varchar(20)  NOT NULL COMMENT 'SW_인증_번호',
+    `HW_CRTF_NO`      varchar(20)  NOT NULL COMMENT 'HW_인증_번호',
+    `LOGIN_DT`        datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '로그인_일시',
+    `ATHNT_KEY_VAL`   varchar(100) NOT NULL COMMENT '인증_키_값',
+    `LOGIN_IP`        varchar(23)  NOT NULL COMMENT '로그인_IP',
+    `POS_PROG_VER_NO` varchar(20)  NOT NULL COMMENT '포스_프로그램_버전_번호',
+    `LOGIN_STT_CODE`  varchar(7)   NOT NULL COMMENT '로그인_상태_코드',
+    `HDD_CPCTY_VAL`   varchar(100) NOT NULL COMMENT 'HDD_용량_값',
+    `UPDT_VER_NM`     varchar(50)  NOT NULL COMMENT '업데이트_버전_명',
+    `OS_VER_NM`       varchar(50)  NOT NULL COMMENT 'OS_버전_명',
+    `STT_CODE`        varchar(7) COMMENT '상태_코드',
+    `USE_CODE`        varchar(7) COMMENT '용도_코드',
+    `CREATOR`         varchar(100) NOT NULL COMMENT '작성자',
+    `CREATED_AT`      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '작성일시',
+    `UPDATER`         varchar(100) NOT NULL COMMENT '수정자',
+    `UPDATED_AT`      timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시',
+    PRIMARY KEY (`POS_LOGIN_H_PID`),
+    INDEX mn_pos_login_h_idx (`POS_PID`, `STORE_UNQCODE`, `LOGIN_DE`, `CREATED_AT`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4

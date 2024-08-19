@@ -1,0 +1,63 @@
+@startuml
+
+left to right direction
+
+entity "MN_POS_OUTPUT_KND" as mnPosOutputKnd {
+  POS_OUTPUT_KND_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  POS_OUTPUT_KND_CODE : varchar(7)
+  POS_OUTPUT_KND_NM : varchar(50)
+  CREATOR : varchar(50)
+  CREATED_AT : timestamp
+  UPDATER : varchar(50)
+  UPDATED_AT : timestamp
+}
+
+entity "MN_POS_OUTPUT_TMPLAT" as mnPosOutputTmplat {
+  POS_OUTPUT_TMPLAT_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  POS_OUTPUT_KND_CODE : varchar(7)
+  POS_OUTPUT_TMPLAT_CODE : varchar(7)
+  POS_OUTPUT_TMPLAT_NM : varchar(50)
+  POS_OUTPUT_TMPLAT : varchar(4000)
+  CREATOR : varchar(50)
+  CREATED_AT : timestamp
+  UPDATER : varchar(50)
+  UPDATED_AT : timestamp
+}
+
+entity "MN_POS_OUTPUT_CODE" as mnPosOutputCode {
+  POS_OUTPUT_CODE_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  POS_OUTPUT_KND_CODE : varchar(7)
+  POS_OUTPUT_CODE : varchar(7)
+  CREATOR : varchar(50)
+  CREATED_AT : timestamp
+  UPDATER : varchar(50)
+  UPDATED_AT : timestamp
+}
+
+entity "MN_POS_OUTPUT_LOG" as mnPosOutputLog {
+  POS_OUTPUT_LOG_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  STORE_NM : varchar(50)
+  CHG_DT : DATETIME
+  PROCESS_SE_CODE : varchar(1)
+  OUTPUT_TMPLAT : varchar(4000)
+  DEPT_NM : varchar(50)
+  POS_OUTPUT_KND_CODE : varchar(7)
+  POS_OUTPUT_CODE : varchar(7)
+  CREATOR : varchar(50)
+  CREATED_AT : timestamp
+  UPDATER : varchar(50)
+  UPDATED_AT : timestamp
+}
+
+mnPosOutputKnd ||..o{ mnPosOutputTmplat
+mnPosOutputKnd ||..o{ mnPosOutputCode
+
+@enduml

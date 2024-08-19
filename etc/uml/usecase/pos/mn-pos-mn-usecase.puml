@@ -1,0 +1,138 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package POS버전수신현황API{
+  usecase "포스프로그램_등록" AS UC11
+  usecase "포스프로그램_검색" AS UC12
+  usecase "포스프로그램_매장_등록" AS UC13
+  usecase "포스프로그램별_등록매장_조회" AS UC14
+  usecase "포스프로그램별_등록매장_수정" AS UC15
+  usecase "매장별_포스프로그램_검색" AS UC16
+  usecase "매장별_포스프로그램_최종버전_조회" AS UC17
+  usecase "매장별_포스프로그램_적용버전_조회" AS UC18
+  usecase "엑셀다운로드" AS UC19
+  usecase "즐겨찾기추가" AS UC20
+  usecase "표시항목추가" AS UC21
+
+}
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+
+package 로그인이력API{
+  usecase "로그인_로그_등록" AS UC22
+  usecase "로그인_로그_조회" AS UC23
+}
+user --> UC22
+user --> UC23
+
+package POS맥어드레스인증관리API{
+  usecase "맥어드레스 신규등록" AS UC24
+  usecase "맥어드레스 수정" AS UC25
+  usecase "맥어드레스 일괄수정" AS UC26
+  usecase "맥어드레스 검색" AS UC27
+  usecase "맥어드레스 삭제" AS UC28
+}
+user --> UC24
+user --> UC25
+user --> UC26
+user --> UC27
+user --> UC28
+
+package 포스출력물관리API{
+  usecase "포스출력물종류 목록" AS UC28
+  usecase "포스출력물템플릿 목록" AS UC29
+  usecase "포스출력물템플릿 수정" AS UC30
+  usecase "포스출력물코드 목록" AS UC31
+}
+package 포스출력물로그PI{
+  usecase "포스출력물로그 목록" AS UC32
+}
+user <-- UC28
+user --> UC29
+user --> UC30
+user --> UC31
+user --> UC32
+
+package 주방프린터-상품연결API{
+  usecase "즐겨찾기추가" AS UC33
+  usecase "표시항목선택" AS UC34
+  usecase "코드_상품명검색" AS UC35
+  usecase "상품분류목록조회" AS UC36
+  usecase "주방프린터목록조회" AS UC37
+  usecase "출력상품목록조회" AS UC38
+  usecase "출력상품목록삭제" AS UC39
+  usecase "미출력상품목록조회" AS UC40
+  usecase "미출력상품목록추가" AS UC41
+}
+
+UC33 <-- user
+UC34 <-- user
+UC35 <-- user
+UC36 <-- user
+UC37 <-- user
+UC38 <-- user
+UC39 <-- user
+UC40 <-- user
+UC41 <-- user
+
+package 포스기능정의API{
+  usecase "즐겨찾기추가" AS UC42
+  usecase "표시항목선택" AS UC43
+  usecase "포스기능사용관리목록조회" AS UC44
+  usecase "포스기능일괄셋팅" AS UC45
+  usecase "포스기능복사" AS UC46
+  usecase "포스기능구분선택" AS UC47
+  usecase "포스기능사용선택" AS UC48
+  usecase "포스기능저장" AS UC49
+  usecase "포스기능인증관리목록조회" AS UC50
+  usecase "포스기능사용여부선택" AS UC51
+  usecase "포스기능인증여부선택" AS UC52
+  usecase "포스기능인증허용그룹선택" AS UC53
+}
+UC42 <-- user
+UC43 <-- user
+UC44 <-- user
+UC45 <-- user
+UC46 <-- user
+UC47 <-- user
+UC48 <-- user
+UC49 <-- user
+UC50 <-- user
+UC51 <-- user
+UC52 <-- user
+UC53 <-- user
+
+package 매장환경설정API{
+  usecase "포스 목록 조회" AS UC54
+  usecase "포스 환경설정 기본값 조회" AS UC55
+  usecase "포스별 환경설정 조회" AS UC56
+  usecase "포스 환경설정 복사" AS UC57
+  usecase "포스기능 조회" AS UC58
+  usecase "포스기능 저장" AS UC59
+  usecase "포스특이설정조회" AS UC60
+  usecase "포스특이설정조회 기본값 조회" AS UC61
+  usecase "포스특이설정조회 기본값 저장" AS UC62
+}
+UC54 <-- user
+UC55 <-- user
+UC56 <-- user
+UC57 <-- user
+UC58 <-- user
+UC59 <-- user
+UC60 <-- user
+UC61 <-- user
+UC62 <-- user
+
+@enduml

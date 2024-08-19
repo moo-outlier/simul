@@ -1,0 +1,27 @@
+@startuml
+
+left to right direction
+
+entity "MN_PARTNER_CARD" as mnPartnerCard {
+  PARTNER_CARD_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  PARTNER_TYPE_CODE : varchar(7)
+  PARTNER_CODE : varchar(7)
+  PARTNER_NM : varchar(50)
+  START_EXPIRE_DE : int
+  END_EXPIRE_DE : int
+  DSC_SE_CODE : varchar(1)
+  DSC_RT : float
+  DSC_LMT_SE_CODE : varchar(1)
+  DSC_LMT_PRICE : int
+  APPRO_SE_CODE : varchar(1)
+  PARTNER_NOTE : varchar(400)
+  USE_AT : varchar(1)
+  CREATOR : varchar(50)
+  CREATED_AT : timestamp
+  UPDATER : varchar(50)
+  UPDATED_AT : timestamp
+}
+
+@enduml

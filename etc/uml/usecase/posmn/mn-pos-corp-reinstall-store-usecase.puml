@@ -1,0 +1,15 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package 재설치대상매장조회API{
+  usecase "재설치대상매장 조회" AS UC11
+}
+
+' 사용자
+user --> UC11
+
+
+@enduml

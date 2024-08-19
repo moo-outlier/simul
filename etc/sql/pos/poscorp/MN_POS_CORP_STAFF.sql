@@ -1,0 +1,32 @@
+CREATE TABLE `MN_POS_CORP_STAFF`
+(
+    `CORP_STAFF_PID` bigint       NOT NULL AUTO_INCREMENT COMMENT '업체_사원_순번',
+    `STAFF_ID`       varchar(100) NOT NULL COMMENT '사원_ID',
+    `STAFF_NO`       varchar(10)  NOT NULL COMMENT '사원_번호',
+    `STAFF_NM`       varchar(100) NOT NULL COMMENT '사원_명',
+    `STAFF_CARDNO`   varchar(100) COMMENT '사원_카드번호',
+    `STAFF_TELNO`    varchar(20) COMMENT '사원_전화번호',
+    `STAFF_CELNO`    varchar(20) COMMENT '사원_핸드폰번호',
+    `STAFF_EMAIL`    varchar(200) COMMENT '사원_이메일',
+    `STAFF_ADRES`    varchar(256) COMMENT '사원_주소',
+    `STAFF_NOTE`     varchar(400) COMMENT '사원_비고',
+    `MGMT_CORP_CODE` varchar(7)   NOT NULL COMMENT '관리업체_코드',
+    `DEPT_CODE`      varchar(7) COMMENT '부서_코드',
+    `LEVEL_CODE`     varchar(7) COMMENT '직급_코드',
+    `POSITION_CODE`  varchar(7) COMMENT '직책_코드',
+    `STATUS_CODE`    varchar(7)   NOT NULL COMMENT '상태_코드',
+    `WEB_AT`         varchar(1)   NOT NULL COMMENT '웹_사용여부',
+    `SMS_AT`         varchar(1)   NOT NULL COMMENT 'SMS_수신여부',
+    `ADTNL_FIELD_1`  varchar(100) NOT NULL COMMENT '추가_필드_1',
+    `ADTNL_FIELD_2`  varchar(100) NOT NULL COMMENT '추가_필드_2',
+    `ADTNL_FIELD_3`  varchar(100) COMMENT '추가_필드_3',
+    `ADTNL_FIELD_4`  varchar(100) COMMENT '추가_필드_4',
+    `ADTNL_FIELD_5`  varchar(100) COMMENT '추가_필드_5',
+    `CREATOR`        varchar(100) NOT NULL COMMENT '작성자',
+    `CREATED_AT`     timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성시간',
+    `UPDATER`        varchar(100) NOT NULL COMMENT '수정자',
+    `UPDATED_AT`     timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '변경시간',
+    PRIMARY KEY (`CORP_STAFF_PID`),
+    INDEX mn_pos_corp_staff_idx (`CREATED_AT`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4

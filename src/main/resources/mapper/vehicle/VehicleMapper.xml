@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbm.vehicle.dao.VehicleDAO">
+
+  <insert id="createVehicleSchedule">
+--  createVehicleSchedule
+--  편성 생성
+    INSERT INTO
+      MN_VEHICLE_INFO
+    SET
+      PV_UNQNO = #{pvUnqno},
+      PV_UNQCODE = #{pvUnqcode},
+--  기지 역 번호
+      <if test='stationNo != null and !stationNo.equals("")'>
+      STATION_NO = #{stationNo},
+      </if>
+--  마지막 수신 일시
+      <if test='lastReceiveDt != null and !lastReceiveDt.equals("")'>
+      LAST_RECEIVE_DT = #{lastReceiveDt},
+      </if>
+--  호선 번호
+      <if test='lineNo != null and !lineNo.equals("")'>
+      LINE_NO = #{lineNo},
+      </if>
+--  차량 수
+      <if test='carCnt != null and !carCnt.equals("")'>
+      CAR_CNT = #{carCnt},
+      </if>
+      CREATOR = #{creator},
+      UPDATER = #{updater}
+  </insert>
+
+  <insert id="createVehiclesSchedule">
+--  createVehiclesSchedule
+--  다중 편성 생성
+    <foreach collection="create" item="vehicle" separator=";">
+    INSERT INTO
+      MN_VEHICLE_INFO
+    (
+      PV_UNQNO,
+      PV_UNQCODE,
+      <if test='vehicle.stationNo != null and !vehicle.stationNo.equals("")'>
+      STATION_NO,
+      </if>
+      <if test='vehicle.lastReceiveDt != null and !vehicle.lastReceiveDt.equals("")'>
+      LAST_RECEIVE_DT,
+      </if>
+      <if test='vehicle.lineNo != null and !vehicle.lineNo.equals("")'>
+      LINE_NO,
+      </if>
+      <if test='vehicle.carCnt != null and !vehicle.carCnt.equals("")'>
+      CAR_CNT,
+      </if>
+      CREATOR,
+      UPDATER
+    )
+    VALUES
+    (
+      #{vehicle.pvUnqno},
+      #{vehicle.pvUnqcode},
+--  기지 역 번호
+      <if test='vehicle.stationNo != null and !vehicle.stationNo.equals("")'>
+      #{vehicle.stationNo},
+      </if>
+--  마지막 수신 일시
+      <if test='vehicle.lastReceiveDt != null and !vehicle.lastReceiveDt.equals("")'>
+      #{vehicle.lastReceiveDt},
+      </if>
+--  호선 번호
+      <if test='vehicle.lineNo != null and !vehicle.lineNo.equals("")'>
+      #{vehicle.lineNo},
+      </if>
+--  차량 수
+      <if test='vehicle.carCnt != null and !vehicle.carCnt.equals("")'>
+      #{vehicle.carCnt},
+      </if>
+      #{creator},
+      #{updater}
+    )
+    </foreach>
+  </insert>
+
+  <update id="updateVehicleSchedule">
+--  updateVehicleSchedule
+--  편성 수정
+    UPDATE
+      MN_VEHICLE_INFO
+    SET
+--  호선 번호 수정
+      <if test='lineNo != null and !lineNo.equals("")'>
+      LINE_NO = #{lineNo},
+      </if>
+--  편성 고유 번호 수정
+      <if test='pvUnqno != null and !pvUnqno.equals("")'>
+      PV_UNQNO = #{pvUnqno},
+      </if>
+--  기지 역 수정
+      <if test='stationNo != null and !stationNo.equals("")'>
+      STATION_NO = #{stationNo},
+      </if>
+--  차량 수 수정
+      <if test='carCnt != null and !carCnt.equals("")'>
+      CAR_CNT = #{carCnt},
+      </if>
+--  마지막 수신 일시 수정
+      <if test='lastReceiveDt != null and !lastReceiveDt.equals("")'>
+      LAST_RECEIVE_DT = #{lastReceiveDt},
+      </if>
+      UPDATER = #{updater}
+    WHERE
+      PV_UNQCODE = #{pvUnqcode}
+  </update>
+
+  <delete id="deleteVehicleSchedule">
+--  deleteVehicleSchedule
+--  편성 삭제
+    DELETE
+    FROM
+      MN_VEHICLE_INFO
+    WHERE
+      PV_UNQCODE = #{pvUnqcode}
+  </delete>
+
+</mapper>

@@ -1,0 +1,188 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "TouchKeyController" as controller
+participant "TouchKeyService" as service
+participant "TouchKeyDAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 터치키 저장
+activate controller
+controller -> service : Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor, \n tchkeyCode,tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate service
+service -> dao: Hashmap \n (storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor)
+activate dao
+dao -> db: Hashmap \n (storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap \n (storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor)
+activate dao
+dao -> db: Hashmap \n (storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor, \n tchkeyCode,tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor, \n tchkeyCode,tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap \n (storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyCode, \n tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap \n (storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyCode, \n tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap \n (storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyCode, \n tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap \n (storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyCode, \n tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor, \n tchkeyCode,tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, \n tchkeyGrpPageNo, tchkeyGrpImgUrl, tchkeyGrpNm, \n  tchkeyGrpXCoor, tchkeyGrpYCoor, \n tchkeyCode,tchkeyPageNo, goodsCode, goodsNm, goodsPrice, \n tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 터치키 그룹 조회
+activate controller
+controller -> service : Hashmap\n(storeUnqcode, tchkeyGrpPageNo, subSeCode)
+activate service
+service -> dao: Hashmap\n(storeUnqcode, tchkeyGrpPageNo, subSeCode)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, tchkeyGrpPageNo, subSeCode)
+activate db
+dao <-- db: Hashmap\n (subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, tchkeyGrpImgUrl,\n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor)
+deactivate db
+service <-- dao: Hashmap\n (subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, tchkeyGrpImgUrl,\n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor)
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 터치키 조회
+activate controller
+controller -> service : Hashmap\n(storeUnqcode, tchkeyGrpCode, tchkeyPageNo, subSeCode)
+activate service
+service -> dao: Hashmap\n(storeUnqcode, tchkeyGrpCode, tchkeyPageNo, subSeCode)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, tchkeyGrpCode, tchkeyPageNo, subSeCode)
+activate db
+dao <-- db: Hashmap\n (sub_se_code, tchkeyGrpCode, tchkeyCode, tchkeyPageNo,\n goodsNm, goodsPrice, tchkeyXCoor, tchkeyYCoor)
+deactivate db
+service <-- dao: Hashmap\n (sub_se_code, tchkeyGrpCode, tchkeyCode, tchkeyPageNo,\n goodsNm, goodsPrice, tchkeyXCoor, tchkeyYCoor)
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API4
+user -> controller : 터치키 삭제
+activate controller
+controller -> service : Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate service
+service -> dao: Hashmap\n(storeUnqcode, subSeCode, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, subSeCode, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap\n(storeUnqcode, subSeCode, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, subSeCode, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap\n(storeUnqcode, subSeCode, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, subSeCode, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate dao
+dao -> db: Hashmap(List<HashMap>)\n(storeUnqcode, subSeCode, tchkeyGrpCode, tchkeyGrpPageNo, \n tchkeyGrpNm, tchkeyGrpXCoor, tchkeyGrpYCoor, tchkeyCode, \n tchkeyPageNo,goodsCode, goodsNm, tchkeyXCoor, tchkeyYCoor)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API5
+user -> controller : 상품 조회
+activate controller
+controller -> service : Hashmap\n(searchSeCode, searchValSeCode, highCtgCode,costSeCode)
+activate service
+service -> dao: Hashmap\n(searchSeCode, searchValSeCode, highCtgCode,costSeCode)
+activate dao
+dao -> db: Hashmap\n(searchSeCode, searchValSeCode, highCtgCode,costSeCode)
+activate db
+dao <-- db: Hashmap\n (tchkeyGrpCode, thkeyGrpPageNo, tchkeyGrpNm, tchkeyGrpXCoor \n, tchkeGrpyYCoor, subSeCode, storeGcode, goodsNm, \n initSaleCost)
+deactivate db
+service <-- dao: Hashmap\n (tchkeyGrpCode, thkeyGrpPageNo, tchkeyGrpNm, tchkeyGrpXCoor \n, tchkeGrpyYCoor, subSeCode, storeGcode, goodsNm, \n initSaleCost)
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+@enduml

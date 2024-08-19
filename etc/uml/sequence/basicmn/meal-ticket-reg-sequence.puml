@@ -1,0 +1,171 @@
+@startuml Partner Card Reg Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 식권 분류 목록 API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode)
+activate service
+service -> dao: HashMap\n(paymentMethodCode)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+deactivate db
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 식권 분류 등록 API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode, ctgCode,\n ctgNm, useAt)
+activate service
+service -> dao: HashMap\n(paymentMethodCode, ctgCode,\n ctgNm, useAt)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode, ctgCode,\n ctgNm, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 식권 분류 수정 API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode, ctgCode)
+activate service
+service -> dao: HashMap\n(paymentMethodCode, ctgCode)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode, ctgCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API4
+user -> controller : 식권 분류 삭제 API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode, ctgCode)
+activate service
+service -> dao: HashMap\n(paymentMethodCode, ctgCode)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode, ctgCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API5
+user -> controller : 식권 목록 API
+activate controller
+controller -> service : HashMap\n(ctgCode)
+activate service
+service -> dao: HashMap\n(ctgCode)
+activate dao
+dao -> db: HashMap\n(ctgCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API6
+user -> controller : 식권 등록 API
+activate controller
+controller -> service : HashMap\n(ctgCode, autoNumbering, mealTicketCode,\n mealTicketNm, price, useAt)
+activate service
+service -> dao: HashMap\n(ctgCode, autoNumbering, mealTicketCode,\n mealTicketNm, price, useAt)
+activate dao
+dao -> db: HashMap\n(ctgCode, autoNumbering, mealTicketCode,\n mealTicketNm, price, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API7
+user -> controller : 식권 수정 API
+activate controller
+controller -> service : HashMap\n(mealTicketCode, mealTicketNm, price, useAt)
+activate service
+service -> dao: HashMap\n(mealTicketCode, mealTicketNm, price, useAt)
+activate dao
+dao -> db: HashMap\n(mealTicketCode, mealTicketNm, price, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API8
+user -> controller : 식권 삭제 API
+activate controller
+controller -> service : HashMap\n(mealTicketCode)
+activate service
+service -> dao: HashMap\n(mealTicketCode)
+activate dao
+dao -> db: HashMap\n(mealTicketCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API9
+user -> controller : 식권 조회 API
+activate controller
+controller -> service : HashMap\n(startDe, endDe, status,\n storeNm, ctgCode, mealTicketCode,\n mealTicketNo)
+activate service
+service -> dao: HashMap\n(startDe, endDe, status,\n storeNm, ctgCode, mealTicketCode,\n mealTicketNo)
+activate dao
+dao -> db: HashMap\n(startDe, endDe, status,\n storeNm, ctgCode, mealTicketCode,\n mealTicketNo)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

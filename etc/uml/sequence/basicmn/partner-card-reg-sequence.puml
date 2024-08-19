@@ -1,0 +1,134 @@
+@startuml Partner Card Reg Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 제휴카드목록
+activate controller
+controller -> service : void
+activate service
+service -> dao: void
+activate dao
+dao -> db: void
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+deactivate db
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 제휴카드등록API
+activate controller
+controller -> service : HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate service
+service -> dao: HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate dao
+dao -> db: HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 제휴카드수정API
+user -> controller : 제휴카드수정API
+activate controller
+controller -> service : HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate service
+service -> dao: HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate dao
+dao -> db: HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 제휴카드삭제API
+user -> controller : 제휴카드삭제API
+activate controller
+controller -> service : HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate service
+service -> dao: HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate dao
+dao -> db: HashMap\n(partnerTypeCode, partnerNm, startExpireDe,\n endExpireDt, dscSeCode, dscRt,\n dscLmtSeCode, dscLmtPrice, approSeCode,\n partnerNote, useAt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 제휴 상품 목록 API
+user -> controller : 제휴상품목록API
+activate controller
+controller -> service : HashMap\n(paymentMethodCode)
+activate service
+service -> dao: HashMap\n(paymentMethodCode)
+activate dao
+dao -> db: HashMap\n(paymentMethodCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 제휴에 상품 추가 API
+user -> controller : 제휴에 상품 추가 API
+activate controller
+controller -> service : HashMap\n(partnerCode, storeGcode)
+activate service
+service -> dao: HashMap\n(partnerCode, storeGcode)
+activate dao
+dao -> db: HashMap\n(partnerCode, storeGcode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 제휴에 상품 삭제 API
+user -> controller : 제휴에 상품 삭제 API
+activate controller
+controller -> service : HashMap\n(partnerCode, storeGcode)
+activate service
+service -> dao: HashMap\n(partnerCode, storeGcode)
+activate dao
+dao -> db: HashMap\n(partnerCode, storeGcode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+@enduml

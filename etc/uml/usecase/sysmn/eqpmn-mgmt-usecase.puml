@@ -1,0 +1,24 @@
+@startuml
+
+left to right direction
+
+actor "관리자" as admin
+
+package "장비등록"{
+  usecase "장비목록 조회" AS UG10
+  usecase "장비상세 조회" AS UG11
+  usecase "장비상세 수정" AS UG12
+  usecase "장비신규 등록" AS UG13
+  usecase "장비 삭제" AS UG14
+  usecase "장비 등급별 가격 조회" AS UG15
+  usecase "장비 등급별 가격 일괄 수정" AS UG16
+}
+
+admin --> UG10
+admin --> UG11
+admin --> UG12
+admin --> UG13
+admin --> UG14
+admin --> UG15
+admin --> UG16
+@enduml

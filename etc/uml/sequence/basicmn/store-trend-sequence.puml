@@ -1,0 +1,171 @@
+@startuml Kitchen Memo Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 매장추이목록API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate service
+service -> dao: Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate dao
+dao -> db: Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 사용매장수API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate service
+service -> dao:  Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate dao
+dao -> db:  Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 영수건수API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate service
+service -> dao: Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate dao
+dao -> db: Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API4
+user -> controller : 카드승인API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm)
+activate service
+service -> dao: Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate dao
+dao -> db: Hashmap\n(startDe, endDe, limit,\n fchqNm, storeNm
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API5
+user -> controller : 관리업체추이목록API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe)
+activate service
+service -> dao: Hashmap\n(startDe, endDe)
+activate dao
+dao -> db: Hashmap\n(startDe, endDe)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API6
+user -> controller : 월별 설치건수API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe)
+activate service
+service -> dao: Hashmap\n(startDe, endDe)
+activate dao
+dao -> db: Hashmap\n(startDe, endDe)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API7
+user -> controller : 관리업체별 설치건수API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe)
+activate service
+service -> dao: Hashmap\n(startDe, endDe)
+activate dao
+dao -> db: Hashmap\n(startDe, endDe)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API8
+user -> controller : 최근 관리업체별 설치건수
+activate controller
+controller -> service : Hashmap\n(startDe, endDe)
+activate service
+service -> dao: Hashmap\n(startDe, endDe)
+activate dao
+dao -> db: Hashmap\n(startDe, endDe)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API9
+user -> controller : 관리업체 매장사용 현황API
+activate controller
+controller -> service :  Hashmap\n(startDe, endDe)
+activate service
+service -> dao: Hashmap\n(startDe, endDe)
+activate dao
+dao -> db: Hashmap\n(startDe, endDe)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

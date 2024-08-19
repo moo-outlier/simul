@@ -1,0 +1,117 @@
+@startuml
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 제품분류 조회
+user -> controller : 제품분류 조회
+activate controller
+controller -> service : (void)
+activate service
+service -> dao: (void)
+activate dao
+dao -> db: (void)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 제품분류 일괄저장
+user -> controller : 제품분류 일괄저장
+activate controller
+controller -> service : HashMap(eqpmnCtgList)
+activate service
+service -> dao: HashMap(eqpmnCtgList)
+activate dao
+dao -> db: HashMap(eqpmnCtgList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 제품분류 일괄 삭제
+user -> controller : 제품분류 일괄 삭제
+activate controller
+controller -> service : HashMap(eqpmnCtgCodes)
+activate service
+service -> dao: HashMap(eqpmnCtgCodes)
+activate dao
+dao -> db: HashMap(eqpmnCtgCodes)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'제품분류별 장비 목록 조회
+user -> controller : 제품분류별 장비 목록 조회
+activate controller
+controller -> service : HashMap(eqpmnCtgCode)
+activate service
+service -> dao: HashMap(eqpmnCtgCode)
+activate dao
+dao -> db: HashMap(eqpmnCtgCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 제품분류별 장비 일괄 저장
+user -> controller : 제품분류별 장비 일괄 저장
+activate controller
+controller -> service : HashMap(eqpmnCtgCode, eqpmnList)
+activate service
+service -> dao: HashMap(eqpmnCtgCode, eqpmnList)
+activate dao
+dao -> db: HashMap(eqpmnCtgCode, eqpmnList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 제품분류별 장비 일괄 삭제
+user -> controller : 제품분류별 장비 일괄 삭제
+activate controller
+controller -> service : HashMap(eqpmnCtgCode, eqpmnList)
+activate service
+service -> dao: HashMap(eqpmnCtgCode, eqpmnList)
+activate dao
+dao -> db: HashMap(eqpmnCtgCode, eqpmnList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml Partner Card Reg Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package 제휴카드등록API{
+  usecase "제휴카드 목록" AS UC11
+  usecase "제휴카드 추가" AS UC12
+  usecase "제휴카드 수정" AS UC13
+  usecase "제휴카드 삭제" AS UC14
+  usecase "제휴 상품 목록" AS UC15
+  usecase "추가된 상품 추가" AS UC16
+  usecase "추가된 상품 삭제" AS UC17
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+
+@enduml

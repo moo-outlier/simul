@@ -1,0 +1,22 @@
+@startuml
+
+left to right direction
+
+entity "MN_EQPMN_SYMPTMS" as mnEqpmnSymptms {
+    EQPMN_SYMPTMS_PID : INT <<PK>>
+    --
+    SYMPTMS_CTG_SE_CODE : VARCHAR(1)
+    SYMPTMS_CTG_CODE : VARCHAR(7)
+    SYMPTMS_CTG_NM : VARCHAR(50)
+    USE_AT : VARCHAR(1)
+    CREATOR : VARCHAR(100)
+    CREATED_AT : TIMESTAMP
+    UPDATER : VARCHAR(100)
+    UPDATED_AT : TIMESTAMP
+}
+
+@enduml
+
+
+
+

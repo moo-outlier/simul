@@ -1,0 +1,181 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "MemberMnController" as controller
+participant "MemberMnService" as service
+participant "MemberMnDAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 신규회원등록 API
+activate controller
+controller -> service : Hashmap\n(mbrGrdCode, koMbrNm, enMbrNm, fchqCode,fchqNm, \n regStoreNm, storeUnqcode, mbrCardno, \n gender,cardUseSeCode, birthDe, birthSeCode, mbrMttlAt, mbrMttlDe \n mbrTelno, mbrCelno, shortNoSeCode, shortNo, mbrEmail, \n mbrAdres, emailRcvdAt, smsRcvdAt, dmRcvdAt, useAt, \n prevHoldPt, instStaffNm, cshRecptNo, mbrReferVal, mbrNote, \n mbrJoinDe)
+activate service
+service -> dao: String (mbrCelno)
+activate dao
+dao -> db: String (mbrCelno)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: void
+activate dao
+dao -> db: void
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+service -> dao: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, enMbrNm, fchqCode,fchqNm, \n regStoreNm, storeUnqcode, mbrCardno, \n gender,cardUseSeCode, birthDe, birthSeCode, mbrMttlAt, mbrMttlDe \n mbrTelno, mbrCelno, shortNoSeCode, shortNo, mbrEmail, \n mbrAdres, emailRcvdAt, smsRcvdAt, dmRcvdAt, useAt, \n prevHoldPt, instStaffNm, cshRecptNo, mbrReferVal, mbrNote, \n mbrJoinDe)
+activate dao
+dao -> db: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, enMbrNm, fchqCode,fchqNm, \n regStoreNm, storeUnqcode, mbrCardno, \n gender,cardUseSeCode, birthDe, birthSeCode, mbrMttlAt, mbrMttlDe \n mbrTelno, mbrCelno, shortNoSeCode, shortNo, mbrEmail, \n mbrAdres, emailRcvdAt, smsRcvdAt, dmRcvdAt, useAt, \n prevHoldPt, instStaffNm, cshRecptNo, mbrReferVal, mbrNote, \n mbrJoinDe)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 회원정보수정 API
+activate controller
+controller -> service : Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, enMbrNm, regStoreNm, \n storeUnqcode, mbrCardno, gender, \n cardUseSeCode, birthDe, birthSeCode, mbrMttlAt, mbrMttlDe \n mbrTelno, mbrCelno, shortNoSeCode, shortNo, \n mbrEmail, mbrAdres, emailRcvdAt, smsRcvdAt, \n dmRcvdAt, useAt, instStaffNm, cshRecptNo,mbrReferVal, mbrNote \n [HEADER] storeUnqcode, fchqCode)
+activate service
+service -> dao: String(mbrCode)
+activate dao
+dao -> db: String(mbrCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: String(mbrCelno)
+activate dao
+dao -> db: String(mbrCelno)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: String(mbrCode)
+activate dao
+dao -> db: String(mbrCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, enMbrNm, regStoreNm, \n storeUnqcode, mbrCardno, gender, \n cardUseSeCode, birthDe, birthSeCode, mbrMttlAt, mbrMttlDe \n mbrTelno, mbrCelno, shortNoSeCode, shortNo, \n mbrEmail, mbrAdres, emailRcvdAt, smsRcvdAt, \n dmRcvdAt, useAt, instStaffNm, cshRecptNo,mbrReferVal, mbrNote \n [HEADER] storeUnqcode, fchqCode)
+activate dao
+dao -> db: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, enMbrNm, regStoreNm, \n storeUnqcode, mbrCardno, gender, \n cardUseSeCode, birthDe, birthSeCode, mbrMttlAt, mbrMttlDe \n mbrTelno, mbrCelno, shortNoSeCode, shortNo, \n mbrEmail, mbrAdres, emailRcvdAt, smsRcvdAt, \n dmRcvdAt, useAt, instStaffNm, cshRecptNo,mbrReferVal, mbrNote \n [HEADER] storeUnqcode, fchqCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 회원정보삭제 API
+activate controller
+controller -> service : Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, regStoreNm, \n mbrCardno,  [HEADER] storeUnqcode, fchqCode)
+activate service
+service -> dao: String(mbrCode)
+activate dao
+dao -> db: String(mbrCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: String(mbrCode)
+activate dao
+dao -> db: String(mbrCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, regStoreNm, \n storeUnqcode, mbrCardno)
+activate dao
+dao -> db: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, regStoreNm, \n storeUnqcode, mbrCardno)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, regStoreNm, \n storeUnqcode, mbrCardno)
+activate dao
+dao -> db: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, regStoreNm, \n storeUnqcode, mbrCardno)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, regStoreNm, \n storeUnqcode, mbrCardno)
+activate dao
+dao -> db: Hashmap\n(mbrCode,mbrGrdCode, koMbrNm, regStoreNm, \n storeUnqcode, mbrCardno)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+' API5
+user -> controller : 회원목록 API
+activate controller
+controller -> service : Hashmap\n (limitCnt, detailAt, [HEADER] storeUnqcode, fchqCode)
+activate service
+service -> dao: void
+activate dao
+dao -> db: void
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap\n (limitCnt, detailAt, [HEADER] storeUnqcode, fchqCode)
+activate dao
+dao -> db: Hashmap\n (limitCnt, detailAt, [HEADER] storeUnqcode, fchqCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+' API6
+user -> controller :회원검색 API
+activate controller
+controller -> service : MemberSearchVO \n (srchOptionVal, srchStartDe, srchEndDe,  mbrCode, koMbrNm, \n mbrGrdCode, fstvOptionVal, fstvStartDe, fstvEndDe, srchNumOptionVal, \n srchNum, gender, mbrMttlAt, mbrEmail, emailRcvdAt, smsRcvdAt, \n srchAcmSalsesOptionVal, startAcmltSales, endAcmltSales, \n srchPtOptionVal, startSrchPtDe, endSrchPtDe,  cardUseSeCode, mbrCardno\n  [HEADER] storeUnqcode, fchqCode)
+activate service
+service -> dao: MemberSearchVO\n (srchOptionVal, srchStartDe, srchEndDe,  mbrCode, koMbrNm, \n mbrGrdCode, fstvOptionVal, fstvStartDe, fstvEndDe, srchNumOptionVal, \n srchNum, gender, mbrMttlAt, mbrEmail, emailRcvdAt, smsRcvdAt, \n srchAcmSalsesOptionVal, startAcmltSales, endAcmltSales, \n srchPtOptionVal, startSrchPtDe, endSrchPtDe,  cardUseSeCode, mbrCardno\n  [HEADER] storeUnqcode, fchqCode)
+activate dao
+dao -> db: MemberSearchVO\n (srchOptionVal, srchStartDe, srchEndDe,  mbrCode, koMbrNm, \n mbrGrdCode, fstvOptionVal, fstvStartDe, fstvEndDe, srchNumOptionVal, \n srchNum, gender, mbrMttlAt, mbrEmail, emailRcvdAt, smsRcvdAt, \n srchAcmSalsesOptionVal, startAcmltSales, endAcmltSales, \n srchPtOptionVal, startSrchPtDe, endSrchPtDe,  cardUseSeCode, mbrCardno\n  [HEADER] storeUnqcode, fchqCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

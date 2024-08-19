@@ -1,0 +1,30 @@
+CREATE TABLE `MN_POS_CORP_TRNSF`
+(
+    `CORP_TRNSF_PID`        bigint       NOT NULL AUTO_INCREMENT COMMENT '업체_설치_순번',
+    `STORE_UNQCODE`         varchar(14)  NOT NULL COMMENT '매장_고유코드',
+    `FCHQ_CODE`             varchar(7)   NOT NULL COMMENT '본사_코드',
+    `FCHQ_NM`               varchar(50)  NOT NULL COMMENT '본사_명',
+    `STORE_NM`              varchar(50)  NOT NULL COMMENT '매장_명',
+    `STT_CODE`              varchar(7)   NOT NULL COMMENT '진행_상태_코드',
+    `FROM_TRNSF_CORP_CODE`  varchar(7)   NOT NULL COMMENT '이출_업체_코드',
+    `FROM_TRNSF_CORP_NM`    varchar(50)  NOT NULL COMMENT '이출_업체_명',
+    `FROM_TRNSF_REGI_DT`    datetime     NOT NULL COMMENT '이출_신청_일시',
+    `FROM_TRNSF_STAFF_NM`   varchar(50)  NOT NULL COMMENT '이출_신청_사원_명',
+    `TRNSF_HIGH_CORP_CODE`  varchar(7)   NOT NULL COMMENT '이관_총판_업체_코드',
+    `TRNSF_HIGH_CORP_NM`    varchar(50)  NOT NULL COMMENT '이관_총판_업체_명',
+    `TRNSF_CHCK_DT`         datetime COMMENT '이관_확인_일시',
+    `TRNSF_CHCK_STAFF_NM`   varchar(50) COMMENT '이관_확인_사원_명',
+    `TO_TRNSF_CORP_CODE`    varchar(7)   NOT NULL COMMENT '이입_업체_코드',
+    `TO_TRNSF_CORP_NM`      varchar(50)  NOT NULL COMMENT '이입_업체_명',
+    `TO_TRNSF_REGI_DT`      datetime COMMENT '이입_확인_일시',
+    `TO_TRNSF_STAFF_NM`     varchar(50) COMMENT '이입_확인_사원_명',
+    `TRNSF_CANCEL_DT`       datetime COMMENT '취소_일시',
+    `TRNSF_CANCEL_STAFF_NM` varchar(50) COMMENT '취소_사원_명',
+    `CREATOR`               varchar(100) NOT NULL COMMENT '작성자',
+    `CREATED_AT`            timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성시간',
+    `UPDATER`               varchar(100) NOT NULL COMMENT '수정자',
+    `UPDATED_AT`            timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '변경시간',
+    PRIMARY KEY (`CORP_TRNSF_PID`),
+    INDEX mn_pos_corp_trnsf_idx (`STORE_UNQCODE`, `CREATED_AT`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4

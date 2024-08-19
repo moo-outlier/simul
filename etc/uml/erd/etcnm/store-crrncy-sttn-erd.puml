@@ -1,0 +1,23 @@
+@startuml 매장_금전_현황
+
+left to right direction
+
+entity "MN_STORE_CRRNCY_STTN" as mnStoreCrrncySttn {
+  STORE_CRRNCY_STTN_PID : int <<pk>>
+  --
+  FCHQ_CODE : varchar(7)
+  STORE_UNQCODE : varchar(14)
+  STORE_NM : varchar(50)
+  SALES_DE : int
+  POS_NO : varchar(20)
+  RCPPAY_SE_CODE : varchar(1)
+  VAULTCASH_ACNT_CODE : varchar(7)
+  VAULTCASH_ACNT_NM : varchar(50)
+  PRICE : int(11)
+  CRRNCY_STTN_NOTE : varchar(400)
+  CREATOR : varchar(100)
+  CREATED_AT : timestamp
+  UPDATER : varchar(100)
+  UPDATED_AT : timestamp
+}
+@enduml

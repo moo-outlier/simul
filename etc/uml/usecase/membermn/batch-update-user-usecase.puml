@@ -1,0 +1,21 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점" as store
+
+package 회원정보일괄변경{
+  usecase 회원정보_조회 AS BUU10
+  usecase 회원정보_상세조회 AS BUU11
+  usecase 회원정보_일괄수정 AS BUU12
+  usecase 즐겨찾기추가 AS BUU13
+  usecase 표시항목추가 AS BUU14
+}
+
+store --> BUU10
+store --> BUU11
+store --> BUU12
+store --> BUU13
+store --> BUU14
+
+@enduml

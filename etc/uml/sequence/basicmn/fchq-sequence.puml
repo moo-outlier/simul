@@ -1,0 +1,99 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 본사코드 일반자동채번API
+activate controller
+controller -> service : void
+activate service
+service -> dao: void
+activate dao
+dao -> db: void
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: String
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 본사코드 데모자동채번API
+activate controller
+controller -> service : void
+activate service
+service -> dao: void
+activate dao
+dao -> db: void
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: String
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 본사 전체 조회API
+activate controller
+controller -> service : Hashmap\n(officeCode, officeNm, \ncorpNo, useCode, sttCode)
+activate service
+service -> dao: Hashmap\n(officeCode, officeNm, \ncorpNo, useCode, sttCode)
+activate dao
+dao -> db: Hashmap\n(officeCode, officeNm, \ncorpNo, useCode, sttCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API4
+user -> controller : 본사 상세 조회API
+activate controller
+controller -> service : Hashmap\n(officeCode)
+activate service
+service -> dao: Hashmap\n(officeCode)
+activate dao
+dao -> db: Hashmap\n(officeCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API5
+user -> controller : 본사 정보 등록API
+activate controller
+controller -> service : Hashmap\n(officeCode, officeNm, repNm, corpNo,\n comNm, officeTypeNm, officeItemNm,\n officeTelo, officeCelno, officeFaxno,\n localCode, sttCode, sysOpenDe, officeEmail,\n officeStockOpenAt, websiteUrl, postNo, readnmAdres,\n detailAdres, useCode, brandAt, saleMarginAt, sysNote,\n prodCateCode, mgmtVanCode, mgmtCorpCode)
+activate service
+service -> dao: Hashmap\n(officeCode, officeNm, repNm, corpNo,\n comNm, officeTypeNm, officeItemNm,\n officeTelo, officeCelno, officeFaxno,\n localCode, sttCode, sysOpenDe, officeEmail,\n officeStockOpenAt, websiteUrl, postNo, readnmAdres,\n detailAdres, useCode, brandAt, saleMarginAt, sysNote,\n prodCateCode, mgmtVanCode, mgmtCorpCode)
+activate dao
+dao -> db: Hashmap\n(officeCode, officeNm, repNm, corpNo,\n comNm, officeTypeNm, officeItemNm,\n officeTelo, officeCelno, officeFaxno,\n localCode, sttCode, sysOpenDe, officeEmail,\n officeStockOpenAt, websiteUrl, postNo, readnmAdres,\n detailAdres, useCode, brandAt, saleMarginAt, sysNote,\n prodCateCode, mgmtVanCode, mgmtCorpCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

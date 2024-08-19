@@ -1,0 +1,38 @@
+# Server Port
+server:
+  port: 8080
+# Spring
+spring:
+  # Database
+  master:
+    datasource:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://58.226.22.130:3306/cbm_simul_msa?&allowMultiQueries=true&characterEncoding=UTF-8
+      username: cbm-master
+      password: cbmcbm1234@
+  slave:
+    datasource:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:log4jdbc:mysql://58.226.22.130:3307/cbm_main?&allowMultiQueries=true&characterEncoding=UTF-8
+      username: cbm-slave-user
+      password: cbmslave1234@
+  # Ant Path Matcher
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+# Logging
+logging:
+  config: classpath:logback-local.xml
+# Micro Service Domain
+service:
+  domain:
+    main:
+      url: https://cbm-api.outlier.kr
+    rule:
+      url: https://cbm-api.outlier.kr
+    auth:
+      url: https://cbm-api.outlier.kr
+    staff:
+      url: https://cbm-api.outlier.kr
+    common:
+      url: https://cbm-api.outlier.kr

@@ -1,0 +1,17 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package 로그인이력API{
+  usecase "로그인_로그_등록" AS UC11
+  usecase "로그인_로그_조회" AS UC12
+}
+
+
+' 사용자
+user --> UC11
+user --> UC12
+
+@enduml

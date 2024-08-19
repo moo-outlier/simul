@@ -1,0 +1,30 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package 설치관리API{
+  usecase "설치의뢰 매장포스검색" AS UC11
+  usecase "설치의뢰등록" AS UC12
+  usecase "설치요청 검색" AS UC13
+  usecase "포스 설치 상세이력 조회" AS UC14
+  usecase "설치 업체 조회" AS UC15
+  usecase "설치 업체 인증이력 상세조회" AS UC16
+  usecase "설치 업체 운영매장 포스 조회" AS UC17
+  usecase "설치업체 설치 현황 조회" AS UC18
+  usecase "설치업체 설치 매장 현황 조회" AS UC19
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+
+@enduml

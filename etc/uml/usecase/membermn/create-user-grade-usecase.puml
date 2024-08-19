@@ -1,0 +1,26 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점" as store
+
+package 회원등급설정{
+  usecase 회원등급_신규등록 AS UG10
+  usecase 회원등급_전체조회 AS UG11
+  usecase 회원등급_상세조회 AS UG12
+  usecase 회원등급_수정 AS UG13
+  usecase 회원등급_삭제 AS UG14
+  usecase 즐겨찾기추가 AS UG15
+  usecase 표시항목추가 AS UG16
+}
+
+store --> UG10
+store --> UG11
+store --> UG12
+store --> UG13
+store --> UG14
+store --> UG15
+store --> UG16
+
+
+@enduml

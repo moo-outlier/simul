@@ -1,0 +1,26 @@
+@startuml
+
+left to right direction
+
+entity "MN_SAFE_OPEN_H" as mnKitchenMemo {
+  KIT_MEMO_PID : int <<pk>>
+  --
+  SAFE_OPEN_H_PID : bigint
+  STORE_UNQCODE : varchar(14)
+  SAFE_OPEN_DE : int
+  POS_NO : varchar(20)
+  POS_PID : int
+  SAFE_OPEN_AT : datetime
+  SAFE_OPEN_SE_CODE : varchar(1)
+  STAFF_NM : varchar(50)
+  RECPT_NO : varchar(20)
+  SALE_PRICE : int
+  DISCOUNT_PRICE : int
+  ACT_SALE_PRICE : int
+  CREATOR : varchar(100)
+  CREATED_AT : timestamp
+  UPDATER : varchar(100)
+  UPDATED_AT : timestamp
+}
+
+@enduml

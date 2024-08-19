@@ -1,0 +1,333 @@
+@startuml
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 장비AS이력현황 조회
+user -> controller : 장비AS이력현황 조회
+activate controller
+controller -> service : HashMap(deSeCode, startDe, endDe, serialNo, histNo, recordSize, pageNo, \nprocessCorpCode, asProcessCode, altrtvEqpmnAt, altrtvEqpmnReturnAt, \naltrrvEqpmnSerialNo, eqpmnCtgCode, eqpmnCode, asCostCode, paymentAt, \nrcepterDeptCode, vanCode, corpCodeList, mnfcturCorpCode, symptmsHighCtgCode, \nsymptmsLowCtgCode, regSeCode, mgmtCorpSendWaybilNo, mgmtCorpSendFormCode, \nmgmtCorpSenderRetrnerNm, mnfcturDe, dlivyDe, assrncPdSeCode, exchngCmpntNm)
+activate service
+service -> dao: HashMap(deSeCode, startDe, endDe, serialNo, histNo, recordSize, pageNo, \nprocessCorpCode, asProcessCode, altrtvEqpmnAt, altrtvEqpmnReturnAt, \naltrrvEqpmnSerialNo, eqpmnCtgCode, eqpmnCode, asCostCode, paymentAt, \nrcepterDeptCode, vanCode, corpCodeList, mnfcturCorpCode, symptmsHighCtgCode, \nsymptmsLowCtgCode, regSeCode, mgmtCorpSendWaybilNo, mgmtCorpSendFormCode, \nmgmtCorpSenderRetrnerNm, mnfcturDe, dlivyDe, assrncPdSeCode, exchngCmpntNm)
+activate dao
+dao -> db: HashMap(deSeCode, startDe, endDe, serialNo, histNo, recordSize, pageNo, \nprocessCorpCode, asProcessCode, altrtvEqpmnAt, altrtvEqpmnReturnAt, \naltrrvEqpmnSerialNo, eqpmnCtgCode, eqpmnCode, asCostCode, paymentAt, \nrcepterDeptCode, vanCode, corpCodeList, mnfcturCorpCode, symptmsHighCtgCode, \nsymptmsLowCtgCode, regSeCode, mgmtCorpSendWaybilNo, mgmtCorpSendFormCode, \nmgmtCorpSenderRetrnerNm, mnfcturDe, dlivyDe, assrncPdSeCode, exchngCmpntNm)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'장비AS이력현황 상세조회
+user -> controller : 장비AS이력현황 상세조회
+activate controller
+controller -> service : HashMap(histNo, corpCode)
+activate service
+service -> dao: HashMap(histNo, corpCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'장비AS이력현황 수정
+user -> controller : 장비AS이력현황 수정
+activate controller
+controller -> service : HashMap(histNo, asProcessCode, corpCode, corpNm, eqpmnCtgCode, eqpmnCode, \neqpmnCtgNm, eqpmnNm, mnfcturDe, serialNo, assrncPdSeCode, dlivyDe, stockDe, \nstockFormSeCode, altrtvEqpmnAt, asCostCode, asCostPrice, asRepairPrimeCost, \nprocessCorpCode, altrtvEqpmnCtgCode, altrtvEqpmnCode, altrtvEqpmnReturnAt, \naltrtvEqpmnSerialNo, asSendWaybilNo, asSendFormCode, asSendDt, \nasSenderNm, mnfcturCorpCode, mnfcturCorpNm, asReceiveDt, asReceiverNm, \nmgmtCorpSendWaybilNo, mgmtCorpSendFormCode, mgmtCorpSendDt, \nmgmtCorpSenderReceiverNm, vanCode, cmpltDe, acsryApdterAt, acsrySerialCableAt, \nacsryPowerCordAt, acsryKeyboardAt, acsryMouseAt, symptmsHighCtgNm, \nsymptmsHighCtgCode, symptmsLowCtg1Nm, symptmsLowCtg1Code, \nsymptmsLowCtg2Nm, symptmsLowCtg2Code, symptmsLowCtg3Nm, \nsymptmsLowCtg3Code, exchngCmpnt1Nm, exchngCmpnt2Nm, exchngCmpnt3Nm, \nexchngCmpnt4Nm, exchngCmpnt5Nm, exchngCmpnt6Nm, exchngCmpnt7Nm, \nexchngCmpnt8Nm, exchngCmpnt9Nm, exchngCmpnt10Nm, defectHNote, processMsgNote)
+activate service
+service -> dao: HashMap(histNo, asProcessCode, corpCode, corpNm, eqpmnCtgCode, eqpmnCode, \neqpmnCtgNm, eqpmnNm, mnfcturDe, serialNo, assrncPdSeCode, dlivyDe, stockDe, \nstockFormSeCode, altrtvEqpmnAt, asCostCode, asCostPrice, asRepairPrimeCost, \nprocessCorpCode, altrtvEqpmnCtgCode, altrtvEqpmnCode, altrtvEqpmnReturnAt, \naltrtvEqpmnSerialNo, asSendWaybilNo, asSendFormCode, asSendDt, \nasSenderNm, mnfcturCorpCode, mnfcturCorpNm, asReceiveDt, asReceiverNm, \nmgmtCorpSendWaybilNo, mgmtCorpSendFormCode, mgmtCorpSendDt, \nmgmtCorpSenderReceiverNm, vanCode, cmpltDe, acsryApdterAt, acsrySerialCableAt, \nacsryPowerCordAt, acsryKeyboardAt, acsryMouseAt, symptmsHighCtgNm, \nsymptmsHighCtgCode, symptmsLowCtg1Nm, symptmsLowCtg1Code, \nsymptmsLowCtg2Nm, symptmsLowCtg2Code, symptmsLowCtg3Nm, \nsymptmsLowCtg3Code, exchngCmpnt1Nm, exchngCmpnt2Nm, exchngCmpnt3Nm, \nexchngCmpnt4Nm, exchngCmpnt5Nm, exchngCmpnt6Nm, exchngCmpnt7Nm, \nexchngCmpnt8Nm, exchngCmpnt9Nm, exchngCmpnt10Nm, defectHNote, processMsgNote)
+activate dao
+dao -> db: HashMap(histNo, asProcessCode, corpCode, corpNm, eqpmnCtgCode, eqpmnCode, \neqpmnCtgNm, eqpmnNm, mnfcturDe, serialNo, assrncPdSeCode, dlivyDe, stockDe, \nstockFormSeCode, altrtvEqpmnAt, asCostCode, asCostPrice, asRepairPrimeCost, \nprocessCorpCode, altrtvEqpmnCtgCode, altrtvEqpmnCode, altrtvEqpmnReturnAt, \naltrtvEqpmnSerialNo, asSendWaybilNo, asSendFormCode, asSendDt, \nasSenderNm, mnfcturCorpCode, mnfcturCorpNm, asReceiveDt, asReceiverNm, \nmgmtCorpSendWaybilNo, mgmtCorpSendFormCode, mgmtCorpSendDt, \nmgmtCorpSenderReceiverNm, vanCode, cmpltDe, acsryApdterAt, acsrySerialCableAt, \nacsryPowerCordAt, acsryKeyboardAt, acsryMouseAt, symptmsHighCtgNm, \nsymptmsHighCtgCode, symptmsLowCtg1Nm, symptmsLowCtg1Code, \nsymptmsLowCtg2Nm, symptmsLowCtg2Code, symptmsLowCtg3Nm, \nsymptmsLowCtg3Code, exchngCmpnt1Nm, exchngCmpnt2Nm, exchngCmpnt3Nm, \nexchngCmpnt4Nm, exchngCmpnt5Nm, exchngCmpnt6Nm, exchngCmpnt7Nm, \nexchngCmpnt8Nm, exchngCmpnt9Nm, exchngCmpnt10Nm, defectHNote, processMsgNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'장비AS이력현황 등록
+user -> controller : 장비AS이력현황 등록
+activate controller
+controller -> service : HashMap(asProcessCode, corpCode, corpNm, eqpmnCtgCode, eqpmnCode, \neqpmnCtgNm, eqpmnNm, mnfcturDe, serialNo, assrncPdSeCode, dlivyDe, stockDe, \nstockFormSeCode, altrtvEqpmnAt, asCostCode, asCostPrice, asRepairPrimeCost, \nprocessCorpCode, altrtvEqpmnCtgCode, altrtvEqpmnCode, altrtvEqpmnReturnAt, \naltrtvEqpmnSerialNo, asSendWaybilNo, asSendFormCode, asSendDt, \nasSenderNm, mnfcturCorpCode, mnfcturCorpNm, asReceiveDt, asReceiverNm, \nmgmtCorpSendWaybilNo, mgmtCorpSendFormCode, mgmtCorpSendDt, \nmgmtCorpSenderReceiverNm, vanCode, cmpltDe, acsryApdterAt, acsrySerialCableAt, \nacsryPowerCordAt, acsryKeyboardAt, acsryMouseAt, symptmsHighCtgNm, \nsymptmsHighCtgCode, symptmsLowCtg1Nm, symptmsLowCtg1Code, \nsymptmsLowCtg2Nm, symptmsLowCtg2Code, symptmsLowCtg3Nm, \nsymptmsLowCtg3Code, exchngCmpnt1Nm, exchngCmpnt2Nm, exchngCmpnt3Nm, \nexchngCmpnt4Nm, exchngCmpnt5Nm, exchngCmpnt6Nm, exchngCmpnt7Nm, \nexchngCmpnt8Nm, exchngCmpnt9Nm, exchngCmpnt10Nm, defectHNote, processMsgNote)
+activate service
+service -> dao: HashMap(asProcessCode, corpCode, corpNm, eqpmnCtgCode, eqpmnCode, \neqpmnCtgNm, eqpmnNm, mnfcturDe, serialNo, assrncPdSeCode, dlivyDe, stockDe, \nstockFormSeCode, altrtvEqpmnAt, asCostCode, asCostPrice, asRepairPrimeCost, \nprocessCorpCode, altrtvEqpmnCtgCode, altrtvEqpmnCode, altrtvEqpmnReturnAt, \naltrtvEqpmnSerialNo, asSendWaybilNo, asSendFormCode, asSendDt, \nasSenderNm, mnfcturCorpCode, mnfcturCorpNm, asReceiveDt, asReceiverNm, \nmgmtCorpSendWaybilNo, mgmtCorpSendFormCode, mgmtCorpSendDt, \nmgmtCorpSenderReceiverNm, vanCode, cmpltDe, acsryApdterAt, acsrySerialCableAt, \nacsryPowerCordAt, acsryKeyboardAt, acsryMouseAt, symptmsHighCtgNm, \nsymptmsHighCtgCode, symptmsLowCtg1Nm, symptmsLowCtg1Code, \nsymptmsLowCtg2Nm, symptmsLowCtg2Code, symptmsLowCtg3Nm, \nsymptmsLowCtg3Code, exchngCmpnt1Nm, exchngCmpnt2Nm, exchngCmpnt3Nm, \nexchngCmpnt4Nm, exchngCmpnt5Nm, exchngCmpnt6Nm, exchngCmpnt7Nm, \nexchngCmpnt8Nm, exchngCmpnt9Nm, exchngCmpnt10Nm, defectHNote, processMsgNote)
+activate dao
+dao -> db: HashMap(asProcessCode, corpCode, corpNm, eqpmnCtgCode, eqpmnCode, \neqpmnCtgNm, eqpmnNm, mnfcturDe, serialNo, assrncPdSeCode, dlivyDe, stockDe, \nstockFormSeCode, altrtvEqpmnAt, asCostCode, asCostPrice, asRepairPrimeCost, \nprocessCorpCode, altrtvEqpmnCtgCode, altrtvEqpmnCode, altrtvEqpmnReturnAt, \naltrtvEqpmnSerialNo, asSendWaybilNo, asSendFormCode, asSendDt, \nasSenderNm, mnfcturCorpCode, mnfcturCorpNm, asReceiveDt, asReceiverNm, \nmgmtCorpSendWaybilNo, mgmtCorpSendFormCode, mgmtCorpSendDt, \nmgmtCorpSenderReceiverNm, vanCode, cmpltDe, acsryApdterAt, acsrySerialCableAt, \nacsryPowerCordAt, acsryKeyboardAt, acsryMouseAt, symptmsHighCtgNm, \nsymptmsHighCtgCode, symptmsLowCtg1Nm, symptmsLowCtg1Code, \nsymptmsLowCtg2Nm, symptmsLowCtg2Code, symptmsLowCtg3Nm, \nsymptmsLowCtg3Code, exchngCmpnt1Nm, exchngCmpnt2Nm, exchngCmpnt3Nm, \nexchngCmpnt4Nm, exchngCmpnt5Nm, exchngCmpnt6Nm, exchngCmpnt7Nm, \nexchngCmpnt8Nm, exchngCmpnt9Nm, exchngCmpnt10Nm, defectHNote, processMsgNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'장비AS이력현황 삭제
+user -> controller : 장비AS이력현황 삭제
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'결제상세정보 조회
+user -> controller : 결제상세정보 조회
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'결제상세정보 저장
+user -> controller : 결제상세정보 저장
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode, serialNo, eqpmnCtgCode, \neqpmnCode, paymentDt, payerNm, paymentMethodNm, paymentPrice, \npaymentSuccessAt, paymentProgressSeNm)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode, serialNo, eqpmnCtgCode, \neqpmnCode, paymentDt, payerNm, paymentMethodNm, paymentPrice, \npaymentSuccessAt, paymentProgressSeNm)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode, serialNo, eqpmnCtgCode, \neqpmnCode, paymentDt, payerNm, paymentMethodNm, paymentPrice, \npaymentSuccessAt, paymentProgressSeNm)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'결제상세정보 삭제(결제취소)
+user -> controller : 결제상세정보 삭제(결제취소)
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'AS접수증 조회
+user -> controller : AS접수증 조회
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'AS접수내역 조회
+user -> controller : AS접수내역 조회
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'AS접수내역 저장
+user -> controller : AS접수내역 저장
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode, defectHNote, processMsgNote)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode, defectHNote, processMsgNote)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode, defectHNote, processMsgNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'AS접수내역 삭제
+user -> controller : AS접수내역 삭제
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode, regDe, eqpmnCtgCode, eqpmnCode)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode, regDe, eqpmnCtgCode, eqpmnCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode, regDe, eqpmnCtgCode, eqpmnCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'견적서 조회
+user -> controller : 견적서 조회
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'견적서 저장
+user -> controller : 견적서 저장
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode, prqudoJson)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode, prqudoJson)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode, prqudoJson)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'견적서 삭제
+user -> controller : 견적서 삭제
+activate controller
+controller -> service : HashMap(histNo, corpCode, asProcessCode, regDe, eqpmnCtgCode, eqpmnCode)
+activate service
+service -> dao: HashMap(histNo, corpCode, asProcessCode, regDe, eqpmnCtgCode, eqpmnCode)
+activate dao
+dao -> db: HashMap(histNo, corpCode, asProcessCode, regDe, eqpmnCtgCode, eqpmnCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'관리업체 조회(업체선택:상세페이지)
+user -> controller : 관리업체 조회(업체선택:상세페이지)
+activate controller
+controller -> service : HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate service
+service -> dao: HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate dao
+dao -> db: HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'관리업체 조회(업체선택:검색조건)
+user -> controller : 관리업체 조회(업체선택:검색조건)
+activate controller
+controller -> service : HashMap(corpCodeOrNm, recordSize, pageNo)
+activate service
+service -> dao: HashMap(corpCodeOrNm, recordSize, pageNo)
+activate dao
+dao -> db: HashMap(corpCodeOrNm, recordSize, pageNo)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+'제조업체 조회
+user -> controller : 제조업체 조회
+activate controller
+controller -> service : (void)
+activate service
+service -> dao: (void)
+activate dao
+dao -> db: (void)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+@enduml

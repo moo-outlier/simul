@@ -1,0 +1,28 @@
+@startuml Gift Card Reg Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package 상품권등록API{
+  usecase "상품권분류 목록" AS UC11
+  usecase "상품권분류 추가" AS UC12
+  usecase "상품권분류 수정" AS UC13
+  usecase "상품권분류 삭제" AS UC14
+  usecase "상품권 목록" AS UC15
+  usecase "상품권 추가" AS UC16
+  usecase "상품권 수정" AS UC17
+  usecase "상품권 삭제" AS UC18
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+
+@enduml

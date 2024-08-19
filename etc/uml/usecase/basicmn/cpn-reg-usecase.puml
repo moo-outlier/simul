@@ -1,0 +1,36 @@
+@startuml Coupon Card Reg Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package 쿠폰등록API{
+  usecase "쿠폰분류 목록" AS UC11
+  usecase "쿠폰분류 추가" AS UC12
+  usecase "쿠폰분류 수정" AS UC13
+  usecase "쿠폰분류 삭제" AS UC14
+  usecase "쿠폰 목록" AS UC15
+  usecase "쿠폰 추가" AS UC16
+  usecase "쿠폰 수정" AS UC17
+  usecase "쿠폰 삭제" AS UC18
+  usecase "상품 목록" AS UC19
+  usecase "추가된 상품 목록" AS UC20
+  usecase "추가된 상품 추가" AS UC21
+  usecase "추가된 상품 삭제" AS UC22
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+user --> UC22
+
+@enduml

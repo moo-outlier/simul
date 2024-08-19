@@ -1,0 +1,126 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "MemberMnController" as controller
+participant "MemberMnService" as service
+participant "MemberMnDAO" as dao
+database "DB" as db
+
+user -> controller : 회원 카드 발급 API
+activate controller
+controller -> service : Hashmap\n (mbrCode, newCardno, cardSttSeCode, cardIsnSeCode, \n cardIsnDe, cardIsnNote,  [HEADER] storeUnqcode)
+activate service
+service -> dao: String(mbrCode)
+activate dao
+dao -> db: String(mbrCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: String (mbrCode)
+activate dao
+dao -> db: String (mbrCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap\n (mbrCode, newCardno, cardSttSeCode, cardIsnSeCode, \n cardIsnDe, cardIsnNote,  [HEADER] storeUnqcode)
+activate dao
+dao -> db: Hashmap\n (mbrCode, newCardno, cardSttSeCode, cardIsnSeCode, \n cardIsnDe, cardIsnNote,  [HEADER] storeUnqcode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap\n (mbrCode, newCardno, cardSttSeCode, cardIsnSeCode, \n cardIsnDe, cardIsnNote,  [HEADER] storeUnqcode)
+activate dao
+dao -> db: Hashmap\n (mbrCode, newCardno, cardSttSeCode, cardIsnSeCode, \n cardIsnDe, cardIsnNote,  [HEADER] storeUnqcode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap\n (mbrCode, newCardno, cardSttSeCode, cardIsnSeCode, \n cardIsnDe, cardIsnNote,  [HEADER] storeUnqcode)
+activate dao
+dao -> db: Hashmap\n (mbrCode, newCardno, cardSttSeCode, cardIsnSeCode, \n cardIsnDe, cardIsnNote,  [HEADER] storeUnqcode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API8
+user -> controller :회원 카드 수정 (재발급) API
+activate controller
+controller -> service : Hashmap\n (newCardno, cardSttSeCode, mbrCode, newCardno, prevCardno, \n cardSttSeCode, cardIsnSeCode, cardIsnDe, cardIsnNote, \n mbrCardHPid, mbrCode, [HEADER] storeUnqcode)
+activate service
+service -> dao: String (mbrCode)
+activate dao
+dao -> db: String (mbrCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: String (newCardno)
+activate dao
+dao -> db: String (newCardno)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: String (mbrCode)
+activate dao
+dao -> db: String (mbrCode)
+activate db
+dao <-- db: Hashmap \n (mbrCode, newCardno, cardIsnSeCode,\n cardAflStoreCode, cardIsnDe, cardSttSeCode, cardIsnNote)
+deactivate db
+service <-- dao: Hashmap \n (mbrCode, newCardno, cardIsnSeCode,\n cardAflStoreCode, cardIsnDe, cardSttSeCode, cardIsnNote)
+deactivate dao
+service -> dao: Hashmap\n (newCardno, cardSttSeCode, mbrCode, newCardno, prevCardno, \n cardSttSeCode, cardIsnSeCode, cardIsnDe, cardIsnNote, \n mbrCardHPid, mbrCode, [HEADER] storeUnqcode, \n prevCardno, mbrCardHPid)
+activate dao
+dao -> db: Hashmap\n (newCardno, cardSttSeCode, mbrCode, newCardno, prevCardno, \n cardSttSeCode, cardIsnSeCode, cardIsnDe, cardIsnNote, \n mbrCardHPid, mbrCode, [HEADER] storeUnqcode, \n prevCardno, mbrCardHPid)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap\n (newCardno, cardSttSeCode, mbrCode, newCardno, prevCardno, \n cardSttSeCode, cardIsnSeCode, cardIsnDe, cardIsnNote, \n mbrCardHPid, mbrCode, [HEADER] storeUnqcode, \n prevCardno, mbrCardHPid)
+activate dao
+dao -> db: Hashmap\n (newCardno, cardSttSeCode, mbrCode, newCardno, prevCardno, \n cardSttSeCode, cardIsnSeCode, cardIsnDe, cardIsnNote, \n mbrCardHPid, mbrCode, [HEADER] storeUnqcode, \n prevCardno, mbrCardHPid)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+user -> controller :회원 카드 상세 API
+activate controller
+controller -> service : Hashmap \n (mbrCode, [HEADER] storeUnqcode)
+activate service
+service -> dao: Hashmap \n (mbrCode, [HEADER] storeUnqcode)
+activate dao
+dao -> db: Hashmap \n (mbrCode, [HEADER] storeUnqcode)
+activate db
+dao <-- db: List<Hashmap>
+deactivate db
+service <-- dao: List<Hashmap>
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

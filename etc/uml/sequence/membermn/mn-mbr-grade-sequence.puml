@@ -1,0 +1,149 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "MemberMnController" as controller
+participant "MemberMnService" as service
+participant "MemberMnDAO" as dao
+database "DB" as db
+
+' API11
+user -> controller :회원 등급 신규등록 API
+activate controller
+controller -> service : Hashmap \n (grdNm,defAt, dscRt, dscLmtWage, subsPt, \n minUsePt, maxUsePt, frsPrcPt, dscAcmlAt, \n ptAcmlAt, acmSeCode, anvrAcmSeCode, \n anvrAcmRt, dayAdjsCnt, \.adjsMaxWege, cashAcmRt, \n crdtCardAcmRt, mtktAcmRt, trmAcmRt, copAcmRt, \n cshRecptAcmRt, gftvcAcmRt, aflCrdAcmRt, \n rfAcmRt, cshbeAcmRt [HEADER] storeUnqcode )
+activate service
+service -> dao: String (grdNm))
+activate dao
+dao -> db: String (grdNm)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: void
+activate dao
+dao -> db: void
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+service -> dao: Hashmap \n (grdNm,defAt, dscRt, dscLmtWage, subsPt, \n minUsePt, maxUsePt, frsPrcPt, dscAcmlAt, \n ptAcmlAt, acmSeCode, anvrAcmSeCode, \n anvrAcmRt, dayAdjsCnt, \.adjsMaxWege, cashAcmRt, \n crdtCardAcmRt, mtktAcmRt, trmAcmRt, copAcmRt, \n cshRecptAcmRt, gftvcAcmRt, aflCrdAcmRt, \n rfAcmRt, cshbeAcmRt [HEADER] storeUnqcode )
+activate dao
+dao -> db: Hashmap \n (grdNm,defAt, dscRt, dscLmtWage, subsPt, \n minUsePt, maxUsePt, frsPrcPt, dscAcmlAt, \n ptAcmlAt, acmSeCode, anvrAcmSeCode, \n anvrAcmRt, dayAdjsCnt, \.adjsMaxWege, cashAcmRt, \n crdtCardAcmRt, mtktAcmRt, trmAcmRt, copAcmRt, \n cshRecptAcmRt, gftvcAcmRt, aflCrdAcmRt, \n rfAcmRt, cshbeAcmRt [HEADER] storeUnqcode )
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API11
+user -> controller :회원 등급 수정 API
+activate controller
+controller -> service : Hashmap \n (grdCode, grdNm,defAt, dscRt, dscLmtWage, subsPt, \n minUsePt, maxUsePt, frsPrcPt, dscAcmlAt, \n ptAcmlAt, acmSeCode, anvrAcmSeCode, \n anvrAcmRt, dayAdjsCnt, adjsMaxWege, cashAcmRt, \n crdtCardAcmRt, mtktAcmRt, trmAcmRt, copAcmRt, \n cshRecptAcmRt, gftvcAcmRt, aflCrdAcmRt, \n rfAcmRt, cshbeAcmRt [HEADER] storeUnqcode )
+activate service
+service -> dao: String (grdCode)
+activate dao
+dao -> db: String (grdCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap \n (grdCode, grdNm,defAt, dscRt, dscLmtWage, subsPt, \n minUsePt, maxUsePt, frsPrcPt, dscAcmlAt, \n ptAcmlAt, acmSeCode, anvrAcmSeCode, \n anvrAcmRt, dayAdjsCnt, adjsMaxWege, cashAcmRt, \n crdtCardAcmRt, mtktAcmRt, trmAcmRt, copAcmRt, \n cshRecptAcmRt, gftvcAcmRt, aflCrdAcmRt, \n rfAcmRt, cshbeAcmRt [HEADER] storeUnqcode )
+activate dao
+dao -> db: Hashmap \n (grdCode, grdNm,defAt, dscRt, dscLmtWage, subsPt, \n minUsePt, maxUsePt, frsPrcPt, dscAcmlAt, \n ptAcmlAt, acmSeCode, anvrAcmSeCode, \n anvrAcmRt, dayAdjsCnt, adjsMaxWege, cashAcmRt, \n crdtCardAcmRt, mtktAcmRt, trmAcmRt, copAcmRt, \n cshRecptAcmRt, gftvcAcmRt, aflCrdAcmRt, \n rfAcmRt, cshbeAcmRt [HEADER] storeUnqcode )
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API12
+user -> controller :회원 등급 전체조회 API
+activate controller
+controller -> service :
+activate service
+service -> dao:
+activate dao
+dao -> db:
+activate db
+dao <-- db: List<Hashmap> \n (dscRt, acmSeCode, grdNm, cashAcmRt,subsPt, \n  grdCode, minUsePt, cadtCardAcmRt)
+deactivate db
+service <-- dao: List<Hashmap> \n (dscRt, acmSeCode, grdNm, cashAcmRt,subsPt, \n  grdCode, minUsePt, cadtCardAcmRt)
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API13
+user -> controller :회원 등급 삭제 API
+activate controller
+controller -> service :Hashmap \n (grdCode, grdNm, defAt [HEADER] storeUnqcode)
+activate service
+service -> dao: Hashmap \n (grdCode, grdNm, defAt [HEADER] storeUnqcode)
+activate dao
+dao -> db: Hashmap \n (grdCode, grdNm, defAt [HEADER] storeUnqcode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: String (grdCode)
+activate dao
+dao -> db: String (grdCode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: Hashmap \n (grdCode, grdNm, defAt [HEADER] storeUnqcode)
+activate dao
+dao -> db: Hashmap \n (grdCode, grdNm, defAt [HEADER] storeUnqcode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API14
+user -> controller :회원 등급 상세조회 API
+activate controller
+controller -> service :String (grdCode [HEADER] storeUnqcode)
+activate service
+service -> dao: String (grdCode [HEADER] storeUnqcode)
+activate dao
+dao -> db: String (grdCode [HEADER] storeUnqcode)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+service -> dao: String (grdCode [HEADER] storeUnqcode)
+activate dao
+dao -> db: String (grdCode [HEADER] storeUnqcode)
+activate db
+dao <-- db: List<Hashmap> \n (,grdCode, grdNm,defAt, dscRt, dscLmtWage, subsPt, \n minUsePt, maxUsePt, frsPrcPt, dscAcmlAt, ptAcmlAt,\n  acmSeCode, anvrAcmSeCode, anvrAcmRt, \n grdCvrgSeCode, dayAdjsCnt, adjsMaxWege, cashAcmRt, \n crdtCardAcmRt, mtktAcmRt, trmAcmRt, copAcmRt, \n cshRecptAcmRt, gftvcAcmRt, aflCrdAcmRt, rfAcmRt, cshbeAcmRt)
+deactivate db
+service <-- dao: List<Hashmap> \n (,grdCode, grdNm,defAt, dscRt, dscLmtWage, subsPt, \n minUsePt, maxUsePt, frsPrcPt, dscAcmlAt, ptAcmlAt,\n  acmSeCode, anvrAcmSeCode, anvrAcmRt, \n grdCvrgSeCode, dayAdjsCnt, adjsMaxWege, cashAcmRt, \n crdtCardAcmRt, mtktAcmRt, trmAcmRt, copAcmRt, \n cshRecptAcmRt, gftvcAcmRt, aflCrdAcmRt, rfAcmRt, cshbeAcmRt)
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+
+@enduml

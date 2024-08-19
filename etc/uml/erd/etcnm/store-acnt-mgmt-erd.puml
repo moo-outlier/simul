@@ -1,0 +1,20 @@
+@startuml 매장_계정_관리
+
+left to right direction
+
+entity "MN_STORE_ACNT_MGMT" as mnStoreAcntMgmt {
+  STORE_ACNT_MGMT_PID : int <<pk>>
+  --
+  FCHQ_CODE : varchar(7)
+  STORE_UNQCODE : varchar(14)
+  VAULTCASH_ACNT_CODE : varchar(7)
+  VAULTCASH_ACNT_NM : varchar(50)
+  USE_AT : varchar(1) DEFAULT Y
+  RCPPAY_SE_CODE : varchar(1)
+  CREATOR : varchar(100)
+  CREATED_AT : timestamp
+  UPDATER : varchar(100)
+  UPDATED_AT : timestamp
+}
+
+@enduml

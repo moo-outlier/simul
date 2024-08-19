@@ -1,0 +1,37 @@
+@startuml
+
+left to right direction
+
+entity "MN_STM_CONFRM_CHG_H" as mnPartnerCard {
+  STM_CONFRM_CHG_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  FCHQ_NM : varchar(50)
+  STORE_NM : varchar(50)
+  CONFRM_SE_CODE : varchar(1)
+  BEFORE_CONFRM_CORP_CODE : varchar(50)
+  BEFORE_CONFRM_CORP_NM : varchar(50)
+  BEFORE_CONFRM_BUY_CNT : int
+  BEFORE_CONFRM_SALE_CNT : int
+  BEFORE_CONFRM_INSTALL_CNT : int
+  BEFORE_LOCAL_POS_CONFRM_BUY_CNT : int
+  BEFORE_LOCAL_POS_CONFRM_SALE_CNT : int
+  BEFORE_LOCAL_POS_CONFRM_INSTALL_CNT : int
+  BEFORE_LOCAL_POS_AT_SE_CODE : varchar(1)
+  AFTER_CONFRM_CORP_CODE : varchar(50)
+  AFTER_CONFRM_CORP_NM : varchar(50)
+  AFTER_CONFRM_BUY_CNT : int
+  AFTER_CONFRM_SALE_CNT : int
+  AFTER_CONFRM_INSTALL_CNT : int
+  AFTER_LOCAL_POS_CONFRM_BUY_CNT : int
+  AFTER_LOCAL_POS_CONFRM_SALE_CNT : int
+  AFTER_LOCAL_POS_CONFRM_INSTALL_CNT : int
+  AFTER_LOCAL_POS_AT_SE_CODE : varchar(1)
+  CONFRM_NOTE : varchar(400)
+  CREATOR : varchar(100)
+  CREATED_AT : timestamp
+  UPDATER : varchar(100)
+  UPDATED_AT : timestamp
+}
+
+@enduml

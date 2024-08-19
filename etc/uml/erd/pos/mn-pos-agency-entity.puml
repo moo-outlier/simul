@@ -1,0 +1,95 @@
+@startuml 
+
+ left to right direction
+entity "MN_DSTRB_M" as mnDstrbM {
+	총판 마스터
+	--
+}
+
+entity "MN_AGENCY_M" as mnAgencyM {
+	대리점 마스터
+	--
+}
+
+entity "MN_AGENCY_TRNSF" as mnAgencyTrnsf {
+  대리점 이관
+  --
+}
+
+entity "MN_AGENCY_TRNSF_H" as mnAgencyTrnsfH {
+  대리점 이관 이력
+  --
+}
+
+entity "MN_AGENCY_INSTL" as mnAgencyInstl {
+  대리점 설치
+  --
+	CORP_INSTL_PID : BIGINT	 <<PK>>
+}
+
+entity "MN_AGENCY_INSTL_H" as mnAgencyInstlH {
+  대리점 설치 이력
+  --
+	CORP_INSTL_H_PID : BIGINT	 <<PK>>
+}
+
+'========================================외부 도메인================================================
+entity "SF_AGENCY_STAFF" as sfAgencyStaff {
+   외부 - 대리점 사원
+   --
+  }
+
+entity "MN_STM_M" as mnStmM {
+  외부 - 매장관리 마스터
+  --
+}
+
+entity "PS_POS_M" as psPosM {
+  외부 - 포스 마스터
+  --
+ }
+
+ entity "PS_LICENSE_M" as  psLicenseM {
+   외부 - 라이센스 마스터
+   --
+  }
+
+ entity "PS_LICENSE_AUTH" as  psLicenseAuth {
+   외부 - 라이센스 인증
+   --
+  }
+
+entity "PS_LICENSE_AUTU_H" as  psLicenseAuthH {
+   외부 - 라이센스 변경 이력
+   --
+  }
+
+  entity "MN_AGENCY_INSTL_DAILY_STATS" as mnAgencyInstlDailyStats {
+  	외부 - 대리점 설치 일일 통계
+  	--
+  }
+
+  entity "MN_AGENCY_INSTL_MONTHLY_STATS" as mnAgencyInstlMonthlyStats {
+  	외부 = 대리점 설치 월 통계
+  	--
+  }
+
+
+'========================================ERD DIAGRAM===============================================
+mnDstrbM ||..o{ mnAgencyM
+mnAgencyM ||..o{ mnAgencyTrnsf
+mnAgencyTrnsf ||..o{ mnAgencyTrnsfH
+mnAgencyM ||..o{ mnAgencyInstl
+mnAgencyInstl ||..o{ mnAgencyInstlH
+
+mnAgencyM ||..o{ psLicenseM
+psPosM ||..o{ mnAgencyInstl
+mnStmM ||..|{ psPosM
+
+psLicenseM ||..|| psLicenseAuth
+psLicenseAuth ||..|{ psLicenseAuthH
+mnAgencyM ||..o{ sfAgencyStaff
+
+
+
+@enduml

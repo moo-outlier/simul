@@ -1,0 +1,43 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점" as store
+
+package 회원포인트실적{
+  usecase 회원포인트실적_조회 AS PC10
+}
+
+store --> PC10
+
+package 회원유치사원별_매출내역{
+  usecase 회원유치사원별_매출내역_조회 AS PC11
+}
+
+store --> PC11
+
+package 회원-상품_구매내역{
+  usecase 상품_구매내역_조회 AS PC12
+  usecase SMS전송  AS PC13
+}
+
+store --> PC13
+
+package 상품-회원_구매내역{
+  usecase 상품_회원_구매내역_조회 AS PC14
+}
+
+store --> PC14
+
+package 회원구매성향분석{
+  usecase 회원구매성향분석_조회 AS PC15
+}
+
+store --> PC15
+
+package 회원매출점유{
+  usecase 회원매출점유_조회 AS PC16
+}
+
+store --> PC16
+@enduml

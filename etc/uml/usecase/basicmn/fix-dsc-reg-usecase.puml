@@ -1,0 +1,24 @@
+@startuml Fix Discount Reg Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package 고정할인등록API{
+  usecase "할인구분-유형 목록" AS UC11
+  usecase "할인구분-유형 상세목록" AS UC12
+  usecase "타매장복사" AS UC13
+  usecase "매장간복사" AS UC14
+  usecase "전체매장복사" AS UC15
+  usecase "선택매장복사" AS UC16
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+
+@enduml

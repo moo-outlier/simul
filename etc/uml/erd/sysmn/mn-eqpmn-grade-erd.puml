@@ -1,0 +1,21 @@
+@startuml
+
+left to right direction
+
+entity "MN_EQPMN_GRADE" as mnEqpmnGrade {
+  EQPMN_GRADE_PID : INT <<PK>>
+  --
+  EQPMN_CODE : VARCHAR(7)
+  GRD_CODE : VARCHAR(7)
+  PRICE : INT(11)
+  CREATOR : VARCHAR(100)
+  CREATED_AT : TIMESTAMP
+  UPDATER : VARCHAR(100)
+  UPDATED_AT : TIMESTAMP
+}
+
+@enduml
+
+
+
+

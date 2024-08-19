@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbm.simulation.dao.SimulationDao">
+
+    <!-- 운행률 -->
+    <select id="selectTotalRaceFlag" parameterType="HashMap" resultType="LinkedHashMap">
+        SELECT
+            CAST(SUM(IF(RACE_FLAG = 0, 1, 0)) as CHAR ) AS RACE_FLAG_1,
+            CAST(SUM(IF(RACE_FLAG = 1, 1, 0)) as CHAR ) AS RACE_FLAG_2,
+            CAST(SUM(IF(RACE_FLAG = 2, 1, 0)) as CHAR ) AS RACE_FLAG_3
+        FROM MN_LIVE_TRAIN_INFO;
+    </select>
+
+    <!-- 실시간 고정 건 -->
+    <select id="selectLiveFailure" parameterType="HashMap" resultType="Integer">
+        SELECT count(*)
+        FROM MN_FAILURE_H
+    </select>
+
+    <!-- 고장 등급별 고장 건 -->
+    <select id="selectFailureFlag" parameterType="HashMap" resultType="LinkedHashMap">
+        SELECT
+            CAST(SUM(IF(FAILURE_FLAG = 'A', 1, 0)) as CHAR ) AS FAILURE_FLAG_1,
+            CAST(SUM(IF(FAILURE_FLAG = 'B', 1, 0)) as CHAR ) AS FAILURE_FLAG_2,
+            CAST(SUM(IF(FAILURE_FLAG = 'C', 1, 0)) as CHAR ) AS FAILURE_FLAG_3,
+            CAST(SUM(IF(FAILURE_FLAG = 'D', 1, 0)) as CHAR ) AS FAILURE_FLAG_4,
+            CAST(SUM(IF(FAILURE_FLAG = 'W', 1, 0)) as CHAR ) AS FAILURE_FLAG_5
+        FROM MN_FAILURE_H
+    </select>
+
+    <!-- 편성 운영 현황 -->
+    <select id="selectTrainStatus" parameterType="HashMap" resultType="LinkedHashMap">
+        SELECT
+            A.PV_UNQNO as pvUnqno,
+            A.CONN_FLAG as connFlag,
+            A.STATUS_FLAG as statusFlag,
+            CAST(SUM(IF(FAILURE_FLAG = 'A', 1, 0)) as CHAR ) AS FAILURE_FLAG_1,
+            CAST(SUM(IF(FAILURE_FLAG = 'B', 1, 0)) as CHAR ) AS FAILURE_FLAG_2,
+            CAST(SUM(IF(FAILURE_FLAG = 'C', 1, 0)) as CHAR ) AS FAILURE_FLAG_3,
+            CAST(SUM(IF(FAILURE_FLAG = 'D', 1, 0)) as CHAR ) AS FAILURE_FLAG_4,
+            CAST(SUM(IF(FAILURE_FLAG = 'W', 1, 0)) as CHAR ) AS FAILURE_FLAG_5,
+            CAST(COUNT(FAILURE_FLAG) as CHAR) as FAILURE_FLAG_TOTAL
+
+        FROM MN_LIVE_TRAIN_INFO as A
+                 LEFT JOIN MN_FAILURE_H as B
+                           ON A.PV_UNQNO = B.PV_UNQNO
+
+        WHERE 0 = 0
+        <if test='raceFlag != null and !raceFlag.equals("")'>
+            AND RACE_FLAG = #{raceFlag}
+        </if>
+
+
+        GROUP BY A.PV_UNQNO, A.CONN_FLAG, A.STATUS_FLAG
+
+
+    </select>
+
+    <!-- 편성 운영 현황 -->
+    <select id="selectTrainInfo" parameterType="HashMap" resultType="LinkedHashMap">
+        SELECT PV_UNQNO    as pvUnqno,
+               RACE_FLAG   as raceFlag,
+               STATUS_FLAG as statusFlag
+
+        FROM MN_LIVE_TRAIN_INFO
+    </select>
+
+    <!-- 열차 편성 정보 -->
+    <select id="selectTrainInfo2" parameterType="HashMap" resultType="LinkedHashMap">
+        SELECT PV_UNQNO    as pvUnqno,
+               RACE_FLAG   as raceFlag,
+               STATUS_FLAG as statusFlag
+
+        FROM MN_LIVE_TRAIN_INFO
+    </select>
+
+    <!-- 열차 편성 정보 -->
+    <select id="selectTrainInfo3" parameterType="HashMap" resultType="LinkedHashMap">
+        SELECT PV_UNQNO as pvUnqno,
+               CONN_FLAG as connFlag,
+               STATUS_FLAG as statusFlag,
+               NOTCH_BRAKING_SPD as  ,
+               NOTCH_PROP_SPD as notchPropSpd,
+               CURRENT_SPD as currentSpd,
+               TARGET_SPD as targetSpd,
+               LINE_VOLT as lineVolt,
+               MOTOR_AMPERE as motorAmpere,
+               BATTERY_AMPERE as batteryAmpere,
+               BC_PRESSR_KG as bcPressrKg,
+               MR_PRESSR_KG as mrPressrKg
+
+        FROM MN_LIVE_TRAIN_INFO
+        WHERE 0 = 0
+        <if test='selectValue != null and !selectValue.equals("")'>
+            AND PV_UNQNO = #{selectValue}
+        </if>
+
+    </select>
+
+</mapper>

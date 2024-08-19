@@ -1,0 +1,21 @@
+@startuml 매출수기등록
+
+left to right direction
+
+actor "사용자" as user
+
+package 매출수기등록{
+  usecase "영수증목록 조회" AS UC11
+  usecase "영수증내역 조회" AS UC12
+  usecase "매출수기등록" AS UC13
+  usecase "수기등록매출 수정" AS UC14
+  usecase "수기등록매출 삭제" AS UC15
+}
+
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+
+@enduml

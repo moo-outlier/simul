@@ -1,0 +1,44 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+
+user -> controller : 회원미수금현황 조회(매장별)
+activate controller
+controller -> service : Hashmap \n (startDe, endDe, mbrCode, mbrNm)
+activate service
+service -> dao: Hashmap \n (startDe, endDe, mbrCode, mbrNm)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe, mbrCode, mbrNm)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+user -> controller : 회원미수금현황 조회(회원별)
+activate controller
+controller -> service : Hashmap \n (startDe, endDe, mbrCode)
+activate service
+service -> dao: Hashmap \n (startDe, endDe, mbrCode)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe, mbrCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

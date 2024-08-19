@@ -1,0 +1,146 @@
+@startuml CBM Device Detail Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 장치 코드 전체 조회(테이블) API
+user -> controller : 장치 코드 전체 조회 API (recordSize, startNo)
+activate controller
+controller -> service : Hashmap(recordSize, startNo)
+activate service
+service -> dao : 장치 코드 전체 개수 Hashmap(recordSize, startNo)
+activate dao
+dao -> db : Hashmap(recordSize, startNo)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+service -> dao : 장치 코드 전체 조회 Hashmap(recordSize, startNo)
+activate dao
+dao -> db : Hashmap(recordSize, startNo)
+activate db
+dao <-- db : List
+deactivate db
+service <-- dao : List
+deactivate dao
+controller <-- service : ResObj
+deactivate service
+user <-- controller : ResObj
+deactivate controller
+
+' 장치 코드 전체 조회(코드) API
+user -> controller : 장치 코드 전체 조회(코드) API
+activate controller
+controller -> service : void
+activate service
+service -> dao : void
+activate dao
+dao -> db:  void
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 장치 코드 단일 조회 API
+user -> controller : 장치 코드 단일 조회 API (deviceCode)
+activate controller
+controller -> service : Hashmap(deviceCode)
+activate service
+service -> dao : Hashmap(deviceCode)
+activate dao
+dao -> db:  Hashmap(deviceCode)
+activate db
+dao <-- db: Hashmap
+deactivate db
+service <-- dao: Hashmap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 장비 코드 추가 API
+user -> controller : 장치 코드 추가 API (devices)
+activate controller
+controller -> service : List<Hashmap(deviceCode, deviceNm, deviceNote)>
+activate service
+service -> dao : List<Hashmap(deviceCode, deviceNm, deviceNote)>
+activate dao
+dao -> db : List<Hashmap(deviceCode, deviceNm, deviceNote)>
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 장치 코드 수정 API
+user -> controller : 장치 코드 수정 API (deviceCode, deviceNm, deviceNote)
+activate controller
+controller -> service : Hashmap(deviceCode, deviceNm, deviceNote)
+activate service
+
+service -> dao : 장비 코드 조회 (deviceCode)
+activate dao
+dao -> db: Hashmap(deviceCode)
+activate db
+dao <-- db: Hashmap
+deactivate db
+service <-- dao: Hashmap
+deactivate dao
+
+service -> dao : Hashmap(deviceCode, deviceNm, deviceNote)
+activate dao
+dao -> db : Hashmap(deviceCode, deviceNm, deviceNote)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 장비 코드 삭제 API
+user -> controller : 장비 코드 삭제 API (deviceCode)
+activate controller
+controller -> service : Hashmap(deviceCode)
+activate service
+
+service -> dao : 장비 코드 조회 (deviceCode)
+activate dao
+dao -> db: Hashmap(deviceCode)
+activate db
+dao <-- db: Hashmap
+deactivate db
+service <-- dao: Hashmap
+deactivate dao
+
+service -> dao : 장비 코드 삭제 Hashmap(deviceCode)
+activate dao
+dao -> db : Hashmap(deviceCode)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

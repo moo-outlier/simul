@@ -1,0 +1,26 @@
+CREATE TABLE `MN_STORE_RECPT` (
+    `STORE_RECPT_PID` int NOT NULL AUTO_INCREMENT COMMENT '매장_영수증_일련번호',
+    `FCHQ_CODE` varchar(7) NOT NULL  COMMENT '본사_코드',
+    `STORE_UNQCODE` varchar(14)   COMMENT '매장_고유코드',
+    `SALES_DE` int NOT NULL  COMMENT '영업_일자',
+    `POS_NO` varchar(20) NOT NULL  COMMENT '포스_번호',
+    `RECPT_NO` varchar(20) NOT NULL  COMMENT '영수증_번호',
+    `SALES_SE_CODE` varchar(1)   COMMENT '매출_구분_코드',
+    `PRDLST_CNT` int(11)   COMMENT '품목_수량',
+    `TOTAL_SALES_PRICE` int(11)   COMMENT '총_매출_금액',
+    `TOTAL_DSC_PRICE` int(11)   COMMENT '총_할인_금액',
+    `NORMAL_DSC_PRICE` int(11)   COMMENT '일반_할인_금액',
+    `CPN_DSC_PRICE` int(11)   COMMENT '쿠폰_할인_금액',
+    `ACT_SALES_PRICE` int(11)   COMMENT '실제_매출_금액',
+    `PRICE` int(11)   COMMENT '가액',
+    `VAT_PRICE` int(11)   COMMENT '부가_금액',
+    `PAYMENT_SUM_PRICE` int(11)   COMMENT '결제_합계_금액',
+    `CSH_PAYMENT_PRICE` int(11)   COMMENT '현금_결제_금액',
+    `CARD_PAYMENT_PRICE` int(11)   COMMENT '카드_결제_금액',
+    `ETC_PAYMENT_PRICE` int(11)   COMMENT '기타_결제_금액',
+    `CREATOR` varchar(100) NOT NULL  COMMENT '작성자',
+    `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '작성일시',
+    `UPDATER` varchar(100) NOT NULL  COMMENT '수정자',
+    `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시'
+    , PRIMARY KEY (`STORE_RECPT_PID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

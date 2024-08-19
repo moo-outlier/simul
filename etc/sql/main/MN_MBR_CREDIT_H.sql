@@ -1,0 +1,18 @@
+CREATE TABLE `MN_MBR_CREDIT_H` (
+    `MBR_CREDIT_H_PID` int NOT NULL AUTO_INCREMENT COMMENT '회원_외상_내역_일련번호',
+    `FCHQ_CODE` varchar(7) NOT NULL  COMMENT '본사_코드',
+    `STORE_UNQCODE` varchar(14) NOT NULL  COMMENT '매장_고유코드',
+    `STORE_NM` varchar(50) NOT NULL  COMMENT '매장_명',
+    `MBR_CODE` varchar(7) NOT NULL  COMMENT '회원_코드',
+    `KO_MBR_NM` varchar(50) NOT NULL  COMMENT '한글_회원_명',
+    `CREDIT_PRICE` int(11) NOT NULL DEFAULT 0 COMMENT '외상_금액',
+    `DEPOSIT_PRICE` int(11) NOT NULL DEFAULT 0 COMMENT '입금_금액',
+    `DEPOSIT_METHOD_SECODE` varchar(1)   COMMENT '입금_수단_구분코드',
+    `APPRO_LOG_NO` varchar(20)   COMMENT '승인_로그_번호',
+    `PROCESS_DT` datetime   COMMENT '처리_일시',
+    `CREATOR` varchar(100) NOT NULL  COMMENT '작성자',
+    `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '작성일시',
+    `UPDATER` varchar(100) NOT NULL  COMMENT '수정자',
+    `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시'
+    , PRIMARY KEY (`MBR_CREDIT_H_PID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

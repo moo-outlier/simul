@@ -1,0 +1,161 @@
+@startuml 
+
+ left to right direction
+
+ entity "MN_POS" as mnPos {
+  포스
+  --
+ 	POS_PID : BIGINT	 <<PK>>
+ 	--
+ }
+
+ entity "MN_POS_LOGIN_H" as mnPosLoginH {
+  포스 로그인 이력
+  --
+  POS_LOGIN_H_PID : BIGINT <<pk>>
+  --
+  POS_PID : BIGINT <<idx>>
+ }
+
+ entity "MN_POS_PROG_VER" as mnPosProgVer {
+   포스 프로그램 버전
+   --
+   POS_PROG_VER_PID : BIGINT <<pk>>
+   --
+ }
+
+ ' 테이블 명 변경 MN_POS_PROG_TARGET -> MN_POS_PROG_VER_TARGET
+ entity "MN_POS_PROG_VER_TARGET" as mnPosProgVerTarget {
+   포스 프로그램 버전 적용 대상
+   --
+   POS_PROG_REG_PID : BIGINT <<pk>>
+   --
+   POS_PROG_PID : BIGINT <<idx>>
+   POS_PID : BIGINT <<idx>>
+ }
+
+ ' 테이블 명 변경 MN_POS_PROG_RECV_H -> MN_POS_PROG_VER_RECV_H
+ entity "MN_POS_PROG_VER_RECV_H" as mnPosProgVerRecvH {
+  프로그램 버전 수신 이력
+  --
+   POS_PROG_INSTALL_H_PID : BIGINT <<pk>>
+   --
+   POS_PROG_REG_PID : BIGINT <<idx>>
+ }
+
+' 포스 맥어드레스
+entity "MN_POS_MAC_ADDR" as mnPosMacAddr {
+  포스 맥어드레스
+  --
+  POS_MAC_ADDR_PID : BIGINT <<pk>>
+  --
+  POS_PID : BIGINT <<idx>>
+}
+
+entity "MN_POS_ENV_PREFER" as mnStmEnvPrefer {
+  포스관리 환경 설정
+  --
+  ENV_PREFER_PID : INT <<pk>>
+  --
+}
+
+entity "MN_POS_ENV_PREFER_H" as mnStmEnvPreferH {
+  포스관리 환경 설정 이력
+  --
+  ENV_PREFER_PID : INT <<pk>>
+  --
+}
+
+entity "MN_POS_KITPTR" as mnStmKitptr{
+  포스관리 주방프린터
+  --
+  KITPTR_PID : INT <<pk>>
+  --
+}
+
+entity "MN_POS_POSFNCT_GRP" as mnStmPosFnctGrp {
+  포스관리 포스 기능 그룹
+  --
+  POS_FNCT_GRP_PID : BIGINT <<pk>>
+  --
+}
+
+entity "MN_POS_POSFNCT_AUTH" as mnStmFnctAuth {
+  포스관리 포스 기능 인증
+  --
+  POS_FNCT_AUTH_PID : BIGINT <<pk>>
+  --
+}
+
+entity "MN_POS_POSFNCT_USE" as mnStmPosFnctUse {
+  포스관리 포스 기능 사용
+  --
+  POS_FNCT_USE_PID : BIGINT <<pk>>
+  --
+}
+
+entity "MN_POS_OUTPUT_KND" as mnPosOutputKnd {
+  포스 출력물 템플릿
+  --
+  POS_OUTPUT_KND_PID : INT <<pk>>
+  --
+}
+
+entity "MN_POS_OUTPUT_TMPLAT" as mnPosOutputTmplat {
+  포스 출력물 종류
+  --
+  POS_OUTPUT_TMPLAT_PID : INT <<pk>>
+  --
+}
+
+entity "MN_POS_OUTPUT_CODE" as mnPosOutputCode {
+  포스 출력물 코드
+  --
+  POS_OUTPUT_CODE_PID : INT <<pk>>
+  --
+}
+
+entity "MN_POS_OUTPUT_LOG" as mnPosOutputLog {
+  포스 출력물 로그
+  --
+  POS_OUTPUT_LOG_PID : INT <<pk>>
+  --
+}
+
+'========================================외부 도메인================================================
+entity "MN_STM_M" as mnStmM {
+  외부 - 매장관리 마스터
+  --
+  STORE_PID : INT <<pk>>
+  --
+}
+entity "MN_STM_POS_EXCCLC_H" as mnStmPosExcclc {
+  외부 - 매장관리 포스 정산 내역
+  --
+  POS_EXCCLC_H_PID : BIGINT <<pk>>
+  --
+}
+
+
+'========================================ERD DIAGRAM===============================================
+mnPos ||..o{ mnPosLoginH
+mnPos ||..|| mnPosProgVerTarget
+mnPos ||..o{ mnPosProgVerRecvH
+mnPos ||..|| mnPosMacAddr
+mnPos ||..|| mnPosProgVer
+
+mnPos ||..|| mnStmEnvPrefer
+mnStmEnvPrefer ||..o{ mnStmEnvPreferH
+mnPos ||..|| mnStmKitptr
+mnPos ||..|| mnStmPosFnctGrp
+mnPos ||..|| mnStmFnctAuth
+mnPos ||..|| mnStmPosFnctUse
+
+mnPosOutputKnd ||..o{ mnPosOutputTmplat
+mnPosOutputKnd ||..o{ mnPosOutputCode
+
+mnStmM ||..o{ mnPos
+mnPos ||..o{ mnStmPosExcclc
+
+
+@enduml

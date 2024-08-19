@@ -1,0 +1,31 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점" as store
+
+package 회원정보등록{
+  usecase 기존회원_단순조회 AS UJ10
+  usecase 기존회원_확장조회 AS UJ11
+  usecase 기존회원_정보수정 AS UJ12
+  usecase 기존회원_카드발급 AS UJ13
+  usecase 기존회원_일괄삭제 AS UJ14
+  usecase 기존회원_단일삭제 AS UJ15
+  usecase 신규회원_등록 AS UJ16
+  usecase 즐겨찾기추가 AS UJ17
+  usecase 표시항목추가 AS UJ18
+}
+
+' 사용자
+store --> UJ10
+store --> UJ11
+store --> UJ12
+store --> UJ13
+store --> UJ14
+store --> UJ15
+store --> UJ16
+store --> UJ17
+store --> UJ18
+
+
+@enduml

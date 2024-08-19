@@ -1,0 +1,104 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "MemberStatsController" as controller
+participant "MemberStatsService" as service
+participant "MemberStatsDAO" as dao
+database "DB" as db
+
+
+user -> controller :회원포인트 실적 검색
+activate controller
+controller -> service : Hashmap \n (startDe, endDe, storeUnqcode, \n mbrCode, mbrNm)
+activate service
+service -> dao: Hashmap \n (startDe, endDe, storeUnqcode, \n mbrCode, mbrNm)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe, storeUnqcode, \n mbrCode, mbrNm)
+activate db
+dao <-- db: List<Hashmap>
+deactivate db
+service <-- dao: List<Hashmap>
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+user -> controller :회원유치사원별 매출내역 검색
+activate controller
+controller -> service : Hashmap \n (startDe, endDe, staffNo, \n staffNm, mbrCode, koMbrNm, storeUnqcode)
+activate service
+service -> dao: Hashmap \n (startDe, endDe, staffNo, \n staffNm, mbrCode, koMbrNm, storeUnqcode)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe, staffNo, \n staffNm, mbrCode, koMbrNm, storeUnqcode)
+activate db
+dao <-- db: List<Hashmap>
+deactivate db
+service <-- dao: List<Hashmap>
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+user -> controller : 회원-상품/상품-회원 구매내역 검색
+activate controller
+controller -> service : Hashmap \n (startDe, endDe, selectSeCode, \n goodsCode, goodsNm, mbrNm, mbrCode, mbrCardno)
+activate service
+service -> dao: Hashmap \n (startDe, endDe, selectSeCode, \n goodsCode, goodsNm, mbrNm, mbrCode, mbrCardno)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe, selectSeCode, \n goodsCode, goodsNm, mbrNm, mbrCode, mbrCardno)
+activate db
+dao <-- db: List<Hashmap>
+deactivate db
+service <-- dao: List<Hashmap>
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+user -> controller : 회원구매성향분석 검색
+activate controller
+controller -> service : Hashmap \n (startDe, endDe, selectSeCode, ctgSeCode)
+activate service
+service -> dao: Hashmap \n (startDe, endDe, selectSeCode, ctgSeCode)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe, selectSeCode, ctgSeCode)
+activate db
+dao <-- db: List<Hashmap>
+deactivate db
+service <-- dao: List<Hashmap>
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+user -> controller : 회원메출점유 검색
+activate controller
+controller -> service : Hashmap \n (startDe, endDe)
+activate service
+service -> dao: Hashmap \n (startDe, endDe)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe)
+activate db
+dao <-- db: List<Hashmap>
+deactivate db
+service <-- dao: List<Hashmap>
+deactivate dao
+
+service -> dao: Hashmap \n (startDe, endDe)
+activate dao
+dao -> db: Hashmap \n (startDe, endDe)
+activate db
+dao <-- db: List<Hashmap>
+deactivate db
+service <-- dao: List<Hashmap>
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+@enduml

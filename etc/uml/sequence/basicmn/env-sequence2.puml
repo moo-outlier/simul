@@ -1,0 +1,208 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+
+' 포스명 일괄수정
+user -> controller : 포스명 일괄수정
+activate controller
+controller -> service : Hashmap(storeUnqcode, posList)
+activate service
+service -> dao: Hashmap(storeUnqcode, posList)
+activate dao
+dao -> db: Hashmap(storeUnqcode, posList)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 테이블그룹 조회
+user -> controller : 테이블그룹 조회
+activate controller
+controller -> service : Hashmap(storeUnqcode)
+activate service
+service -> dao: Hashmap(storeUnqcode)
+activate dao
+dao -> db: Hashmap(storeUnqcode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 테이블그룹 일괄수정
+user -> controller : 테이블그룹 일괄수정
+activate controller
+controller -> service : Hashmap(storeUnqcode, posList)
+activate service
+service -> dao: Hashmap(storeUnqcode, posList)
+activate dao
+dao -> db: Hashmap(storeUnqcode, posList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 환경코드목록 조회
+user -> controller : 환경코드목록 조회
+activate controller
+controller -> service : Hashmap(tabCode, typeCode)
+activate service
+service -> dao: Hashmap(tabCode, typeCode)
+activate dao
+dao -> db: Hashmap(tabCode, typeCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 환경변수목록 조회
+user -> controller : 환경변수목록 조회
+activate controller
+controller -> service : Hashmap(envCode)
+activate service
+service -> dao: Hashmap(envCode)
+activate dao
+dao -> db: Hashmap(envCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 환경변수 일괄조회 - FC본사
+user -> controller : 환경변수 일괄조회 - FC본사
+activate controller
+controller -> service : Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, regAt, mgmtCorpCode)
+activate service
+service -> dao: Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, regAt, mgmtCorpCode)
+activate dao
+dao -> db: Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, regAt, mgmtCorpCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 환경변수 일괄조회 - 매장
+user -> controller : 환경변수 일괄조회 - 매장
+activate controller
+controller -> service : Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, storeCode, storeNm, \nregAt, mgmtCorpCode)
+activate service
+service -> dao: Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, storeCode, storeNm, \nregAt, mgmtCorpCode)
+activate dao
+dao -> db: Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, storeCode, storeNm, \nregAt, mgmtCorpCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 환경변수 일괄조회 - 포스
+user -> controller : 환경변수 일괄조회 - 포스
+activate controller
+controller -> service : Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, storeCode, storeNm, \nregAt)
+activate service
+service -> dao: Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, storeCode, storeNm, \nregAt)
+activate dao
+dao -> db: Hashmap(envCode, recordSize, pageNo,\nfchqCode, fchqNm, storeCode, storeNm, \nregAt)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 환경변수 일괄수정 - FC본사
+user -> controller : 환경변수 일괄수정 - FC본사
+activate controller
+controller -> service : Hashmap(envCode, envPrefers)
+activate service
+service -> dao: Hashmap(envCode, envPrefers)
+activate dao
+dao -> db: Hashmap(envCode, envPrefers)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 환경변수 일괄수정 - 매장
+user -> controller : 환경변수 일괄수정 - 매장
+activate controller
+controller -> service : Hashmap(envCode, envPrefers)
+activate service
+service -> dao: Hashmap(envCode, envPrefers)
+activate dao
+dao -> db: Hashmap(envCode, envPrefers)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 환경변수 일괄수정 - 포스
+user -> controller : 환경변수 일괄수정 - 포스
+activate controller
+controller -> service : Hashmap(envCode, envPrefers)
+activate service
+service -> dao: Hashmap(envCode, envPrefers)
+activate dao
+dao -> db: Hashmap(envCode, envPrefers)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+@enduml

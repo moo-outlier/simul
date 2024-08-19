@@ -1,0 +1,15 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "사용자" as user
+actor "환율정보 API" as api <<system>>
+
+package 일자별환율정보{
+  usecase 환율정보조회 AS UC01
+}
+
+user --> UC01
+UC01 <-- api
+
+@enduml

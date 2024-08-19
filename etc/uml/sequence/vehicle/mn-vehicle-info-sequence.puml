@@ -1,0 +1,161 @@
+@startuml CBM Vehicle Info Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 편성목록API
+user -> controller : 편성 목록 API (recordSize, startNo)
+activate controller
+controller -> service : 편성 목록 조회 (recordSize, startNo)
+activate service
+
+service -> dao : 편성 총 데이터 개수
+activate dao
+dao -> db : 편성 총 데이터 개수
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+
+service -> dao : 편성 목록(recordSize, startNo)
+activate dao
+dao -> db : 편성 목록(recordSize, startNo)
+activate db
+dao <-- db : List
+deactivate db
+service <-- dao : List
+deactivate dao
+
+controller <-- service : ResObj
+deactivate service
+user <-- controller : ResObj
+deactivate controller
+
+' 편성상세조회API
+user -> controller : 편성 상세조회 API (pvUnqcode)
+activate controller
+controller -> service : 편성 상세조회 (pvUnqcode)
+activate service
+service -> dao : 편성 조회 (pvUnqcode)
+activate dao
+dao -> db:  편성 조회 (pvUnqcode)
+activate db
+dao <-- db: Hashmap
+deactivate db
+service <-- dao: Hashmap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 편성추가API
+user -> controller : 편성 추가 API (pvUnqcode,pvUnqno,stationNo,lastReceiveDt,carCnt,lineNo)
+activate controller
+controller -> service : 편성 추가 (pvUnqcode,pvUnqno,stationNo,lastReceiveDt,carCnt,lineNo)
+activate service
+
+service -> dao : 편성고유번호 중복체크 (pvUnqno)
+activate dao
+dao -> db : 편성고유번호 중복체크 (pvUnqno)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+
+service -> dao : 편성고유코드 중복체크 (pvUnqcode)
+activate dao
+dao -> db : 편성고유코드 중복체크 (pvUnqcode)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+
+service -> dao : 편성 추가 (pvUnqcode,pvUnqno,stationNo,lastReceiveDt,carCnt,lineNo)
+activate dao
+dao -> db : 편성 추가 (pvUnqcode,pvUnqno,stationNo,lastReceiveDt,carCnt,lineNo)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 편성수정API
+user -> controller : 편성 수정 API (pvUnqcode,pvUnqno,stationNo,lastReceiveDt,carCnt,lineNo)
+activate controller
+controller -> service : 편성 수정 (pvUnqcode,pvUnqno,stationNo,lastReceiveDt,carCnt,lineNo)
+activate service
+
+service -> dao : 편성 조회 (pvUnqcode)
+activate dao
+dao -> db: 편성 조회 (pvUnqcode)
+activate db
+dao <-- db: Hashmap
+deactivate db
+service <-- dao: Hashmap
+deactivate dao
+
+service -> dao : 편성고유번호 중복체크 (pvUnqno)
+activate dao
+dao -> db : 편성고유번호 중복체크 (pvUnqno)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+
+service -> dao : 편성 정보 수정 (pvUnqcode,pvUnqno,stationNo,lastReceiveDt,carCnt,lineNo)
+activate dao
+dao -> db : 편성 정보 수정 (pvUnqcode,pvUnqno,stationNo,lastReceiveDt,carCnt,lineNo)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 편성삭제API
+user -> controller : 편성 삭제 API (pvUnqcode)
+activate controller
+controller -> service : 편성 삭제 (pvUnqcode)
+activate service
+
+service -> dao : 편성 조회 (pvUnqcode)
+activate dao
+dao -> db: 편성 조회 (pvUnqcode)
+activate db
+dao <-- db: Hashmap
+deactivate db
+service <-- dao: Hashmap
+deactivate dao
+
+service -> dao : 편성 정보 삭제 (pvUnqcode)
+activate dao
+dao -> db : 편성 정보 삭제 (pvUnqcode)
+activate db
+dao <-- db : int
+deactivate db
+service <-- dao : int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

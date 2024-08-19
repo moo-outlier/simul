@@ -1,0 +1,99 @@
+@startuml Safe Open Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 금전현황 조회 API
+user -> controller : 금전현황 조회 API
+activate controller
+controller -> service : HashMap(\nstartDe, endDe, storeUnqcodeList, \nrcppaySeCode, vaultcashAcntCode)
+activate service
+service -> dao: HashMap(\nstartDe, endDe, storeUnqcodeList, \nrcppaySeCode, vaultcashAcntCode)
+activate dao
+dao -> db: HashMap(\nstartDe, endDe, storeUnqcodeList, \nrcppaySeCode, vaultcashAcntCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 금전현황 단일추가 API
+user -> controller : 금전현황 단일추가 API
+activate controller
+controller -> service : HashMap(\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nAcntCode, AcntNm, price, crrncySttnNote)
+activate service
+service -> dao: HashMap(\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nAcntCode, AcntNm, price, crrncySttnNote)
+activate dao
+dao -> db: HashMap(\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nAcntCode, AcntNm, price, crrncySttnNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 금전현황 배열추가 API
+user -> controller : 금전현황 배열추가 API
+activate controller
+controller -> service : HashMap(\ncrrncySttnList)
+activate service
+service -> dao: HashMap(\ncrrncySttnList)
+activate dao
+dao -> db: HashMap(\ncrrncySttnList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 금전현황 수정 API
+user -> controller : 금전현황 수정 API
+activate controller
+controller -> service : HashMap(storeCrrncySttnPid,\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nvaultcashAcntCode, vaultcashAcntNm, price, crrncySttnNote)
+activate service
+service -> dao: HashMap(storeCrrncySttnPid,\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nvaultcashAcntCode, vaultcashAcntNm, price, crrncySttnNote)
+activate dao
+dao -> db: HashMap(storeCrrncySttnPid,\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nvaultcashAcntCode, vaultcashAcntNm, price, crrncySttnNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 금전현황 삭제 API
+user -> controller : 금전현황 삭제 API
+activate controller
+controller -> service : HashMap(storeCrrncySttnPid,\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nvaultcashAcntCode, vaultcashAcntNm, price, crrncySttnNote)
+activate service
+service -> dao: HashMap(storeCrrncySttnPid,\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nvaultcashAcntCode, vaultcashAcntNm, price, crrncySttnNote)
+activate dao
+dao -> db: HashMap(storeCrrncySttnPid,\nstoreUnqcode, salesDe, posNo, rcppaySeCode, \nvaultcashAcntCode, vaultcashAcntNm, price, crrncySttnNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

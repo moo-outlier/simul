@@ -1,0 +1,46 @@
+@startuml Kitchen Memo Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 매장인증관련변경내역 등록 API
+user -> controller : 매장인증관련변경내역 등록 API
+activate controller
+controller -> service : HashMap\n(fchqNm, storeNm, confrmSeCode,\n beforeConfrmCorpCode, beforeConfrmCorpNm,\n beforeConfrmBuyCnt, beforeConfrmSaleCnt,\n beforeConfrmInstallCnt, beforeLocalPosConfrmBuyCnt,\n beforeLocalPosConfrmSaleCnt, beforeLocalPosConfrmInstallCnt,\n beforeLocalPosAtSeCode, afterConfrmCorpCode, afterConfrmCorpNm,\n afterConfrmBuyCnt, afterConfrmSaleCnt, afterConfrmInstallCnt,\n afterLocalPosConfrmBuyCnt, afterLocalPosConfrmSaleCnt,\n afterLocalPosConfrmInstallCnt, afterLocalPosAtSeCode, confrmNote)
+activate service
+service -> dao: HashMap\n(fchqNm, storeNm, confrmSeCode,\n beforeConfrmCorpCode, beforeConfrmCorpNm,\n beforeConfrmBuyCnt, beforeConfrmSaleCnt,\n beforeConfrmInstallCnt, beforeLocalPosConfrmBuyCnt,\n beforeLocalPosConfrmSaleCnt, beforeLocalPosConfrmInstallCnt,\n beforeLocalPosAtSeCode, afterConfrmCorpCode, afterConfrmCorpNm,\n afterConfrmBuyCnt, afterConfrmSaleCnt, afterConfrmInstallCnt,\n afterLocalPosConfrmBuyCnt, afterLocalPosConfrmSaleCnt,\n afterLocalPosConfrmInstallCnt, afterLocalPosAtSeCode, confrmNote)
+activate dao
+dao -> db: HashMap\n(fchqNm, storeNm, confrmSeCode,\n beforeConfrmCorpCode, beforeConfrmCorpNm,\n beforeConfrmBuyCnt, beforeConfrmSaleCnt,\n beforeConfrmInstallCnt, beforeLocalPosConfrmBuyCnt,\n beforeLocalPosConfrmSaleCnt, beforeLocalPosConfrmInstallCnt,\n beforeLocalPosAtSeCode, afterConfrmCorpCode, afterConfrmCorpNm,\n afterConfrmBuyCnt, afterConfrmSaleCnt, afterConfrmInstallCnt,\n afterLocalPosConfrmBuyCnt, afterLocalPosConfrmSaleCnt,\n afterLocalPosConfrmInstallCnt, afterLocalPosAtSeCode, confrmNote)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 매장인증관련변경내역 목록 API
+user -> controller : 매장인증관련변경내역 목록 API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe, fchqCode, fchqNm,\n storeCode, storeNm, beforeLocalPosAtSeCode,\n afterLocalPosAtSeCode, confrmSeCode)
+activate service
+service -> dao:  Hashmap\n(startDe, endDe, fchqCode, fchqNm,\n storeCode, storeNm, beforeLocalPosAtSeCode,\n afterLocalPosAtSeCode, confrmSeCode)
+activate dao
+dao -> db:  Hashmap\n(startDe, endDe, fchqCode, fchqNm,\n storeCode, storeNm, beforeLocalPosAtSeCode,\n afterLocalPosAtSeCode, confrmSeCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+@enduml

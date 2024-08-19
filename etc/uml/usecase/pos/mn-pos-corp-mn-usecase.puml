@@ -1,0 +1,139 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "권한MSA" as 권한MSA <<system>>
+actor "관리자" as user
+
+package 포스이관관리API{
+  usecase "이출관리 조회" AS UC11
+  usecase "이출신청" AS UC12
+  usecase "이출신청 취소" AS UC13
+  usecase "이출신청내역조회" AS UC14
+  usecase "이입관리 조회" AS UC15
+  usecase "이입확인" AS UC16
+  usecase "이입취소" AS UC17
+  usecase "이관신청 조회" AS UC18
+  usecase "이관확인" AS UC19
+  usecase "이관취소" AS UC20
+  usecase "이관확인취소" AS UC21
+}
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+
+package 설치업체관리API{
+  usecase "설치업체조회" AS UC22
+  usecase "월인증건수 검색" AS UC23
+  usecase "월인증건수 저장" AS UC24
+  usecase "업체정보신규등록" AS UC25
+  usecase "업체정보업데이트" AS UC26
+  usecase "업체정보조회" AS UC27
+  usecase "사원정보 조회" AS UC28
+  usecase "사원정보 상세조회" AS UC29
+  usecase "사원관리 등록" AS UC30
+  usecase "사원관리 수정" AS UC31
+  usecase "인증관리 조회" AS UC32
+  usecase "인증관리 디테일" AS UC33
+  usecase "인증관리 명의변경 (대리점만 적용)" AS UC34
+  usecase "인증관리 매장이관 (대리점만 적용)" AS UC35
+  usecase "인증관리 라이센스 이관 (대리점만 적용)" AS UC36
+}
+user --> UC22
+user --> UC23
+user --> UC24
+user --> UC25
+user --> UC26
+user --> UC27
+user --> UC28
+user --> UC29
+user --> UC30
+user --> UC31
+user --> UC32
+user --> UC33
+user --> UC34
+user --> UC35
+user --> UC36
+
+package 설치관리API{
+  usecase "설치의뢰 매장포스검색" AS UC37
+  usecase "설치의뢰등록" AS UC38
+  usecase "설치요청 검색" AS UC39
+  usecase "포스 설치 상세이력 조회" AS UC40
+  usecase "설치 업체 조회" AS UC41
+  usecase "설치 업체 인증이력 상세조회" AS UC42
+  usecase "설치 업체 운영매장 포스 조회" AS UC43
+  usecase "설치업체 설치 현황 조회" AS UC44
+  usecase "설치업체 설치 매장 현황 조회" AS UC45
+}
+UC37 <-- user
+UC38 <-- user
+UC39 <-- user
+UC40 <-- user
+UC41 <-- user
+UC42 <-- user
+UC43 <-- user
+UC44 <-- user
+UC45 <-- user
+
+package 총판대리점-포스사용현황API{
+  usecase "포스사용현황 조회" AS UC46
+}
+UC46 --> user
+
+package 재설치대상매장조회API{
+  usecase "재설치대상매장 조회" AS UC47
+}
+UC47 --> user
+
+package 관리업체인증현황API{
+  usecase "관리업체인증현황 조회" AS UC48
+  usecase "관리업체인증현황 상세조회" AS UC49
+}
+UC48 <-- user
+UC49 <-- user
+
+package 사원정보관리API{
+  usecase "사원정보관리 목록" AS UC50
+  usecase "사원정보관리 상세조회" AS UC51
+  usecase "사원정보관리 수정" AS UC52
+  usecase "사원정보조회 목록" AS UC53
+  usecase "포스비밀번호 변경" AS UC54
+  usecase "비밀번호 변경" AS UC55
+  usecase "메뉴권한조회" AS UC56
+  usecase "메뉴권한수정" AS UC57
+  usecase "메뉴권한복사" AS UC58
+  usecase "메뉴권한(모바일)조회" AS UC59
+  usecase "메뉴권한(모바일)수정" AS UC60
+  usecase "메뉴권한(모바일)복사" AS UC61
+}
+UC50 <-- user
+UC51 <-- user
+UC52 <-- user
+UC53 <-- user
+UC54 <-- user
+UC55 <-- user
+UC56 <-- user
+UC57 <-- user
+UC58 <-- user
+UC59 <-- user
+UC60 <-- user
+UC61 <-- user
+UC56 <-- 권한MSA
+UC57 <-- 권한MSA
+UC58 <-- 권한MSA
+UC59 <-- 권한MSA
+UC60 <-- 권한MSA
+UC61 <-- 권한MSA
+
+
+
+@enduml

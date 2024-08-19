@@ -1,0 +1,38 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package 설치업체관리API{
+  usecase "설치업체조회" AS UC11
+  usecase "월인증건수 검색" AS UC12
+  usecase "월인증건수 저장" AS UC13
+  usecase "업체정보신규등록" AS UC14
+  usecase "업체정보업데이트" AS UC15
+  usecase "업체정보조회" AS UC15
+  usecase "사원정보 조회" AS UC16
+  usecase "사원정보 상세조회" AS UC16
+  usecase "사원관리 등록" AS UC17
+  usecase "사원관리 수정" AS UC18
+  usecase "인증관리 조회" AS UC19
+  usecase "인증관리 디테일" AS UC19
+  usecase "인증관리 명의변경 (대리점만 적용)" AS UC19
+  usecase "인증관리 매장이관 (대리점만 적용)" AS UC20
+  usecase "인증관리 라이센스 이관 (대리점만 적용)" AS UC21
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+
+@enduml

@@ -1,0 +1,43 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "권한MSA" as 권한MSA <<system>>
+actor "관리자" as user
+
+package 본사마스터API{
+  usecase 본사전체조회 AS UC11
+  usecase 본사상세조회 AS UC12
+  usecase 본사메뉴권한조회 AS UC13
+  usecase 본사메뉴권한수정 AS UC14
+  usecase 본사코드자릿수조회 AS UC15
+  usecase 본사코드자릿수수정 AS UC16
+  usecase 본사환경조회 AS UC17
+  usecase 본사환경수정 AS UC18
+  usecase 본사특이사항조회 AS UC19
+  usecase 본사특이사항수정 AS UC20
+  usecase "본사메뉴권한(모바일)조회" AS UC21
+  usecase "본사메뉴권한(모바일)수정" AS UC22
+}
+
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+
+' 시스템
+UC13 --> 권한MSA
+UC14 --> 권한MSA
+UC21 --> 권한MSA
+UC22 --> 권한MSA
+
+@enduml

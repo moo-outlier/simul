@@ -1,0 +1,24 @@
+@startuml
+
+left to right direction
+
+entity "MN_CPN" as mnGiftCard {
+  CPN_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  CTG_CODE : varchar(7)
+  CPN_CODE : varchar(7)
+  CPN_NM : varchar(50)
+  DSC_SE_CODE : varchar(1)
+  DSC_RT : float
+  DSC_PRICE : int
+  USE_AT : varchar(1)
+  START_EXPIRE_DE : int
+  END_EXPIRE_DE : int
+  CREATOR : varchar(50)
+  CREATED_AT : timestamp
+  UPDATER : varchar(50)
+  UPDATED_AT : timestamp
+}
+
+@enduml

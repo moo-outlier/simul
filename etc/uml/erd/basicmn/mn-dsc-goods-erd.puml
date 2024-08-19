@@ -1,0 +1,28 @@
+@startuml
+
+left to right direction
+
+entity "MN_DSC_GOODS" as mnDscGoods {
+  DSC_GOODS_PID : int <<pk>>
+  --
+  STORE_UNQCODE : varchar(14)
+  PAYMENT_METHOD_CODE : varchar(7)
+  PAYMENT_METHOD_SE_CODE : varchar(1)
+  STORE_GCODE : varchar(7)
+  GOODS_NM : varchar(50)
+  HIGH_CTG_CODE : varchar(7)
+  HIGH_CTG_NM : varchar(50)
+  MID_CTG_CODE : varchar(7)
+  MID_CTG_NM : varchar(50)
+  LOW_CTG_CODE : varchar(7)
+  LOW_CTG_NM : varchar(50)
+  PRICE : int
+  ARRAY_SEQ : int
+  USE_AT : varchar(a)
+  CREATOR : varchar(50)
+  CREATED_AT : timestamp
+  UPDATER : varchar(50)
+  UPDATED_AT : timestamp
+}
+
+@enduml

@@ -1,0 +1,117 @@
+@startuml
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 업체목록 조회
+user -> controller : 업체목록 조회
+activate controller
+controller -> service : HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate service
+service -> dao: HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate dao
+dao -> db: HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 업체상세 조회
+user -> controller : 업체상세 조회
+activate controller
+controller -> service : HashMap(corpCode)
+activate service
+service -> dao: HashMap(corpCode)
+activate dao
+dao -> db: HashMap(corpCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 업체 신규등록
+user -> controller : 업체 신규등록
+activate controller
+controller -> service : HashMap(corpNm, eqpmnCorpSeCode, repNm, vanCorpCode, useAt, \nposProgCode, storeCode, storeNm, hardwareInfo, useCode, corpNo, \ncomNm, corpTypeNm, itemNm, corpTelno, corpCelno, corpFaxno, \nsttCode, corpAdres, mgmtChargerNm, mgmtChargerCelno, \nstoreGrdCode, corpGrdCode, corpNote)
+activate service
+service -> dao: HashMap(corpNm, eqpmnCorpSeCode, repNm, vanCorpCode, useAt, \nposProgCode, storeCode, storeNm, hardwareInfo, useCode, corpNo, \ncomNm, corpTypeNm, itemNm, corpTelno, corpCelno, corpFaxno, \nsttCode, corpAdres, mgmtChargerNm, mgmtChargerCelno, \nstoreGrdCode, corpGrdCode, corpNote)
+activate dao
+dao -> db: HashMap(corpNm, eqpmnCorpSeCode, repNm, vanCorpCode, useAt, \nposProgCode, storeCode, storeNm, hardwareInfo, useCode, corpNo, \ncomNm, corpTypeNm, itemNm, corpTelno, corpCelno, corpFaxno, \nsttCode, corpAdres, mgmtChargerNm, mgmtChargerCelno, \nstoreGrdCode, corpGrdCode, corpNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 업체 수정
+user -> controller : 업체 수정
+activate controller
+controller -> service : HashMap(corpCode, corpNm, eqpmnCorpSeCode, repNm, vanCorpCode, useAt, \nposProgCode, storeCode, storeNm, hardwareInfo, useCode, corpNo, \ncomNm, corpTypeNm, itemNm, corpTelno, corpCelno, corpFaxno, \nsttCode, corpAdres, mgmtChargerNm, mgmtChargerCelno, \nstoreGrdCode, corpGrdCode, corpNote)
+activate service
+service -> dao: HashMap(corpCode, corpNm, eqpmnCorpSeCode, repNm, vanCorpCode, useAt, \nposProgCode, storeCode, storeNm, hardwareInfo, useCode, corpNo, \ncomNm, corpTypeNm, itemNm, corpTelno, corpCelno, corpFaxno, \nsttCode, corpAdres, mgmtChargerNm, mgmtChargerCelno, \nstoreGrdCode, corpGrdCode, corpNote)
+activate dao
+dao -> db: HashMap(corpCode, corpNm, eqpmnCorpSeCode, repNm, vanCorpCode, useAt, \nposProgCode, storeCode, storeNm, hardwareInfo, useCode, corpNo, \ncomNm, corpTypeNm, itemNm, corpTelno, corpCelno, corpFaxno, \nsttCode, corpAdres, mgmtChargerNm, mgmtChargerCelno, \nstoreGrdCode, corpGrdCode, corpNote)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 업체 삭제
+user -> controller : 업체 삭제
+activate controller
+controller -> service : HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate service
+service -> dao: HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate dao
+dao -> db: HashMap(corpCode, corpNm, eqpmnCorpSeCode, useAt)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 관리업체 갱신
+user -> controller : 관리업체 갱신
+activate controller
+controller -> service : (void)
+activate service
+service -> dao: (void)
+activate dao
+dao -> db: (void)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+@enduml

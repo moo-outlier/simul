@@ -1,0 +1,135 @@
+@startuml
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 장비목록 조회
+user -> controller : 장비목록 조회
+activate controller
+controller -> service : HashMap(eqpmnCode, eqpmnNm, eqpmnCtgCode, mnfcturCorpCode, saleAt)
+activate service
+service -> dao: HashMap(eqpmnCode, eqpmnNm, eqpmnCtgCode, mnfcturCorpCode, saleAt)
+activate dao
+dao -> db: HashMap(eqpmnCode, eqpmnNm, eqpmnCtgCode, mnfcturCorpCode, saleAt)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 장비상세 조회
+user -> controller : 장비상세 조회
+activate controller
+controller -> service : HashMap(eqpmnCode)
+activate service
+service -> dao: HashMap(eqpmnCode)
+activate dao
+dao -> db: HashMap(eqpmnCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 장비신규 등록
+user -> controller : 장비신규 등록
+activate controller
+controller -> service : HashMap(eqpmnNm, eqpmnCtgCode, mnfcturCorpCode, \nsaleAt, price, eqpmnNote, eqpmnImgUrl)
+activate service
+service -> dao: HashMap(eqpmnNm, eqpmnCtgCode, mnfcturCorpCode, \nsaleAt, price, eqpmnNote, eqpmnImgUrl)
+activate dao
+dao -> db: HashMap(eqpmnNm, eqpmnCtgCode, mnfcturCorpCode, \nsaleAt, price, eqpmnNote, eqpmnImgUrl)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 장비상세 수정
+user -> controller : 장비상세 수정
+activate controller
+controller -> service : HashMap(eqpmnCode, eqpmnNm, eqpmnCtgCode, \nmnfcturCorpCode, saleAt, price, eqpmnNote, eqpmnImgUrl)
+activate service
+service -> dao: HashMap(eqpmnCode, eqpmnNm, eqpmnCtgCode, \nmnfcturCorpCode, saleAt, price, eqpmnNote, eqpmnImgUrl)
+activate dao
+dao -> db: HashMap(eqpmnCode, eqpmnNm, eqpmnCtgCode, \nmnfcturCorpCode, saleAt, price, eqpmnNote, eqpmnImgUrl)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 장비 삭제
+user -> controller : 장비 삭제
+activate controller
+controller -> service : HashMap(eqpmnCode, eqpmnCtgCode)
+activate service
+service -> dao: HashMap(eqpmnCode, eqpmnCtgCode)
+activate dao
+dao -> db: HashMap(eqpmnCode, eqpmnCtgCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 장비 등급별 가격조회
+user -> controller : 장비 등급별 가격조회
+activate controller
+controller -> service : HashMap(eqpmnCode)
+activate service
+service -> dao: HashMap(eqpmnCode)
+activate dao
+dao -> db: HashMap(eqpmnCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+' 장비 등급별 가격 일괄 저장
+user -> controller : 장비 등급별 가격 일괄 저장
+activate controller
+controller -> service : HashMap(eqpmnCode, grdPriceList)
+activate service
+service -> dao: HashMap(eqpmnCode, grdPriceList)
+activate dao
+dao -> db: HashMap(eqpmnCode, grdPriceList)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: JSONObject
+deactivate controller
+
+@enduml

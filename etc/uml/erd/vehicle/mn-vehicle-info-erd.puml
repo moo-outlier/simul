@@ -1,0 +1,21 @@
+@startuml
+
+left to right direction
+
+entity "MN_VEHICLE_INFO" as mnVehicleInfo {
+  `VEHICLE_INFO_PID` : int << pk >>
+  --
+  VEHICLE_INFO_PID : int
+  LINE_NO : int
+  PV_UNQNO : varchar(50)
+  PV_UNQCODE : varchar(14)
+  STATION_NO : int
+  CAR_CNT : int
+  LAST_RECEIVE_DT : date
+  CREATOR : varchar(100)
+  CREATED_AT : timestamp
+  UPDATER : varchar(100)
+  UPDATED_AT : timestamp
+}
+
+@enduml

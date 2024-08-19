@@ -1,0 +1,17 @@
+@startuml
+
+left to right direction
+
+entity "MN_STM_ENV_CODE" as mnStmEnvCode {
+  ENV_PID : int <<pk>>
+  --
+  STORE_TYPE_CODE : VARCHAR(7)
+  STORE_USE_CODE : VARCHAR(7)
+  STORE_ENV_TAB_CODE : VARCHAR(7)
+  STORE_ENV_GROUP_CODE : VARCHAR(7)
+  ENV_CODE : VARCHAR(7)
+  UPDATED_AT : TIMESTAMP
+  CREATED_AT : TIMESTAMP
+}
+
+@enduml

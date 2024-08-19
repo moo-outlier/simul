@@ -1,0 +1,32 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점" as store
+
+package 회원포인트조정{
+  usecase 회원조회 AS PC10
+  usecase 조정포인트_저장 AS PC11
+}
+
+store --> PC10
+store --> PC11
+
+package 회원포인트이관{
+  usecase 회원조회 AS PT10
+  usecase 이관포인트_저장 AS PT11
+}
+
+store --> PT10
+store --> PT11
+
+package 회원포인트변경내역{
+  usecase 포인트변경내역_조회 AS PS10
+  usecase 엑셀_다운로드 AS PS11
+}
+
+store --> PS10
+store --> PS11
+
+
+@enduml

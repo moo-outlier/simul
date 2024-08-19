@@ -1,0 +1,19 @@
+@startuml
+
+left to right direction
+
+entity "MN_FCHQ_ENV_PREFER_H" as mnFchqEnvCode {
+  ENV_PREFER_PID : int <<pk>>
+  --
+  FCHQ_CODE : VARCHAR(7)
+  TAB_CODE : VARCHAR(7)
+  POS_CODE : VARCHAR(9)
+  ENV_JSON : JSON
+  PREV_ENV_JSON : JSON
+  CREATOR : VARCHAR(100)
+  UPDATOR : VARCHAR(100)
+  UPDATED_AT : TIMESTAMP
+  CREATED_AT : TIMESTAMP
+}
+
+@enduml

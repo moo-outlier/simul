@@ -1,0 +1,117 @@
+@startuml Partner Card Reg Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 포스출력물종류 목록 API
+activate controller
+controller -> service : void
+activate service
+service -> dao: void
+activate dao
+dao -> db: void
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+deactivate db
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 포스출력물템플릿 목록 API
+activate controller
+controller -> service : HashMap\n(posOutputKndCode)
+activate service
+service -> dao: HashMap\n(posOutputKndCode)
+activate dao
+dao -> db: HashMap\n(posOutputKndCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 포스출력물템플릿 상세 조회 API
+activate controller
+controller -> service : HashMap\n(posOutputKndCode, posOutputTmplatCode)
+activate service
+service -> dao: HashMap\n(posOutputKndCode, posOutputTmplatCode)
+activate dao
+dao -> db: HashMap\n(posOutputKndCode, posOutputTmplatCode)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: HashMap
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API4
+user -> controller : 포스출력물 템플릿 수정 API
+activate controller
+controller -> service : HashMap\n(posOutputKndCode, posOutputTmplatCode,\n posOutputTmplat)
+activate service
+service -> dao: HashMap\n(posOutputKndCode, posOutputTmplatCode,\n posOutputTmplat)
+activate dao
+dao -> db: HashMap\n(posOutputKndCode, posOutputTmplatCode,\n posOutputTmplat)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+controller <-- service: boolean
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API5
+user -> controller : 포스출력물코드 목록 API
+activate controller
+controller -> service : HashMap\n(posOutputKndCode)
+activate service
+service -> dao: HashMap\n(posOutputKndCode)
+activate dao
+dao -> db: HashMap\n(posOutputKndCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API6
+user -> controller : 포스출력물로그 목록
+activate controller
+controller -> service : HashMap\n(startDe, endDe, posOutputKndCode)
+activate service
+service -> dao: HashMap\n(startDe, endDe, posOutputKndCode)
+activate dao
+dao -> db: HashMap\n(startDe, endDe, posOutputKndCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

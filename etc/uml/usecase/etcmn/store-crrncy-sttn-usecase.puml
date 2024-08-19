@@ -1,0 +1,21 @@
+@startuml 금전현황
+
+left to right direction
+
+actor "사용자" as user
+
+package 금전현황{
+  usecase "금전현황 조회" AS UC11
+  usecase "금전현황 단일추가" AS UC12
+  usecase "금전현황 배열추가" AS UC13
+  usecase "금전현황 수정" AS UC14
+  usecase "금전현황 삭제" AS UC15
+}
+
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+
+@enduml

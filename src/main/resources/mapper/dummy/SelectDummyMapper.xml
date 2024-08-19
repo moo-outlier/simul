@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbm.dummy.dao.SelectDummyDAO">
+
+  <!-- 장치정보 조회 -->
+  <select id="getDeviceInfos" resultType="LinkedHashMap">
+    SELECT DEVICE_UNQNO AS deviceUnqno,
+           DEVICE_CODE  AS deviceCode,
+           CAR_SE_CODE  AS carSeCode,
+           DEVICE_NM    AS deviceNm,
+           PV_UNQCODE   AS pvUnqcode
+    FROM MN_DEVICE_INFO
+  </select>
+
+  <!--고장정보 조회 -->
+  <select id="getFailureInfos" resultType="LinkedHashMap">
+    select FAILURE_GRP_CODE AS failureGrpCode,
+           FAILURE_CODE     AS failureCode,
+           FAILURE_NM       AS failureNm,
+           FAILURE_FLAG     AS failureFlag,
+           FAILURE_MSG      AS failureMsg,
+           ACTION1_MSG      AS action1Msg,
+           ACTION2_MSG      AS action2Msg
+    from MN_FAILURE_CODE;
+  </select>
+
+  <!--장치 정보 조회-->
+  <select id="getFailureDeviceInfos" resultType="LinkedHashMap">
+    select B.PV_UNQNO     AS pvUnqno,
+           A.PV_UNQCODE   AS pvUnqcode,
+           A.DEVICE_UNQNO AS deviceUnqno,
+           A.DEVICE_CODE  AS deviceCode,
+           A.DEVICE_NM    AS deviceNm,
+           A.CAR_SE_CODE  AS carSeCode
+    from MN_DEVICE_INFO AS A
+           left join (select PV_UNQNO,
+                             PV_UNQCODE
+                      from MN_VEHICLE_INFO) AS B
+                     on B.PV_UNQCODE = A.PV_UNQCODE;
+  </select>
+
+  <!--역정보 조회-->
+  <select id="getStationInfos" resultType="LinkedHashMap">
+    select STATION_NO AS stationNo,
+           STATION_NM AS stationNm
+    from MN_STATION_INFO
+    where STATION_NO between 1 and 51;
+  </select>
+
+  <!-- 열차 실시간 이동 데이터 조회 -->
+  <select id="getLiveVehicles" resultType="cbm.dummy.vo.VehicleDummyVO">
+    select PV_UNQCODE         AS pvUnqcode,
+           LOCATION           AS location,
+           LOCATION_SE_CODE   AS locationSeCode,
+           STATUS_SE_CODE     AS statusSeCode,
+           FAILURE_STATUS_CNT AS failureStatusCnt,
+           STOP_CNT           AS stopCnt
+    from MN_LIVE_VEHICLE_STATUS;
+  </select>
+
+
+</mapper>

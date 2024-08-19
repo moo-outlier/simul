@@ -1,0 +1,16 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package 관리업체인증현황API{
+  usecase "관리업체인증현황 조회" AS UC11
+  usecase "관리업체인증현황 상세조회" AS UC12
+}
+
+' 사용자
+user --> UC12
+
+
+@enduml

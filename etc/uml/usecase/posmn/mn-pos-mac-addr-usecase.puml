@@ -1,0 +1,23 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package POS맥어드레스인증관리API{
+  usecase "맥어드레스 신규등록" AS UC11
+  usecase "맥어드레스 수정" AS UC12
+  usecase "맥어드레스 일괄수정" AS UC13
+  usecase "맥어드레스 검색" AS UC14
+  usecase "맥어드레스 삭제" AS UC15
+}
+
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+
+@enduml

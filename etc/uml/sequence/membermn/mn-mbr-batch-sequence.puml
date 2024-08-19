@@ -1,0 +1,27 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "MemberMnController" as controller
+participant "MemberMnService" as service
+participant "MemberMnDAO" as dao
+database "DB" as db
+
+
+user -> controller :회원 정보 일괄 수정
+activate controller
+controller -> service : Hashmap \n (mbrGrdCode, shortNoSeCode, smsRcvdAt, \n emailRcvdAt, useAt, mbrCode \n  [HEADER] storeUnqcode, fchqCode)
+activate service
+service -> dao: Hashmap \n (mbrGrdCode, shortNoSeCode, smsRcvdAt, \n emailRcvdAt, useAt, mbrCode \n  [HEADER] storeUnqcode, fchqCode)
+activate dao
+dao -> db: Hashmap \n (mbrGrdCode, shortNoSeCode, smsRcvdAt, \n emailRcvdAt, useAt, mbrCode \n  [HEADER] storeUnqcode, fchqCode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

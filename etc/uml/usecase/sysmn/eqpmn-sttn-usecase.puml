@@ -1,0 +1,46 @@
+@startuml
+
+left to right direction
+
+actor "관리자" as admin
+
+package "AS장비이력현황"{
+  usecase "장비이력현황 조회" AS UG10
+  usecase "장비이력현황 상세조회" AS UG11
+  usecase "장비이력현황 수정" AS UG12
+  usecase "장비이력현황 등록" AS UG13
+  usecase "장비이력현황 삭제" AS UG14
+  usecase "결제상세정보 조회" AS UG15
+  usecase "결제상세정보 수정" AS UG16
+  usecase "결제상세정보 삭제(결제취소)" AS UG17
+  usecase "AS접수증 조회" AS UG18
+  usecase "AS접수내역 조회" AS UG19
+  usecase "AS접수내역 저장" AS UG20
+  usecase "AS접수내역 삭제" AS UG21
+  usecase "견적서 조회" AS UG22
+  usecase "견적서 수정" AS UG23
+  usecase "견적서 삭제" AS UG24
+  usecase "관리업체 조회" AS UG25
+  usecase "제조업체 조회" AS UG26
+  usecase "히스토리 조회" AS UG27
+}
+
+admin --> UG10
+admin --> UG11
+admin --> UG12
+admin --> UG13
+admin --> UG14
+admin --> UG15
+admin --> UG16
+admin --> UG17
+admin --> UG18
+admin --> UG19
+admin --> UG20
+admin --> UG21
+admin --> UG22
+admin --> UG23
+admin --> UG24
+admin --> UG25
+admin --> UG26
+admin --> UG27
+@enduml

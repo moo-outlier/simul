@@ -1,0 +1,32 @@
+@startuml 매장_영수증_내역
+
+left to right direction
+
+entity "STORE_RECPT_H" as mnStoreRecptH {
+  STORE_RECPT_H_PID : int <<pk>>
+  --
+  FCHQ_CODE : varchar(7)
+  STORE_UNQCODE : varchar(14)
+  SALES_DE : int
+  POS_NO : varchar(20)
+  RECPT_NO : varchar(20)
+  GOODS_NM : varchar(50)
+  GOODS_CODE : varchar(20)
+  CNT : int(11)
+  NORMAL_PRICE : int(11)
+  SALE_PRICE : int(11)
+  SALES_PRICE : int(11)
+  DSC_PRICE : int(11)
+  NORMAL_DSC_PRICE : int(11)
+  CPN_DSC_PRICE : int(11)
+  CPN_CODE : varchar(7)
+  CPN_NM : varchar(50)
+  ACT_SALES_PRICE : int(11)
+  VAT : int(11)
+  CREATOR : varchar(100)
+  CREATED_AT : timestamp
+  UPDATER : varchar(100)
+  UPDATED_AT : timestamp
+}
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package 총판대리점-포스사용현황API{
+  usecase "포스사용현황 조회" AS UC11
+}
+
+' 사용자
+user --> UC11
+
+@enduml

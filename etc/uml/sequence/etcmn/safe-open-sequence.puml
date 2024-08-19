@@ -1,0 +1,45 @@
+@startuml Safe Open Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 돈통오픈이력 추가API
+user -> controller : 돈통오픈이력 추가API
+activate controller
+controller -> service : HashMap\n(posNo, posPid, safeOpenDt,\n safeOpenSeCode, staffNm, recptNo,\n salePrice, discountPrice, actSalePrice)
+activate service
+service -> dao: HashMap\n(posNo, posPid, safeOpenDt,\n safeOpenSeCode, staffNm, recptNo,\n salePrice, discountPrice, actSalePrice)
+activate dao
+dao -> db: HashMap\n(posNo, posPid, safeOpenDt,\n safeOpenSeCode, staffNm, recptNo,\n salePrice, discountPrice, actSalePrice)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: String
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' 돈통오픈이력 목록API
+user -> controller : 돈통오픈이력 목록API
+activate controller
+controller -> service : HashMap\n(startDe, endDe)
+activate service
+service -> dao: HashMap\n(startDe, endDe)
+activate dao
+dao -> db: HashMap\n(startDe, endDe)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: String
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

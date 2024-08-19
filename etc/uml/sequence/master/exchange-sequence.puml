@@ -1,0 +1,27 @@
+@startuml Kitchen Memo Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' 일자별환율정보
+user -> controller : 일자별환율정보
+activate controller
+controller -> service : HashMap\n(posNo, finalDt)
+activate service
+service -> dao:HashMap\n(환율정보)
+activate dao
+dao -> db: HashMap\n(환율정보)
+activate db
+dao <-- db: HashMap
+deactivate db
+service <-- dao: HashMap
+deactivate dao
+controller <-- service: HashMap
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

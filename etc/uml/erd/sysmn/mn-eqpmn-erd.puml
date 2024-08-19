@@ -1,0 +1,29 @@
+@startuml
+
+left to right direction
+
+entity "MN_EQPMN" as mnEqpmn {
+    EQPMN_PID : INT <<PK>>
+    --
+    SORT_SEQ : INT(11)
+    EQPMN_CODE : VARCHAR(7)
+    EQPMN_NM : VARCHAR(50)
+    EQPMN_CTG_CODE : VARCHAR(7)
+    MNFCTUR_CORP_CODE : VARCHAR(7)
+    SALE_AT : VARCHAR(1)
+    AGENCY_DISPLAY_AT : VARCHAR(1)
+    EQPMN_IMG_URL : VARCHAR(256)
+    EQPMN_NOTE : VARCHAR(400)
+    PRICE : INT(11)
+    GRD_PRICE_JSON : JSON
+    CREATOR : VARCHAR(100)
+    CREATED_AT : TIMESTAMP
+    UPDATER : VARCHAR(100)
+    UPDATED_AT : TIMESTAMP
+}
+
+@enduml
+
+
+
+

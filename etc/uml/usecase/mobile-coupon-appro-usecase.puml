@@ -1,0 +1,33 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "가맹점" as user
+
+package 모바일쿠폰승인현황_API{
+  usecase "모바일쿠폰승인_등록" AS MA11
+  usecase "모바일쿠폰승인_목록" AS MA12
+  usecase "즐겨찾기 추가" AS MA13
+  usecase "엑셀 다운로드" AS MA14
+}
+
+package 모바일쿠폰승인상품_API{
+  usecase "모바일쿠폰승인상품_등록" AS MAP11
+  usecase "모바일쿠폰승인상품_목록" AS MAP12
+  usecase "즐겨찾기 추가" AS MAP13
+  usecase "엑셀 다운로드" AS MAP14
+
+}
+
+' 사용자
+user --> MA11
+user --> MA12
+user --> MA13
+user --> MA14
+
+user --> MAP11
+user --> MAP12
+user --> MAP13
+user --> MAP14
+
+@enduml

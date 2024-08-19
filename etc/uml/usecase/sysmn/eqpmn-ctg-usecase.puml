@@ -1,0 +1,24 @@
+@startuml
+
+left to right direction
+
+actor "관리자" as admin
+
+package "제품분류관리"{
+  usecase "제품분류 조회" AS UG10
+  usecase "제품분류 일괄저장" AS UG11
+  usecase "제품분류 일괄삭제" AS UG12
+  usecase "제품분류별 장비 목록 조회" AS UG13
+  usecase "제품분류별 장비 일괄 저장" AS UG14
+  usecase "제품분류별 장비 일괄 삭제" AS UG15
+  usecase "제품분류별 장비 순서 변경" AS UG16
+}
+
+admin --> UG10
+admin --> UG11
+admin --> UG12
+admin --> UG13
+admin --> UG14
+admin --> UG15
+admin --> UG16
+@enduml

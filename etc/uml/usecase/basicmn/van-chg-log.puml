@@ -1,0 +1,14 @@
+@startuml Coupon Card Reg Usecase
+
+left to right direction
+
+actor "사용자" as user
+
+package "VAN사 변경 로그"{
+  usecase "VAN사 변경 로그 목록" AS UC11
+}
+
+' 사용자
+user --> UC11
+
+@enduml

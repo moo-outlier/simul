@@ -1,0 +1,20 @@
+@startuml Kitchen Memo Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package 주방메모관리API{
+  usecase 주방메모조회 AS UC11
+  usecase 주방메모등록 AS UC12
+  usecase 주방메모수정 AS UC13
+  usecase 주방메모삭제 AS UC14
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+
+@enduml

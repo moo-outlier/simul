@@ -1,0 +1,339 @@
+@startuml Sample Sequence
+
+actor "사용자" as user
+participant "MemberPointController" as controller
+participant "MemberPointService" as service
+participant "MemberPointDAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 회원포인트_회원검색
+activate controller
+controller -> service : Hashmap\n(mbrCode, koMbrNm, mbrCardno, shortNo, storeUnqcode)
+activate service
+service -> dao:   Hashmap\n(mbrCode, koMbrNm, mbrCardno, shortNo, storeUnqcode)
+activate dao
+dao -> db: String Hashmap\n(mbrCode, koMbrNm, mbrCardno, shortNo, storeUnqcode)
+activate db
+dao <-- db: Hashmap\n(storeMbrPid, mbrCode, koMbrNm, gender, mbrCardno \n mbrTelno, mbrEmail, avlblPt)
+deactivate db
+service <-- dao: Hashmap\n(storeMbrPid, mbrCode, koMbrNm, gender, mbrCardno \n mbrTelno, mbrEmail, avlblPt)
+deactivate dao
+controller <-- service: ResObj(List(Hashmap\n(storeMbrPid, mbrCode, koMbrNm, gender, mbrCardno \n mbrTelno, mbrEmail, avlblPt)) )
+deactivate service
+user <-- controller: ResObj(List(Hashmap\n(storeMbrPid, mbrCode, koMbrNm, gender, mbrCardno \n mbrTelno, mbrEmail, avlblPt)) )
+deactivate controller
+
+' API2
+user -> controller : 회원포인트_조정
+activate controller
+controller -> service : Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate service
+
+'isMemberCode
+service -> dao: Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+'getStoreMbrPid
+service -> dao: Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate db
+dao <-- db: String storeMbrPid
+deactivate db
+service <-- dao: String storeMbrPid
+deactivate dao
+
+'addPointHistory
+service -> dao: Hashmap\n(storeMbrPid, mbrCode, koMbrNm, storeUnqcode, \n chgPtStoreUnqcode, chgPtDe, prevHoldPt, avlblPt,\n newPt, trnPt, adjsPt, acmPt, acmCancelPt,\n usePt, useCancelPt, pointNote, creator, updater)
+activate dao
+dao -> db: Hashmap\n(storeMbrPid, mbrCode, koMbrNm, storeUnqcode, \n chgPtStoreUnqcode, chgPtDe, prevHoldPt, avlblPt,\n newPt, trnPt, adjsPt, acmPt, acmCancelPt,\n usePt, useCancelPt, pointNote, creator, updater)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+'getAvlblPoint
+service -> dao:
+activate dao
+dao -> db:
+activate db
+dao <-- db: Hashmap\n(avlblPt, mbrPointChgPid)
+deactivate db
+service <-- dao: Hashmap\n(avlblPt, mbrPointChgPid)
+deactivate dao
+
+'updateAvlblPoint
+service -> dao: Hashmap\n(mbrPointChgPid, avlblPt)
+activate dao
+dao -> db: Hashmap\n(mbrPointChgPid, avlblPt)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+'getPointHistoryRow
+service -> dao: Hashmap\n(storeMbrPid)
+activate dao
+dao -> db: Hashmap\n(storeMbrPid)
+activate db
+dao <-- db: Hashmap\n(mbrPointChgPid,  storeMbrPid, mbrCode, koMbrNm, \nstoreUnqcode,  chgPtStoreUnqcode, chgPtDe,  prevHoldPt,  \n newPt, trnPt, avlblPt, adjsPt,acmPt, acmCancelPt, \nusePt, useCancelPt, pointNote, creator, createdAt,\n updater, updatedAt)
+deactivate db
+service <-- dao: Hashmap\n(mbrPointChgPid,  storeMbrPid, mbrCode, koMbrNm, \nstoreUnqcode,  chgPtStoreUnqcode, chgPtDe,  prevHoldPt,  \n newPt, trnPt, avlblPt, adjsPt,acmPt, acmCancelPt, \nusePt, useCancelPt, pointNote, creator, createdAt,\n updater, updatedAt)
+deactivate dao
+
+'getPointRow
+service -> dao: Hashmap\n(storeMbrPid)
+activate dao
+dao -> db: Hashmap\n(storeMbrPid)
+activate db
+dao <-- db: Hashmap\n(mbrPointPid, storeMbrPid ,mbrCode, koMbrNm, \n storeUnqcode,  acmPt, usePt, adjsPt, \n avlblPt, creator, createdAt, updater, updatedAt )
+deactivate db
+service <-- dao: Hashmap\n(mbrPointPid, storeMbrPid ,mbrCode, koMbrNm, \n storeUnqcode,  acmPt, usePt, adjsPt, \n avlblPt, creator, createdAt, updater, updatedAt )
+deactivate dao
+
+'updatePointEncode
+service -> dao: Hashmap\n(pointEncVal, pointEncVal, mbrCode, mbrCode, \n storeUnqcode, storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(pointEncVal, pointEncVal, mbrCode, mbrCode, \n storeUnqcode, storeUnqcode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API3
+user -> controller : 회원포인트_이관
+activate controller
+controller -> service : Hashmap\n(storeUnqcode, sendMbrCode, sendMbrNm, receiveMbrCode,\n receiveMbrNm, trnPt)
+activate service
+
+'isMemberCode
+service -> dao: Hashmap\n(storeUnqcode, sendMbrCode, sendMbrNm, receiveMbrCode,\n receiveMbrNm, trnPt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, sendMbrCode, sendMbrNm, receiveMbrCode,\n receiveMbrNm, trnPt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+'getStoreMbrPid
+service -> dao: Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate db
+dao <-- db: String storeMbrPid
+deactivate db
+service <-- dao: String storeMbrPid
+deactivate dao
+
+'isMemberCode
+service -> dao: Hashmap\n(storeUnqcode, sendMbrCode, sendMbrNm, receiveMbrCode,\n receiveMbrNm, trnPt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, sendMbrCode, sendMbrNm, receiveMbrCode,\n receiveMbrNm, trnPt)
+activate db
+dao <-- db: boolean
+deactivate db
+service <-- dao: boolean
+deactivate dao
+
+'getStoreMbrPid
+service -> dao: Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, mbrCode, koMbrNm, adjsPt)
+activate db
+dao <-- db: String storeMbrPid
+deactivate db
+service <-- dao: String storeMbrPid
+deactivate dao
+
+'addMemberPointTransfer
+service -> dao: Hashmap\n(storeUnqcode, trnPt, sendStoreMbrPid, sendMbrCode\n, sendMbrNm, receiveStoreMbrPid, receiveMbrCode\n, receiveMbrNm, creator, createdAt, updater, updatedAt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, trnPt, sendStoreMbrPid, sendMbrCode\n, sendMbrNm, receiveStoreMbrPid, receiveMbrCode\n, receiveMbrNm, creator, createdAt, updater, updatedAt)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+'addPointHistory
+service -> dao: Hashmap\n(storeUnqcode, sendStoreMbrPid, sendMbrCode \m, sendMbrNm, receiveStoreMbrPid, receiveMbrCode \n, receiveMbrNm, creator, createdAt, updater, updatedAt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, sendStoreMbrPid, sendMbrCode \m, sendMbrNm, receiveStoreMbrPid, receiveMbrCode \n, receiveMbrNm, creator, createdAt, updater, updatedAt)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+'getAvlblPoint
+service -> dao:
+activate dao
+dao -> db:
+activate db
+dao <-- db: Hashmap \n (avlblPt, mbrPointChgPid)
+deactivate db
+service <-- dao: Hashmap \n (avlblPt, mbrPointChgPid)
+deactivate dao
+
+'updateAvlblPoint
+service -> dao: Hashmap \n (avlblPt, mbrPointChgPid)
+activate dao
+dao -> db: Hashmap \n (avlblPt, mbrPointChgPid)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+'getPointHistoryRow
+service -> dao: Hashmap\n(storeMbrPid)
+activate dao
+dao -> db: Hashmap\n(storeMbrPid)
+activate db
+dao <-- db: Hashmap\n(mbrPointChgPid,  storeMbrPid, mbrCode, koMbrNm, \nstoreUnqcode,  chgPtStoreUnqcode, chgPtDe,  prevHoldPt,  \n newPt, trnPt, avlblPt, adjsPt,acmPt, acmCancelPt, \nusePt, useCancelPt, pointNote, creator, createdAt,\n updater, updatedAt)
+deactivate db
+service <-- dao: Hashmap\n(mbrPointChgPid,  storeMbrPid, mbrCode, koMbrNm, \nstoreUnqcode,  chgPtStoreUnqcode, chgPtDe,  prevHoldPt,  \n newPt, trnPt, avlblPt, adjsPt,acmPt, acmCancelPt, \nusePt, useCancelPt, pointNote, creator, createdAt,\n updater, updatedAt)
+deactivate dao
+
+'getPointRow
+service -> dao: Hashmap\n(storeMbrPid)
+activate dao
+dao -> db: Hashmap\n(storeMbrPid)
+activate db
+dao <-- db: Hashmap\n(mbrPointPid, storeMbrPid ,mbrCode, koMbrNm, \n storeUnqcode,  acmPt, usePt, adjsPt, \n avlblPt, creator, createdAt, updater, updatedAt )
+deactivate db
+service <-- dao: Hashmap\n(mbrPointPid, storeMbrPid ,mbrCode, koMbrNm, \n storeUnqcode,  acmPt, usePt, adjsPt, \n avlblPt, creator, createdAt, updater, updatedAt )
+deactivate dao
+
+'getPointTransferRow
+service -> dao: Hashmap\n(storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode)
+activate db
+dao <-- db: Hashmap\n(mbrPointTrnPid, storeUnqcode, trnPt, sendStoreMbrPid,\n sendMbrCode, sendMbrNm, receiveStoreMbrPid, receiveMbrCode,\n receiveMbrNm, creator, createdAt, updater, updatedAt)
+deactivate db
+service <-- dao: Hashmap\n(mbrPointTrnPid, storeUnqcode, trnPt, sendStoreMbrPid,\n sendMbrCode, sendMbrNm, receiveStoreMbrPid, receiveMbrCode,\n receiveMbrNm, creator, createdAt, updater, updatedAt)
+deactivate dao
+
+'updatePointEncode
+service -> dao: Hashmap\n(pointEncVal, pointEncVal, mbrCode, mbrCode, \n storeUnqcode, storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(pointEncVal, pointEncVal, mbrCode, mbrCode, \n storeUnqcode, storeUnqcode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+'addPointHistory
+service -> dao: Hashmap\n(storeUnqcode, sendStoreMbrPid, sendMbrCode \m, sendMbrNm, receiveStoreMbrPid, receiveMbrCode \n, receiveMbrNm, creator, createdAt, updater, updatedAt)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode, sendStoreMbrPid, sendMbrCode \m, sendMbrNm, receiveStoreMbrPid, receiveMbrCode \n, receiveMbrNm, creator, createdAt, updater, updatedAt)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+'getAvlblPoint
+service -> dao:
+activate dao
+dao -> db:
+activate db
+dao <-- db: Hashmap \n (avlblPt, mbrPointChgPid)
+deactivate db
+service <-- dao: Hashmap \n (avlblPt, mbrPointChgPid)
+deactivate dao
+
+'updateAvlblPoint
+service -> dao: Hashmap \n (avlblPt, mbrPointChgPid)
+activate dao
+dao -> db: Hashmap \n (avlblPt, mbrPointChgPid)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+
+'getPointHistoryRow
+service -> dao: Hashmap\n(storeMbrPid)
+activate dao
+dao -> db: Hashmap\n(storeMbrPid)
+activate db
+dao <-- db: Hashmap\n(mbrPointChgPid,  storeMbrPid, mbrCode, koMbrNm, \nstoreUnqcode,  chgPtStoreUnqcode, chgPtDe,  prevHoldPt,  \n newPt, trnPt, avlblPt, adjsPt,acmPt, acmCancelPt, \nusePt, useCancelPt, pointNote, creator, createdAt,\n updater, updatedAt)
+deactivate db
+service <-- dao: Hashmap\n(mbrPointChgPid,  storeMbrPid, mbrCode, koMbrNm, \nstoreUnqcode,  chgPtStoreUnqcode, chgPtDe,  prevHoldPt,  \n newPt, trnPt, avlblPt, adjsPt,acmPt, acmCancelPt, \nusePt, useCancelPt, pointNote, creator, createdAt,\n updater, updatedAt)
+deactivate dao
+
+'getPointRow
+service -> dao: Hashmap\n(storeMbrPid)
+activate dao
+dao -> db: Hashmap\n(storeMbrPid)
+activate db
+dao <-- db: Hashmap\n(mbrPointPid, storeMbrPid ,mbrCode, koMbrNm, \n storeUnqcode,  acmPt, usePt, adjsPt, \n avlblPt, creator, createdAt, updater, updatedAt )
+deactivate db
+service <-- dao: Hashmap\n(mbrPointPid, storeMbrPid ,mbrCode, koMbrNm, \n storeUnqcode,  acmPt, usePt, adjsPt, \n avlblPt, creator, createdAt, updater, updatedAt )
+deactivate dao
+
+'getPointTransferRow
+service -> dao: Hashmap\n(storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(storeUnqcode)
+activate db
+dao <-- db: Hashmap\n(mbrPointTrnPid, storeUnqcode, trnPt, sendStoreMbrPid,\n sendMbrCode, sendMbrNm, receiveStoreMbrPid, receiveMbrCode,\n receiveMbrNm, creator, createdAt, updater, updatedAt)
+deactivate db
+service <-- dao: Hashmap\n(mbrPointTrnPid, storeUnqcode, trnPt, sendStoreMbrPid,\n sendMbrCode, sendMbrNm, receiveStoreMbrPid, receiveMbrCode,\n receiveMbrNm, creator, createdAt, updater, updatedAt)
+deactivate dao
+
+'updatePointEncode
+service -> dao: Hashmap\n(pointEncVal, pointEncVal, mbrCode, mbrCode, \n storeUnqcode, storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(pointEncVal, pointEncVal, mbrCode, mbrCode, \n storeUnqcode, storeUnqcode)
+activate db
+dao <-- db: int
+deactivate db
+service <-- dao: int
+deactivate dao
+controller <-- service: ResObj
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API4
+user -> controller : 회원포인트_변경내역 조회
+activate controller
+controller -> service : Hashmap\n(searchStartDe, searchEndDe, mbrCode, koMbrNm, \n chgPtStoreUnqcode, storeUnqcode)
+activate service
+
+'getPointHistory
+service -> dao:   Hashmap\n(searchStartDe, searchEndDe, mbrCode, koMbrNm, \n chgPtStoreUnqcode, storeUnqcode)
+activate dao
+dao -> db: Hashmap\n(searchStartDe, searchEndDe, mbrCode, koMbrNm, \n chgPtStoreUnqcode, storeUnqcode)
+activate db
+dao <-- db: List(Hashmap\n(mbrCode, koMbrNm, storeUnqcode, chgPtStoreUnqcode,\n chgPtDe, avlblPt, prevHoldPt, newPt, trnPt,\n adjsPt, acmPt, acmCancelPt, usePt, useCancelPt,\n pointNote))
+deactivate db
+service <-- dao: List(Hashmap\n(mbrCode, koMbrNm, storeUnqcode, chgPtStoreUnqcode,\n chgPtDe, avlblPt, prevHoldPt, newPt, trnPt,\n adjsPt, acmPt, acmCancelPt, usePt, useCancelPt,\n pointNote))
+deactivate dao
+
+controller <-- service: ResObj(List(Hashmap\n(mbrCode, koMbrNm, storeUnqcode, chgPtStoreUnqcode,\n chgPtDe, avlblPt, prevHoldPt, newPt, trnPt,\n adjsPt, acmPt, acmCancelPt, usePt, useCancelPt,\n pointNote)) )
+deactivate service
+user <-- controller: ResObj(List(Hashmap\n(mbrCode, koMbrNm, storeUnqcode, chgPtStoreUnqcode,\n chgPtDe, avlblPt, prevHoldPt, newPt, trnPt,\n adjsPt, acmPt, acmCancelPt, usePt, useCancelPt,\n pointNote)) )
+deactivate controller
+
+
+@enduml

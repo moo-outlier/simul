@@ -1,0 +1,16 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점/FC본사" as store
+
+package 기간회원구매내역{
+  usecase "기간회원 구매내역 조회" AS UG10
+  usecase "회원별 구매내역 상세조회" AS UG11
+  usecase "회원별 상세정보" AS UG12
+}
+
+store --> UG10
+store --> UG11
+store --> UG12
+@enduml

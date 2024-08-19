@@ -1,0 +1,19 @@
+CREATE TABLE `MN_SAFE_OPEN_H` (
+    `SAFE_OPEN_H_PID` bigint NOT NULL AUTO_INCREMENT COMMENT '돈통_오픈_이력_순번',
+    `STORE_UNQCODE` varchar(14) NOT NULL  COMMENT '매장_고유코드',
+    `SAFE_OPEN_DE` int NOT NULL COMMENT '돈통_오픈_일자',
+    `POS_NO` varchar(20) NOT NULL COMMENT '포스_번호',
+    `POS_PID` int NOT NULL COMMENT '포스_일련번호',
+    `SAFE_OPEN_AT` datetime NOT NULL COMMENT '돈통_오픈_일시',
+    `SAFE_OPEN_SE_CODE` varchar(1) NOT NULL COMMENT '돈통_오픈_구분_코드',
+    `STAFF_NM` varchar(50) COMMENT '판매원_명',
+    `RECPT_NO` varchar(20) COMMENT '영수_번호',
+    `SALE_PRICE` int(11) COMMENT '총매출',
+    `DISCOUNT_PRICE` int(11) COMMENT '총할인',
+    `ACT_SALE_PRICE` int(11) COMMENT '실매출',
+    `CREATOR` varchar(100) NOT NULL COMMENT '작성자',
+    `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성시간',
+    `UPDATER` varchar(100) NOT NULL COMMENT '수정자',
+    `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '변경시간'
+    , PRIMARY KEY (`SAFE_OPEN_H_PID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4

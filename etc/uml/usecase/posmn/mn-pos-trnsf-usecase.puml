@@ -1,0 +1,34 @@
+@startuml Store Env Usecase
+
+left to right direction
+
+actor "관리자" as user
+
+package 포스이관관리API{
+  usecase "이출관리 조회" AS UC11
+  usecase "이출신청" AS UC12
+  usecase "이출신청 취소" AS UC13
+  usecase "이출신청내역조회" AS UC14
+  usecase "이입관리 조회" AS UC15
+  usecase "이입확인" AS UC16
+  usecase "이입취소" AS UC17
+  usecase "이관신청 조회" AS UC18
+  usecase "이관확인" AS UC19
+  usecase "이관취소" AS UC20
+  usecase "이관확인취소" AS UC21
+}
+
+' 사용자
+user --> UC11
+user --> UC12
+user --> UC13
+user --> UC14
+user --> UC15
+user --> UC16
+user --> UC17
+user --> UC18
+user --> UC19
+user --> UC20
+user --> UC21
+
+@enduml

@@ -1,0 +1,87 @@
+@startuml
+
+left to right direction
+
+
+entity "MN_SALE_STATS" as mnSaleStats {
+      STATS_PID : int
+      --
+      STORE_UNQCODE : varchar(14)
+      STORE_NM : varchar(50)
+      SALE_DE : int
+      SALE_AT : timestamp
+      SALE_POS_NO : varchar(20)
+      ORDER_NO : varchar(20)
+      RECEIPT_NO : varchar(20)
+      BARCODE_VAL : varchar(100)
+      HIGH_CTG_CODE : varchar(7)
+      HIGH_CTG_NM : varchar(50)
+      MID_CTG_CODE : varchar(7)
+      MID_CTG_NM : varchar(50)
+      LOW_CTG_CODE : varchar(7)
+      LOW_CTG_NM : varchar(50)
+      STORE_GCODE : varchar(20)
+      GOODS_NM : varchar(50)
+      SIDE_GRP_CODE : varchar(50)
+      SIDE_CTG_CODE : varchar(7)
+      SIDE_CTG_NM : varchar(50)
+      SIDE_CTG_COST : int(11)
+      SIDE_CTG_CNT : int(11)
+      SIDE_CTG_PRICE : int(11)
+      SALE_CNT : int(11)
+      SALE_PRICE : int(11)
+      DISCOUNT_PRICE : int(11)
+      ISCOUNT_SE_CODE : varchar(1)
+      ACT_SALE_PRICE : int(11)
+      TIP_PRICE : int(11)
+      OVERCHARGE_PRICE : int(11)
+      VAT_PRICE : int(11)
+      PRICE : int(11)
+      ACM_PT : int(11)
+      USE_PT : int(11)
+      PAYMENT_NO varchar(20)
+      PAYMENT_DE timestamp
+      PAYMENT_SUM_PRICE int(11)
+      SIMPLE_CASH int(11)
+      CASH_PRICE int(11)
+      CREDIT_CARD_PRICE int(11)
+      CREDIT_PRICE int(11)
+      GIFT_CARD_PRICE int(11)
+      MEAL_TICKET_PRICE int(11)
+      MBR_POINT_PRICE int(11)
+      PARTNER_CARD_PRICE int(11)
+      STAFF_CARD_PRICE int(11)
+      MOBILE_COUPON_PRICE int(11)
+      CASHBEE_PRICE int(11)
+      PREPAID_CARD_PRICE int(11)
+      ONLINE_PAYMENT_PRICE int(11)
+      NORMAL_DISCOUNT int(11)
+      SERVICE_DISCOUNT int(11)
+      PARTNER_DISCOUNT int(11)
+      COUPON_DISCOUNT int(11)
+      MBR_DISCOUNT int(11)
+      MEAL_TICKET_DISCOUNT int(11)
+      PACKAGE_DISCOUNT int(11)
+      YAP_DISCOUNT int(11)
+      DELIVERY_AT varchar(1)
+      RETURN_AT varchar(1)
+      CANCEL_AT varchar(1)
+      WEATHER varchar(7)
+      STAFF_NO varchar(10)
+      ORDERER varchar(10)
+      ORDERER_CNT int(11)
+      TABLE_GROUP_PID int(11)
+      TABLE_TYPE_CODE varchar(7)
+      TABLE_NO int(11)
+      FIRST_ORDER_DE timestamp
+      VENDOR_NM varchar(50)
+      BRAND_NM varchar(50)
+      POST_REFUND_PRICE int(11)
+      RIGHT_REFUND_PRICE int(11)
+      REFUND_FEE_PRICE int(11)
+      CREATED_AT timestamp
+      UPDATED_AT timestamp
+}
+
+
+@enduml

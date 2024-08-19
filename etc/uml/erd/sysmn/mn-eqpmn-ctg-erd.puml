@@ -1,0 +1,21 @@
+@startuml
+
+left to right direction
+
+entity "MN_EQPMN_CTG" as mnEqpmnCtg {
+    EQPMN_CTG_PID : INT <<pk>>
+    --
+    EQPMN_CTG_CODE : VARCHAR(7)
+    EQPMN_CTG_NM : VARCHAR(50)
+    EQPMN_CTG_CNTNTS : VARCHAR(2000)
+    CREATOR : VARCHAR(100)
+    CREATED_AT : TIMESTAMP
+    UPDATER : VARCHAR(100)
+    UPDATED_AT : TIMESTAMP
+}
+
+@enduml
+
+
+
+

@@ -1,0 +1,17 @@
+@startuml 계정_관리
+
+left to right direction
+
+actor "사용자" as user
+
+package 계정관리{
+  usecase "계정관리 조회" AS UC11
+  usecase "계정관리 저장" AS UC12
+  usecase "계정관리 삭제" AS UC13
+}
+
+user --> UC11
+user --> UC12
+user --> UC13
+
+@enduml

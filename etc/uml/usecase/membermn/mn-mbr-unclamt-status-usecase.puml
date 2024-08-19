@@ -1,0 +1,14 @@
+@startuml Sample Usecase
+
+left to right direction
+
+actor "가맹점/FC본사" as store
+
+package "회원 미수금 현황"{
+  usecase "회원 미수금 현황 조회(매장별)" AS UG10
+  usecase "회원 미수금 현황 조회(회원별)" AS UG11
+}
+
+store --> UG10
+store --> UG11
+@enduml

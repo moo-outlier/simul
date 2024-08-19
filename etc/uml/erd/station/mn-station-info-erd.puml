@@ -1,0 +1,23 @@
+@startuml
+
+left to right direction
+
+entity "MN_STATION_INFO" as mnStationInfo {
+  `STATUS_INFO_PID` : int << pk >>
+  --
+  STATUS_INFO_PID : int
+  LINE_NO : int
+  STATION_NO : int
+  STATION_NM : varchar(50)
+  USE_AT : varchar(1)
+  STATION_FLAG : int
+  R_STATION_NO : int
+  R_STATION2_NO : int
+  L_STATION_NO : int
+  CREATOR : varchar(100)
+  CREATED_AT : timestamp
+  UPDATER : varchar(100)
+  UPDATED_AT : timestamp
+}
+
+@enduml

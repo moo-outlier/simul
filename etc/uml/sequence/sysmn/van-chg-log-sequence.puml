@@ -1,0 +1,46 @@
+@startuml Kitchen Memo Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' VAN사변경로그 등록 API
+user -> controller : VAN사변경로그 등록 API
+activate controller
+controller -> service : HashMap\n(storeNm, cornerNm, sttCode, useCode,\n beforeDefVanNm, beforeDefVanCode,\n beforeDefVanContractNo, beforeDefVanSerialNo,\n beforeCashVanNm, beforeCashVanCode,\n beforeCashVanContractNo, beforeCashVanSerialNo,\n beforeOkContractNo, beforeOkSerialNo,\n afterDefVanNm, afterDefVanCode, afterDefVanContractNo,\n afterDefVanSerialNo, afterCashVanNm, afterCashVanCode,\n afterCashVanContractNo, afterCashVanSerialNo,\n afterOkContractNo, afterOkSerialNo)
+activate service
+service -> dao: HashMap\n(storeNm, cornerNm, sttCode, useCode,\n beforeDefVanNm, beforeDefVanCode,\n beforeDefVanContractNo, beforeDefVanSerialNo,\n beforeCashVanNm, beforeCashVanCode,\n beforeCashVanContractNo, beforeCashVanSerialNo,\n beforeOkContractNo, beforeOkSerialNo,\n afterDefVanNm, afterDefVanCode, afterDefVanContractNo,\n afterDefVanSerialNo, afterCashVanNm, afterCashVanCode,\n afterCashVanContractNo, afterCashVanSerialNo,\n afterOkContractNo, afterOkSerialNo)
+activate dao
+dao -> db: HashMap\n(storeNm, cornerNm, sttCode, useCode,\n beforeDefVanNm, beforeDefVanCode,\n beforeDefVanContractNo, beforeDefVanSerialNo,\n beforeCashVanNm, beforeCashVanCode,\n beforeCashVanContractNo, beforeCashVanSerialNo,\n beforeOkContractNo, beforeOkSerialNo,\n afterDefVanNm, afterDefVanCode, afterDefVanContractNo,\n afterDefVanSerialNo, afterCashVanNm, afterCashVanCode,\n afterCashVanContractNo, afterCashVanSerialNo,\n afterOkContractNo, afterOkSerialNo)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' VAN사변경로그 목록 API
+user -> controller : VAN사변경로그 목록 API
+activate controller
+controller -> service : Hashmap\n(startDe, endDe, storeNm, storeCode, sttCode, useCode)
+activate service
+service -> dao:  Hashmap\n(startDe, endDe, storeNm, storeCode, sttCode, useCode)
+activate dao
+dao -> db:  Hashmap\n(startDe, endDe, storeNm, storeCode, sttCode, useCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+
+@enduml

@@ -1,0 +1,45 @@
+@startuml Partner Card Reg Sequence
+
+actor "사용자" as user
+participant "Controller" as controller
+participant "Service" as service
+participant "DAO" as dao
+database "DB" as db
+
+' API1
+user -> controller : 할인구분-유형 목록 API
+activate controller
+controller -> service : HashMap\n(storeNm)
+activate service
+service -> dao: HashMap\n(storeNm)
+activate dao
+dao -> db: HashMap\n(storeNm)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+deactivate db
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+' API2
+user -> controller : 할인구분-유형 상세 목록 API
+activate controller
+controller -> service : HashMap\n(storeNm, fixDscCode)
+activate service
+service -> dao: HashMap\n(storeNm, fixDscCode)
+activate dao
+dao -> db: HashMap\n(storeNm, fixDscCode)
+activate db
+dao <-- db: List
+deactivate db
+service <-- dao: List
+deactivate dao
+controller <-- service: List
+deactivate service
+user <-- controller: ResObj
+deactivate controller
+
+@enduml

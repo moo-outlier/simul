@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbm.imprmn.dao.SelectImprmnDAO">
+
+  <select id="countAllHistory" resultType="Integer">
+    /* countAllHistory */
+    /* 정비 이력 총 개수 */
+    SELECT
+      COUNT(*)
+    FROM
+      MN_IMPRMN_H
+    WHERE 1=1
+    <if test='startDe!=null and !startDe.equals("")'>
+      AND DATE(CREATED_AT) <![CDATA[>=]]> #{startDe}
+    </if>
+    <if test='endDe!=null and !endDe.equals("")'>
+      AND DATE(CREATED_AT) <![CDATA[<=]]> #{endDe}
+    </if>
+    <if test='pvUnqcode!=null and !pvUnqcode.equals("")'>
+      AND PV_UNQCODE = #{pvUnqcode}
+    </if>
+    <if test='deviceCode!=null and !deviceCode.equals("")'>
+      AND DEVICE_CODE = #{deviceCode}
+    </if>
+  </select>
+
+  <select id="getAllHistory" parameterType="HashMap" resultType="LinkedHashMap">
+    /* getAllHistory */
+    /* 정비 이력 전체 조회 */
+    SELECT
+      PV_UNQCODE AS pvUnqcode,
+      DEVICE_CODE AS deviceCode,
+      DEVICE_UNQNO AS deviceUnqno,
+      DETAIL_DEVICE_NM AS detailDeviceNm,
+      IMPRMN_NOTE AS imprmnNote,
+      DATE_FORMAT(CREATED_AT, '%Y-%m-%d %H:%i:%s') AS createdAt
+    FROM
+      MN_IMPRMN_H
+    WHERE 1=1
+    <if test='startDe!=null and !startDe.equals("")'>
+      AND DATE(CREATED_AT) <![CDATA[>=]]> #{startDe}
+    </if>
+    <if test='endDe!=null and !endDe.equals("")'>
+      AND DATE(CREATED_AT) <![CDATA[<=]]> #{endDe}
+    </if>
+    <if test='pvUnqcode!=null and !pvUnqcode.equals("")'>
+      AND PV_UNQCODE = #{pvUnqcode}
+    </if>
+    <if test='deviceCode!=null and !deviceCode.equals("")'>
+      AND DEVICE_CODE = #{deviceCode}
+    </if>
+    LIMIT #{recordSize} OFFSET #{startNo}
+  </select>
+
+  <select id="getAllPvUnqcodes" resultType="String">
+    /* getAllPvUnqcodes */
+    /* 정비 이력 편성 번호(편성고유코드) 전체 조회 */
+    SELECT DISTINCT
+      PV_UNQCODE
+    FROM
+      MN_IMPRMN_H
+  </select>
+
+  <select id="getAllHistoryDeviceCodes" resultType="String">
+    /* getAllDeviceCodes */
+    /* 정비 이력 장치 코드 전체 조회  */
+    SELECT DISTINCT
+      DEVICE_CODE
+    FROM
+      MN_IMPRMN_H
+  </select>
+
+  <select id="countAllmanual" resultType="Integer">
+    /* countAllmanual */
+    /* 정비 매뉴얼 총 개수 */
+    SELECT
+      COUNT(*)
+    FROM
+      MN_IMPRMN_MANUAL
+    WHERE 1=1
+    <if test='deviceCode!=null and !deviceCode.equals("")'>
+      AND DEVICE_CODE = #{deviceCode}
+    </if>
+  </select>
+
+  <select id="getAllmanual" parameterType="HashMap" resultType="LinkedHashMap">
+    /* countAllmanual */
+    /* 정비 매뉴얼 전체 조회 */
+    SELECT
+      DEVICE_CODE AS deviceCode,
+      DEVICE_NM AS deviceNm,
+      DETAIL_DEVICE_NM AS detailDeviceNm,
+      FILE_URL AS fileUrl,
+      DATE_FORMAT(CREATED_AT, '%Y-%m-%d %H:%i:%s') AS createdAt
+    FROM
+      MN_IMPRMN_MANUAL
+    WHERE 1=1
+    <if test='deviceCode!=null and !deviceCode.equals("")'>
+      AND DEVICE_CODE = #{deviceCode}
+    </if>
+  </select>
+
+  <select id="getAllManualDeviceCodes" resultType="String">
+    /* getAllManualDeviceCodes */
+    /* 정비 매뉴얼 장치 코드 전체 조회 */
+    SELECT DISTINCT
+      DEVICE_CODE
+    FROM
+      MN_IMPRMN_MANUAL
+  </select>
+  
+  <select id="getManualFileUrl" parameterType="HashMap" resultType="HashMap">
+    /* getManualFileUrl */
+    /* 정비 매뉴얼 PDF 다운로드 경로 조회 */
+    SELECT
+      FILE_URL AS fileUrl
+    FROM
+      MN_IMPRMN_MANUAL
+    WHERE
+      DEVICE_CODE = #{deviceCode}
+  </select>
+
+</mapper>
